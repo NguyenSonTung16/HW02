@@ -1,3 +1,5 @@
+b92e6fc | 2026-10-18T18:03:47+07:00 | Address student review of FR20 manual quantity navigation and invalid input oracles
+7f731b3 | 2026-10-18T17:29:31+07:00 | Audit FR20 mobile cart design and export workflow commit log
 43ed1ac | 2026-10-18T17:29:19+07:00 | List thirteen unexecuted FR20 mobile cart cases in README
 63eedd8 | 2026-10-18T17:28:48+07:00 | Add FR20 quantity boundary cases and clarify design summary
 c6860a8 | 2026-10-18T17:25:43+07:00 | Select FR20 EC representatives and reduce to twelve domain cases

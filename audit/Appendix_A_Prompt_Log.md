@@ -5232,3 +5232,91 @@ dùng skill làm tương tự cho mục 5:FR-20 Giỏ hàng mobile
 
 Đã ghi audit
 
+## AI-LOCAL-aa6db8eb48ef16a2
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+17:53:40 18/10/2026
+
+### Prompt của bạn
+
+tôi thấy hiện tại đang thiếu 1 số thứ như:
+
+1. **Thiếu TC nhập tay số lượng trong giỏ:** TC05 hiện chỉ kiểm tra +/-
+2. **Thiếu mô tả giữ nguyên giỏ khi đi mua sắm rồi quay lại:** có thể bổ sung vào TC09, không cần TC mới
+3. **Expected của TC10–TC12 chưa rõ:** đã có dữ liệu 0,"abc",3 , nhưng cần chốt có cho phép tự chuyển thành 1 và thêm hàng hay phải từ chối
+
+bạn xem thử nhận xét này có phù hợp ko
+
+
+### Output của AI
+
+**Nhận xét của bạn phù hợp, nhưng ý 3 cần phân biệt thiếu sót thiết kế với điểm chưa rõ của đặc tả.**
+
+1. **Nhập tay số lượng: đúng, đang thiếu.** Mobile có ô sửa số lượng trực tiếp, còn TC05 chỉ kiểm tra `+/-`. Nên bổ sung TC nhập tay một giá trị hợp lệ, kiểm tra đúng số lượng, thành tiền, tổng tiền và các sản phẩm khác giữ nguyên. Đây là đường thao tác khác, nên kiểm riêng để dễ xác định lỗi.
+
+2. **Giữ giỏ khi đi mua sắm rồi quay lại: hợp lý.** Có thể mở rộng TC09: ghi nhận giỏ → Tiếp tục mua sắm → quay lại giỏ, không thêm/xóa sản phẩm → đối chiếu sản phẩm, số lượng và tổng tiền. Không cần TC mới. Đây là kiểm tra tính nhất quán khi điều hướng trong cùng phiên; README chưa nói rõ yêu cầu lưu giỏ khi đóng ứng dụng.
+
+3. **Expected TC10–TC12: đúng là chưa đủ để kết luận Pass/Fail.** Dữ liệu hiện tại lần lượt là **0, 1.5, "abc"**; **3 là số nguyên dương hợp lệ**. FR-06 chỉ ghi “chỉ nhận số nguyên dương, tối thiểu là 1”, chưa nói rõ có được tự đổi đầu vào sai thành 1 rồi thêm hàng hay không. Vì vậy, mình chưa có căn cứ chốt một trong hai cách là yêu cầu bắt buộc. Cần xác nhận quy tắc; nếu chọn **từ chối và giữ nguyên giỏ**, phải ghi rõ đó là giả định kiểm thử chờ xác nhận, không suy ra từ code đang chạy.
+
+Hai ý đầu giúp bổ sung độ bao phủ; ý thứ ba chỉ ra hạn chế thật của expected mình đã viết. Mình chưa sửa file trong lượt này.
+
+Đã ghi audit
+
+## AI-LOCAL-a0ca90d6c5172d23
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+17:57:09 18/10/2026
+
+### Prompt của bạn
+
+vậy ý 3 nên sửa thế nào cho phù hợp
+
+
+### Output của AI
+
+Nên **ghi phần expected đã có căn cứ, rồi tách điểm chưa rõ thành một ghi chú chung**, thay vì tự chốt phải từ chối hoặc được đổi thành 1.
+
+Expected cho TC10–TC12:
+
+> Không đưa số lượng không hợp lệ (lần lượt 0, 1.5, "abc") vào giỏ. Sản phẩm SP_B giữ nguyên số lượng và thành tiền.
+
+Ghi chú chung sau bảng:
+
+> Đặc tả chưa quy định việc tự chuyển số lượng không hợp lệ thành 1 rồi thêm sản phẩm. Nếu hệ thống có hành vi này, ghi nhận kết quả thực tế và chờ xác nhận quy tắc trước khi kết luận Pass/Fail cho toàn bộ TC.
+
+Như vậy, **lưu số lượng sai vào giỏ là Fail** theo ràng buộc số nguyên dương; còn **tự đổi thành 1 rồi thêm** thì chưa đủ căn cứ để kết luận. Chỉ viết “từ chối thêm và giữ nguyên toàn bộ giỏ” khi quy tắc đó đã được xác nhận.
+
+Đã ghi audit
+
+## AI-LOCAL-4f4e60c16e6142b2
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+17:59:28 18/10/2026
+
+### Prompt của bạn
+
+sửa cả 3 ý đi, ghi chú vào 5.6 những gì tôi phát hiện
+
+
+### Output của AI
+
+Đã sửa cả ba ý trong [báo cáo](<D:/vscode/Software testing/HW02/Main_Report.docx>) và đồng bộ Markdown, README:
+
+- Thêm **TC14 nhập tay số lượng**, giữ TC05 kiểm tra `+/-`.
+- Mở rộng **TC09** để kiểm tra giỏ giữ nguyên khi đi mua sắm rồi quay lại.
+- Làm rõ expected **TC10–TC12**, kèm ghi chú chờ xác nhận quy tắc tự chuyển thành 1.
+- Ghi cả **ba phát hiện của bạn vào 5.6**, gồm thiếu sót, nguyên nhân và cách sửa.
+
+FR-20 hiện có **29 EC, 14 TC duy nhất**, chưa chạy. Đã push lên `main`.
+
+Đã ghi audit
+
