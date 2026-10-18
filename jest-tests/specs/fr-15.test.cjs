@@ -1,3 +1,4 @@
+if(process.env.HW02_DEMO==='1'){require('../helpers/fr15-ui.cjs').define();}else{
 const {Harness,delay}=require('../helpers/harness.cjs');
 const cases=require('../catalog.json').filter(c=>c.fr==='FR-15');const h=new Harness('FR-15');
 beforeAll(()=>h.start());afterAll(()=>h.finish());
@@ -25,14 +26,14 @@ for(const tc of cases)test(tc.id+' — '+tc.name,()=>h.runCase(tc,async function
  if(n===3){
   // UI-specific regression: observe immediately after saving, before reload.
   await this.page.goto('http://localhost:5174');await this.page.evaluate(t=>localStorage.setItem('adminToken',t),token);await this.page.reload();
-  await this.page.getByRole('button',{name:'Sản phẩm',exact:true}).click();
+  await this.page.getByText('Sản phẩm',{exact:true}).click();
   const row=this.page.locator('tr').filter({hasText:'SP_MUC_TIEU'});await row.getByRole('button',{name:'Sửa',exact:true}).click();
   await this.page.getByPlaceholder('Tên sản phẩm',{exact:true}).fill(data.name);await this.page.getByPlaceholder('Giá tiền',{exact:true}).fill(String(data.price));await this.page.locator('form select').selectOption(String(data.category_id));
   const response=this.page.waitForResponse(r=>r.url().endsWith('/api/products/1001')&&r.request().method()==='PUT');await this.page.getByRole('button',{name:'Lưu sản phẩm',exact:true}).click();await response;await delay(300);
   this.check('Other product name unchanged immediately after save',await this.page.getByText('SP_DOI_CHUNG',{exact:true}).count(),1);
   this.check('Only target has new name immediately after save',await this.page.getByText(data.name,{exact:true}).count(),1);
   await this.page.screenshot({path:require('path').join(process.env.HW02_RUN,tc.id+'-immediate.png'),fullPage:true});
-  await this.page.reload();await this.page.getByRole('button',{name:'Sản phẩm',exact:true}).click();this.check('Other product unchanged after reload',await this.page.getByText('SP_DOI_CHUNG',{exact:true}).count(),1);
+  await this.page.reload();await this.page.getByText('Sản phẩm',{exact:true}).click();this.check('Other product unchanged after reload',await this.page.getByText('SP_DOI_CHUNG',{exact:true}).count(),1);
  }else{
   const r=await this.request('/api/products'+(update?'/1001':''),data,token,update?'PUT':'POST');this.observations={method:update?'PUT':'POST',payload:data,http:r.status,response:r.data};
   if(!valid)this.check('Invalid data rejected',r.status>=400,true);
@@ -43,3 +44,5 @@ for(const tc of cases)test(tc.id+' — '+tc.name,()=>h.runCase(tc,async function
  else if(update){const target=after.find(p=>p.id===1001);for(const key of ['name','price','category_id'])this.check('Saved '+key,target[key],data[key]);this.check('Other products unchanged',after.filter(p=>p.id!==1001),before.filter(p=>p.id!==1001));}
  else {this.check('One product added',after.length,before.length+1);const added=after.find(p=>![1001,1002].includes(p.id));for(const key of ['name','price','category_id'])this.check('Created '+key,added?.[key],data[key]);}
 }));
+
+}

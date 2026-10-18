@@ -1,3 +1,4 @@
+if(process.env.HW02_DEMO==='1'){require('../helpers/fr09-ui.cjs').define();}else{
 const fs=require('fs');const {Harness}=require('../helpers/harness.cjs');const {dependency,sut}=require('../helpers/deps.cjs');
 const path=require('path');const cases=require('../catalog.json').filter(c=>c.fr==='FR-09');
 const h=new Harness('FR-09');beforeAll(()=>h.start());afterAll(()=>h.finish());
@@ -32,3 +33,5 @@ for(const tc of cases)test(tc.id+' — '+tc.name,()=>h.runCase(tc,async function
  fs.writeFileSync(process.env.HW02_CLOCK_FILE,'');
 }));
 afterEach(()=>{fs.writeFileSync(process.env.HW02_CLOCK_FILE,'');});
+
+}

@@ -53,14 +53,24 @@ class Harness{
  }
  async submit(email,password){await this.enterCredentials(email,password);return this.clickSubmit();}
  check(label,actual,expected){this.checks.push({label,actual,expected,pass:JSON.stringify(actual)===JSON.stringify(expected)});}
- async runCase(tc,fn){
-  this.checks=[];this.observations={};this.events=[];this.currentCase=tc.id;await this.context.clearCookies();await this.loginPage();await this.page.evaluate(()=>localStorage.clear());await this.loginPage();
-  if(this.demo&&this.results.cases.length===0){await this.banner('FR-02 — Đăng nhập và khóa tài khoản','6 TC minh họa: TC01, TC02, TC03, TC04, TC07, TC14.\nChú thích kiểm thử do runner hiển thị; không phải UI gốc EShop.');await delay(2000);}
+ async fillField(locator,value,label){
+  await locator.evaluate(e=>e.scrollIntoView({block:'center'}));
+  await this.banner(this.currentCase+' | Nhập '+label,'Điền '+label+(String(value).length>80?' ('+String(value).length+' ký tự)':'')+'. Dừng 1,5 giây sau khi nhập xong.');
+  await locator.evaluate(e=>e.style.outline='3px solid #2563eb');await locator.fill('');
+  if(String(value).length>80)await locator.fill(String(value));else await locator.pressSequentially(String(value),{delay:60});
+  if(this.demo)await delay(1500);await locator.evaluate(e=>e.style.outline='');
+ }
+ async beforeAction(button,label){await button.evaluate(e=>e.scrollIntoView({block:'center'}));await this.banner(this.currentCase+' | Trước khi gửi',label+'\nDừng 2 giây trước khi thực hiện.');await button.hover();if(this.demo)await delay(2000);}
+ async runCase(tc,fn,prepare){
+  this.checks=[];this.observations={};this.events=[];this.currentCase=tc.id;await this.context.clearCookies();let prepareError;
+  try{if(this.fr==='FR-02'){await this.loginPage();await this.page.evaluate(()=>localStorage.clear());await this.loginPage();}else{await this.page.goto('about:blank');if(prepare)await prepare.call(this,tc);}}catch(e){prepareError=e;}
+  const title={'FR-02':'Đăng nhập và khóa tài khoản','FR-09':'Mã giảm giá','FR-15':'Quản lý sản phẩm CRUD'}[this.fr];
+  if(this.demo&&this.results.cases.length===0){await this.banner(this.fr+' — '+title,'Các TC tiêu biểu được thực hiện trên giao diện thật.\nChú thích kiểm thử do runner hiển thị; không phải UI gốc EShop.');await delay(2000);}
   const number=Number(tc.tc.slice(2));
-  await this.banner(tc.id+' | '+tc.name,'MỤC TIÊU: '+tc.expected+'\nTiền điều kiện riêng: tài khoản tồn tại, chưa khóa; n='+([2,3,4].includes(number)?number-2:0)+'.');
+  await this.banner(tc.id+' | '+tc.name,'MỤC TIÊU: '+tc.expected+(this.fr==='FR-02'?'\nTiền điều kiện riêng: tài khoản tồn tại, chưa khóa; n='+([2,3,4].includes(number)?number-2:0)+'.':'\n'+(this.caseContext||'Dữ liệu và trạng thái được chuẩn bị độc lập cho từng TC.')));
   if(this.demo)await delay(4000);
   const started=new Date().toISOString();let infra;
-  try{await fn.call(this,tc);}catch(e){infra=e;}
+  try{if(prepareError)throw prepareError;await fn.call(this,tc);}catch(e){infra=e;}
   const failed=this.checks.filter(c=>!c.pass);const status=infra?'Not Run':failed.length?'Fail':'Pass';
   const summary=this.checks.map(c=>(c.pass?'PASS':'FAIL')+' '+c.label+': '+JSON.stringify(c.actual)+(c.pass?'':' (expected '+JSON.stringify(c.expected)+')')).join('\n');
   const labels={'Login HTTP':'HTTP đăng nhập','JWT returned':'Có JWT trả về','Client stores returned JWT':'Client lưu đúng JWT trả về','Client sends same JWT in Authorization':'Client gửi đúng JWT trong Authorization','JWT accepted by backend':'Backend chấp nhận JWT (HTTP)','JWT identifies correct account':'JWT xác định đúng tài khoản','Rejected; no JWT issued':'Từ chối đăng nhập, không cấp JWT','Counter after wrong login':'Bộ đếm sau lần đăng nhập sai','Account lock activated':'Tài khoản bị khóa','Lock duration is 30 seconds':'Thời hạn khóa đúng 30 giây','Generic UI error displayed':'Có thông báo lỗi phù hợp trên giao diện','Email input type':'Kiểu của trường email','HTML5 validity blocks invalid email':'HTML5 xem email nhập vào là hợp lệ','No login request sent':'Không gửi request đăng nhập','Successful login after lock expiry':'Đăng nhập đúng sau khi hết khóa (HTTP)','JWT issued after expiry':'Có JWT sau khi hết khóa'};
@@ -78,7 +88,7 @@ class Harness{
   if(infra)throw infra;if(failed.length)throw new Error(failed.map(c=>`${c.label}: expected ${JSON.stringify(c.expected)}, received ${JSON.stringify(c.actual)}`).join('; '));
  }
  async finish(){
-  if(this.demo&&this.page){const pass=this.results.cases.filter(r=>r.status==='Pass').length,fail=this.results.cases.filter(r=>r.status==='Fail').length;await this.banner('FR-02 — Tổng kết video đầu tiên',`${this.results.cases.length} TC minh họa | Pass: ${pass} | Fail: ${fail}\nCác kết quả được lưu vào README và hồ sơ chạy test.\nDừng tại đây và chờ sinh viên duyệt trước video FR-09/FR-15.`);await delay(3500);}
+  if(this.demo&&this.page){const pass=this.results.cases.filter(r=>r.status==='Pass').length,fail=this.results.cases.filter(r=>r.status==='Fail').length;await this.banner(this.fr+' — Tổng kết video',`${this.results.cases.length} TC minh họa | Pass: ${pass} | Fail: ${fail}\nCác kết quả được lưu vào README và hồ sơ chạy test.\n`+(this.fr==='FR-02'?'Dừng và chờ duyệt trước video FR-09/FR-15.':'Đã hoàn tất các TC minh họa của chức năng này.'));await delay(3500);}
   const video=this.page?.video();await this.context?.close();
   if(video){const v=path.join(root,'videos',this.fr==='FR-02'&&this.demo?'FR-02-demo-paced.webm':this.fr+'-demo.webm');await video.saveAs(v);fs.copyFileSync(v,path.join(run,this.fr+'-demo.webm'));this.results.video=path.relative(root,v).replaceAll('\\','/');}
   await this.browser?.close();if(this.db)await new Promise(res=>this.db.close(res));
