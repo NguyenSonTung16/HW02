@@ -493,6 +493,41 @@ Từ các hành vi giỏ hàng, xác định thao tác, sản phẩm đích, s�
 
 Ngữ cảnh: nội dung giỏ trước thao tác và sản phẩm đã/chưa có trong giỏ là trạng thái thiết lập, không phải ô nhập. Dữ liệu chuẩn bị: SP_A giá 100.000 đ; SP_B giá 50.000 đ; hai sản phẩm tồn tại, khác ID, giá không đổi trong lần thử. Mỗi TC bắt đầu với giỏ đã chuẩn bị riêng; quan sát trên ứng dụng Mobile, không thay bằng giao diện Web thu nhỏ.
 
+### 5.3 Domain Testing Bước 2 Xác định điều kiện và EC
+
+Tách lớp theo thao tác và trạng thái làm thay đổi kết quả: thêm sản phẩm mới/đã có, giỏ trống/có hàng, đồng ý/hủy xóa. Số lượng thêm được chia thành số nguyên dương, số nguyên không dương, số không nguyên và chuỗi không phải số. EC đầu ra mô tả kết quả cần kiểm tra, gồm cả việc không chấp nhận giá trị ngoài miền; không coi kết quả âm đúng đặc tả là bug.
+
+| ID | Đầu vào/đầu ra | Lớp tương đương |
+| --- | --- | --- |
+| EC1 | Thao tác | Xem giỏ hàng |
+| EC2 | Thao tác | Thêm sản phẩm vào giỏ |
+| EC3 | Thao tác | Điều chỉnh số lượng trong giỏ |
+| EC4 | Thao tác | Xóa sản phẩm khỏi giỏ |
+| EC5 | Thao tác | Tiếp tục mua sắm |
+| EC6 | Sản phẩm khi thêm | Sản phẩm chưa có trong giỏ trước khi thêm |
+| EC7 | Sản phẩm khi thêm | Sản phẩm đã có trong giỏ trước khi thêm |
+| EC8 | Số lượng khi thêm | Số nguyên dương q >= 1 |
+| EC9 | Số lượng khi thêm | Số nguyên q <= 0 |
+| EC10 | Số lượng khi thêm | Giá trị số không nguyên |
+| EC11 | Số lượng khi thêm | Chuỗi không biểu diễn số |
+| EC12 | Giỏ hàng trước khi xem | Giỏ trống, không có dòng sản phẩm |
+| EC13 | Giỏ hàng trước khi xem | Giỏ có ít nhất một dòng sản phẩm |
+| EC14 | Lựa chọn xác nhận xóa | Đồng ý xóa trong hộp thoại |
+| EC15 | Lựa chọn xác nhận xóa | Hủy thao tác trong hộp thoại |
+| EC16 | Điều chỉnh số lượng | Tăng/giảm một đơn vị, số lượng kết quả vẫn >= 1 |
+| EC17 | Hiển thị giỏ có hàng | Hiển thị sản phẩm, đơn giá, số lượng, thành tiền và thao tác; có nút +/- |
+| EC18 | Kết quả thêm sản phẩm đã có | Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm |
+| EC19 | Kết quả điều chỉnh số lượng | Chỉ dòng đích đổi đúng số lượng; các dòng khác giữ nguyên |
+| EC20 | Thành tiền và tổng tiền | Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" |
+| EC21 | Kết quả nhập số lượng không hợp lệ | Không chấp nhận giá trị số lượng ngoài miền số nguyên dương |
+| EC22 | Hộp thoại xóa | Hiện xác nhận trước khi thay đổi giỏ |
+| EC23 | Kết quả đồng ý xóa | Bỏ đúng sản phẩm đích, giữ các sản phẩm khác |
+| EC24 | Kết quả hủy xóa | Giữ nguyên sản phẩm, số lượng và tổng tiền |
+| EC25 | Kết quả tiếp tục mua sắm | Quay về trang chủ |
+| EC26 | Hiển thị giỏ trống | Có hình minh họa và thông báo giỏ hàng trống rõ ràng |
+| EC27 | Kết quả thêm sản phẩm chưa có | Tạo một dòng mới với đúng sản phẩm và số lượng |
+| EC28 | Giỏ hàng trước khi xóa | Chỉ còn sản phẩm đích; xóa được xác nhận sẽ làm giỏ trống |
+
 ## 6 Tổng kết và hồ sơ hỗ trợ
 
 | Chức năng | Designed | Executed | Pass | Fail | Not Run |
