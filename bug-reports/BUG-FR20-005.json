@@ -13,7 +13,7 @@
     "BUG-FR20-005-TC14-before-input.png",
     "BUG-FR20-005-TC14.png"
   ],
-  "issue_url": null,
-  "issue_number": null,
-  "evidence_commit": null
+  "issue_url": "https://github.com/NguyenSonTung16/HW02/issues/14",
+  "issue_number": 14,
+  "evidence_commit": "76e74196cb95b26abd527d02d9d48fceb2b1194e"
 }

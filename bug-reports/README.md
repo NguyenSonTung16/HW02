@@ -11,10 +11,10 @@
 | [BUG-FR15-001](BUG-FR15-001.md) | FR-15 | Danh sách sản phẩm cập nhật sai ngay sau khi sửa: đổi tên cả sản phẩm khác và giữ giá cũ | [Issue #7](https://github.com/NguyenSonTung16/HW02/issues/7) |
 | [BUG-FR15-002](BUG-FR15-002.md) | FR-15 | Chấp nhận và lưu tên sản phẩm dài 256 ký tự | [Issue #8](https://github.com/NguyenSonTung16/HW02/issues/8) |
 | [BUG-FR15-003](BUG-FR15-003.md) | FR-15 | Chấp nhận và lưu sản phẩm có giá bằng 0 | [Issue #9](https://github.com/NguyenSonTung16/HW02/issues/9) |
-| [BUG-FR20-001](BUG-FR20-001.md) | FR-20 | Giỏ hàng Mobile trống thiếu hình minh họa | Chưa đăng |
-| [BUG-FR20-002](BUG-FR20-002.md) | FR-20 | Giỏ hàng Mobile thiếu nút tăng giảm số lượng +/- | Chưa đăng |
-| [BUG-FR20-003](BUG-FR20-003.md) | FR-20 | Giỏ hàng Mobile dùng nhãn Tổng tạm tính thay vì Tổng cộng | Chưa đăng |
-| [BUG-FR20-004](BUG-FR20-004.md) | FR-20 | Xóa sản phẩm khỏi giỏ Mobile ngay lập tức, không có xác nhận | Chưa đăng |
-| [BUG-FR20-005](BUG-FR20-005.md) | FR-20 | Nhập tay số lượng 3 trong giỏ Mobile cho kết quả sai | Chưa đăng |
+| [BUG-FR20-001](BUG-FR20-001.md) | FR-20 | Giỏ hàng Mobile trống thiếu hình minh họa | [Issue #10](https://github.com/NguyenSonTung16/HW02/issues/10) |
+| [BUG-FR20-002](BUG-FR20-002.md) | FR-20 | Giỏ hàng Mobile thiếu nút tăng giảm số lượng +/- | [Issue #11](https://github.com/NguyenSonTung16/HW02/issues/11) |
+| [BUG-FR20-003](BUG-FR20-003.md) | FR-20 | Giỏ hàng Mobile dùng nhãn Tổng tạm tính thay vì Tổng cộng | [Issue #12](https://github.com/NguyenSonTung16/HW02/issues/12) |
+| [BUG-FR20-004](BUG-FR20-004.md) | FR-20 | Xóa sản phẩm khỏi giỏ Mobile ngay lập tức, không có xác nhận | [Issue #13](https://github.com/NguyenSonTung16/HW02/issues/13) |
+| [BUG-FR20-005](BUG-FR20-005.md) | FR-20 | Nhập tay số lượng 3 trong giỏ Mobile cho kết quả sai | [Issue #14](https://github.com/NguyenSonTung16/HW02/issues/14) |
 
 Một bug có thể làm nhiều TC Fail. TC10–TC12 FR-20 chưa chốt quy tắc chuẩn hóa số lượng thành 1; không tạo issue cho hành vi đó khi chưa có căn cứ.

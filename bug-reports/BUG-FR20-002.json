@@ -15,7 +15,7 @@
     "BUG-FR20-002-TC02.png",
     "BUG-FR20-002-TC05.png"
   ],
-  "issue_url": null,
-  "issue_number": null,
-  "evidence_commit": null
+  "issue_url": "https://github.com/NguyenSonTung16/HW02/issues/11",
+  "issue_number": 11,
+  "evidence_commit": "76e74196cb95b26abd527d02d9d48fceb2b1194e"
 }
