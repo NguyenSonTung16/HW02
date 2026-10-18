@@ -4998,3 +4998,32 @@ Mình dừng tại đây, chờ bạn duyệt trước khi làm FR-09 và FR-15.
 
 Đã ghi audit
 
+## AI-LOCAL-dae7a3caa71ef4ea
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+13:14:48 18/10/2026
+
+### Prompt của bạn
+
+tốt, hãy thực hiện tiếp cho FR-09 và FR-15, nhớ lưu video vào folder
+
+
+### Output của AI
+
+Đã lưu hai video mới vào [HW02/videos](<D:/vscode/Software testing/HW02/videos>), giữ đúng nhịp bạn đã duyệt.
+
+**FR-09 — Mã giảm giá · 1 phút 24 giây**
+
+![Video FR-09](<D:/vscode/Software testing/HW02/videos/FR-09-demo.webm>)
+
+**FR-15 — Quản lý sản phẩm CRUD · 1 phút 37 giây**
+
+![Video FR-15](<D:/vscode/Software testing/HW02/videos/FR-15-demo.webm>)
+
+Đã cập nhật [README](<D:/vscode/Software testing/HW02/README.md>): tổng **18/68 TC đã chạy — 6 Pass, 12 Fail, 50 chưa chạy**. Sáu bug mới đã có báo cáo Markdown và [GitHub Issues #4–#9](https://github.com/NguyenSonTung16/HW02/issues), mỗi issue kèm ảnh.
+
+Đã ghi audit
+
