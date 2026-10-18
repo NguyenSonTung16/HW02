@@ -2,3 +2,10 @@
 !/audit/AI_Audit_Report.md
 !/audit/Appendix_A_Prompt_Log.md
 !/audit/generated_report_state.json
+
+!/audit/AI_Audit_Report.docx
+!/audit/AI_Audit_Report.pdf
+
+**/__pycache__/
+**/*.pyc
+**/node_modules/

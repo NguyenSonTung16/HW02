@@ -160,3 +160,10 @@ Video thực thi TC khác với video demo end-to-end sử dụng skill ở mụ
 - [AI Critique](AI_Critique.md).
 - [AI Audit Report](audit/AI_Audit_Report.md).
 - [Nhật ký prompt](audit/Appendix_A_Prompt_Log.md).
+
+## Hồ sơ và nhật ký Git
+
+- [Báo cáo chính Markdown](Main_Report.md) · [Word](Main_Report.docx) · [PDF](Main_Report.pdf).
+- [AI Critique](AI_Critique.md) · [PDF](AI_Critique.pdf).
+- [AI Audit Markdown](audit/AI_Audit_Report.md) · [Word](audit/AI_Audit_Report.docx) · [PDF](audit/AI_Audit_Report.pdf).
+- [Git commit log](Git_Commit_Log.txt) và [giới hạn lịch sử từng bước](Git_Workflow_Notes.md).
