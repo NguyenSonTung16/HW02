@@ -830,5 +830,175 @@
     "techniques": [
       "BVA"
     ]
+  },
+  {
+    "id": "FR-20-TC01",
+    "fr": "FR-20",
+    "tc": "TC01",
+    "name": "Xem giỏ trống",
+    "condition": "EC1; EC12; EC26",
+    "input": "Thao tác: Mở màn hình Giỏ hàng trên Mobile\nTrạng thái ban đầu: Giỏ trống.",
+    "expected": "Hiển thị hình minh họa và thông báo giỏ hàng trống rõ ràng; không hiển thị dòng sản phẩm giả.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC02",
+    "fr": "FR-20",
+    "tc": "TC02",
+    "name": "Xem giỏ có hai sản phẩm",
+    "condition": "EC1; EC13; EC17; EC20",
+    "input": "Thao tác: Mở màn hình Giỏ hàng trên Mobile\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1.",
+    "expected": "Hiển thị đúng hai sản phẩm, đơn giá, số lượng, thành tiền, thao tác và nút +/-; thành tiền A = 200.000 đ, B = 50.000 đ; Tổng cộng = 250.000 đ.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC03",
+    "fr": "FR-20",
+    "tc": "TC03",
+    "name": "Thêm sản phẩm chưa có, số lượng 1",
+    "condition": "EC2; EC6; EC8; EC27; EC20",
+    "input": "Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ\nSản phẩm: \"SP_A\"\nSố lượng thêm: 1\nTrạng thái ban đầu: Chỉ có SP_B số lượng 2.",
+    "expected": "Có thêm đúng một dòng SP_A số lượng 1, thành tiền 100.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 200.000 đ. Có phản hồi trực quan khi thêm.",
+    "techniques": [
+      "Domain Testing",
+      "BVA"
+    ]
+  },
+  {
+    "id": "FR-20-TC04",
+    "fr": "FR-20",
+    "tc": "TC04",
+    "name": "Thêm lại cùng sản phẩm",
+    "condition": "EC2; EC7; EC8; EC18; EC20",
+    "input": "Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ\nSản phẩm: \"SP_A\"\nSố lượng thêm: 3\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1.",
+    "expected": "SP_A chỉ có một dòng, số lượng 5, thành tiền 500.000 đ; SP_B giữ số lượng 1, thành tiền 50.000 đ; Tổng cộng = 550.000 đ. Có phản hồi trực quan khi thêm.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC05",
+    "fr": "FR-20",
+    "tc": "TC05",
+    "name": "Điều chỉnh bằng nút tăng và giảm",
+    "condition": "EC3; EC16; EC19; EC20",
+    "input": "Thao tác: Bấm + một lần ở SP_A, quan sát; sau đó bấm - một lần ở SP_A, quan sát\nSản phẩm đích: \"SP_A\"\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1.",
+    "expected": "Sau +: A số lượng 3, thành tiền 300.000 đ, Tổng cộng = 350.000 đ. Sau -: A số lượng 2, thành tiền 200.000 đ, Tổng cộng = 250.000 đ. B luôn giữ số lượng 1 và thành tiền 50.000 đ.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC06",
+    "fr": "FR-20",
+    "tc": "TC06",
+    "name": "Hủy xác nhận xóa",
+    "condition": "EC4; EC15; EC22; EC24",
+    "input": "Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Hủy\nSản phẩm đích: \"SP_A\"\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1.",
+    "expected": "Có hộp thoại xác nhận; trước khi chọn và sau khi Hủy, A vẫn số lượng 2, B vẫn số lượng 1; Tổng cộng = 250.000 đ.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC07",
+    "fr": "FR-20",
+    "tc": "TC07",
+    "name": "Đồng ý xóa một trong hai sản phẩm",
+    "condition": "EC4; EC14; EC22; EC23; EC20",
+    "input": "Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Đồng ý\nSản phẩm đích: \"SP_A\"\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1.",
+    "expected": "Có xác nhận và giỏ chưa đổi trước khi đồng ý. Sau khi đồng ý, chỉ A bị xóa; B vẫn số lượng 1, thành tiền 50.000 đ; Tổng cộng = 50.000 đ.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC08",
+    "fr": "FR-20",
+    "tc": "TC08",
+    "name": "Xóa sản phẩm cuối cùng",
+    "condition": "EC4; EC14; EC22; EC23; EC26; EC28",
+    "input": "Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Đồng ý\nSản phẩm đích: \"SP_A\"\nTrạng thái ban đầu: Chỉ có SP_A số lượng 1.",
+    "expected": "Có xác nhận trước khi xóa; sau khi đồng ý, không còn dòng SP_A; hiển thị hình minh họa và thông báo giỏ trống rõ ràng.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC09",
+    "fr": "FR-20",
+    "tc": "TC09",
+    "name": "Tiếp tục mua sắm",
+    "condition": "EC5; EC25",
+    "input": "Thao tác: Ghi nhận giỏ; bấm Tiếp tục mua sắm; không thêm/xóa hoặc sửa hàng; mở lại Giỏ hàng trong cùng phiên\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1; Tổng cộng = 250.000 đ.",
+    "expected": "Chuyển về trang chủ, hiển thị danh sách sản phẩm. Khi quay lại giỏ, vẫn đúng hai sản phẩm: A số lượng 2, thành tiền 200.000 đ; B số lượng 1, thành tiền 50.000 đ; Tổng cộng = 250.000 đ.",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC10",
+    "fr": "FR-20",
+    "tc": "TC10",
+    "name": "Số lượng thêm bằng 0",
+    "condition": "EC2; EC6; EC9; EC21",
+    "input": "Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ\nSản phẩm: \"SP_A\"\nSố lượng thêm: 0\nTrạng thái ban đầu: Chỉ có SP_B số lượng 1.",
+    "expected": "Không đưa số lượng không hợp lệ 0 vào giỏ. SP_B giữ nguyên số lượng 1 và thành tiền 50.000 đ. Việc tự chuyển thành 1 rồi thêm SP_A cần xác nhận quy tắc trước khi kết luận toàn bộ TC (xem ghi chú TC10–TC12).",
+    "techniques": [
+      "Domain Testing",
+      "BVA"
+    ]
+  },
+  {
+    "id": "FR-20-TC11",
+    "fr": "FR-20",
+    "tc": "TC11",
+    "name": "Số lượng thêm không nguyên",
+    "condition": "EC2; EC6; EC10; EC21",
+    "input": "Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ\nSản phẩm: \"SP_A\"\nSố lượng thêm: 1.5\nTrạng thái ban đầu: Chỉ có SP_B số lượng 1.",
+    "expected": "Không đưa số lượng không hợp lệ 1.5 vào giỏ. SP_B giữ nguyên số lượng 1 và thành tiền 50.000 đ. Việc tự chuyển thành 1 rồi thêm SP_A cần xác nhận quy tắc trước khi kết luận toàn bộ TC (xem ghi chú TC10–TC12).",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC12",
+    "fr": "FR-20",
+    "tc": "TC12",
+    "name": "Số lượng thêm không phải số",
+    "condition": "EC2; EC6; EC11; EC21",
+    "input": "Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ\nSản phẩm: \"SP_A\"\nSố lượng thêm: \"abc\"\nTrạng thái ban đầu: Chỉ có SP_B số lượng 1.",
+    "expected": "Không đưa số lượng không hợp lệ \"abc\" vào giỏ. SP_B giữ nguyên số lượng 1 và thành tiền 50.000 đ. Việc tự chuyển thành 1 rồi thêm SP_A cần xác nhận quy tắc trước khi kết luận toàn bộ TC (xem ghi chú TC10–TC12).",
+    "techniques": [
+      "Domain Testing"
+    ]
+  },
+  {
+    "id": "FR-20-TC13",
+    "fr": "FR-20",
+    "tc": "TC13",
+    "name": "Số lượng thêm bằng 2, ngay trên biên dưới",
+    "condition": "EC2; EC6; EC8; EC27; EC20",
+    "input": "Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ\nSản phẩm: \"SP_A\"\nSố lượng thêm: 2\nTrạng thái ban đầu: Chỉ có SP_B số lượng 2.",
+    "expected": "Có đúng một dòng SP_A số lượng 2, thành tiền 200.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 300.000 đ. Có phản hồi trực quan khi thêm.",
+    "techniques": [
+      "BVA"
+    ]
+  },
+  {
+    "id": "FR-20-TC14",
+    "fr": "FR-20",
+    "tc": "TC14",
+    "name": "Nhập tay số lượng trong giỏ",
+    "condition": "EC3; EC29; EC19; EC20",
+    "input": "Thao tác: Chọn ô số lượng của SP_A trong giỏ, thay toàn bộ nội dung bằng \"3\"; kết thúc chỉnh sửa theo UI và quan sát giỏ\nSản phẩm đích: \"SP_A\"\nSố lượng nhập: \"3\"\nTrạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1; Tổng cộng = 250.000 đ.",
+    "expected": "SP_A có đúng số lượng 3, thành tiền 300.000 đ; SP_B vẫn số lượng 1, thành tiền 50.000 đ; Tổng cộng = 350.000 đ. Không tạo thêm dòng SP_A.",
+    "techniques": [
+      "Domain Testing"
+    ]
   }
 ]

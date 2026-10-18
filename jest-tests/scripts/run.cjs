@@ -2,7 +2,8 @@ const fs=require('fs'),path=require('path'),{spawn,spawnSync}=require('child_pro
 const root=path.resolve(__dirname,'../..'),tests=path.join(root,'jest-tests');
 const {sut,dependency}=require('../helpers/deps.cjs');
 const args=process.argv.slice(2), fr=args.includes('--fr')?args[args.indexOf('--fr')+1]:'FR-02';
-if(!['FR-02','FR-09','FR-15'].includes(fr))throw Error('Use --fr FR-02, FR-09 or FR-15');
+if(fr==='FR-20'){require('./run-mobile.cjs');return;}
+if(!['FR-02','FR-09','FR-15'].includes(fr))throw Error('Use --fr FR-02, FR-09, FR-15 or FR-20');
 const demo=args.includes('--demo');
 if(demo&&fr!=='FR-02'&&!args.includes('--approved-next-video'))throw Error('Await user approval after FR-02 video.');
 const runid=new Date().toISOString().replace(/[:.]/g,'-')+'-'+fr;
