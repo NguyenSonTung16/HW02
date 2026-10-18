@@ -1,0 +1,13 @@
+{
+  "id": "BUG-FR09-002",
+  "fr": "FR-09",
+  "title": "Cho phép áp dụng mã giảm giá khi chưa đăng nhập và không có JWT",
+  "cases": [
+    "FR-09-TC09"
+  ],
+  "run_id": "2026-10-18T06-19-03-842Z-FR-09",
+  "screenshots": [
+    "BUG-FR09-002-TC09.png"
+  ],
+  "issue_url": null
+}

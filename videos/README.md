@@ -1,9 +1,11 @@
 # Video thực thi test
 
-- [FR-02 — Đăng nhập và khóa tài khoản, bản điều chỉnh nhịp](FR-02-demo-paced.webm): khoảng 2 phút 16 giây. Sáu TC (TC01, TC02, TC03, TC04, TC07, TC14), 1 Pass và 5 Fail; 3 bug đã báo cáo.
-- FR-09 — Mã giảm giá: chưa quay, chờ người dùng duyệt video FR-02.
-- FR-15 — Quản lý sản phẩm CRUD: chưa quay, chờ người dùng duyệt video FR-02.
+Nhịp đã được người dùng duyệt: mục tiêu 4 giây, dừng 1,5 giây sau từng ô nhập, dừng 2 giây trước khi gửi và giữ kết quả 3,5 giây. Video ghi trình duyệt thật; chú thích tiếng Việt, không có âm thanh.
 
-Theo yêu cầu cuối: đọc mục tiêu 4 giây; nhập từng ô và dừng 1,5 giây sau khi nhập xong mỗi ô; dừng 2 giây trước khi gửi; giữ kết quả 3,5 giây. Không có phần dừng riêng ở tiền điều kiện. Chú thích tiếng Việt; không có thuyết minh âm thanh. TC14 đợi 31 giây thật. Thanh HW02 TEST HARNESS là phần minh họa của runner, không phải UI gốc EShop.
+- [FR-02 — Đăng nhập và khóa tài khoản](FR-02-demo-paced.webm): khoảng 2 phút 16 giây; 6 TC, 1 Pass / 5 Fail.
+- [FR-09 — Mã giảm giá](FR-09-demo.webm): khoảng 1 phút 24 giây; 6 TC, 2 Pass / 4 Fail.
+- [FR-15 — Quản lý sản phẩm CRUD](FR-15-demo.webm): khoảng 1 phút 37 giây; 6 TC, 3 Pass / 3 Fail.
 
-Video cũ và các lần chạy trước được giữ trong hồ sơ run/audit; bản hiện tại thay video trước trong README. Đây là video thực thi TC, khác với demo dùng skill thiết kế end-to-end; chưa đăng YouTube.
+FR-09 minh họa áp dụng mã tại checkout với tổng giỏ lấy từ sản phẩm thử; TC09 mở route checkout trực tiếp khi chưa đăng nhập để kiểm tra điều kiện JWT. FR-15 minh họa CRUD và dữ liệu biên trên giao diện admin; TC03 giữ cảnh ngay sau lưu và sau reload. Fixtures được chuẩn bị riêng, không sửa logic SUT.
+
+Thanh HW02 TEST HARNESS là phần minh họa của runner. Video này là thực thi TC, khác với video dùng skill thiết kế end-to-end. Chưa đăng YouTube. Lịch sử các take ở thư mục run/audit được giữ nguyên.

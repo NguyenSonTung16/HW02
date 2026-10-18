@@ -24,7 +24,13 @@ async function ensureFree(port){try{await fetch('http://localhost:'+port);throw 
  await ensureFree(3000);await ensureFree(5173);
  start('backend',['--require',path.join(tests,'helpers/controlled-clock.cjs'),path.join(isolated,'server.js')],isolated);await wait('http://localhost:3000/api/products');
  start('frontend-web',[path.join(sut,'frontend-web/node_modules/vite/bin/vite.js'),'--host','127.0.0.1','--port','5173','--strictPort'],path.join(sut,'frontend-web'));await wait('http://localhost:5173');
- if(fr==='FR-15'){await ensureFree(5174);start('frontend-admin',[path.join(sut,'frontend-admin/node_modules/vite/bin/vite.js'),'--host','127.0.0.1','--port','5174','--strictPort'],path.join(sut,'frontend-admin'));await wait('http://localhost:5174');}
+ if(fr==='FR-15'){
+  await ensureFree(5174);
+  const adminConfig=path.join(isolated,'vite-admin.config.mjs');
+  const originalConfig=require('url').pathToFileURL(path.join(sut,'frontend-admin/vite.config.js')).href;
+  fs.writeFileSync(adminConfig,'import original from '+JSON.stringify(originalConfig)+';\nexport default {...original,cacheDir:'+JSON.stringify(path.join(isolated,'vite-admin-cache'))+'};\n');
+  start('frontend-admin',[path.join(sut,'frontend-admin/node_modules/vite/bin/vite.js'),'--config',adminConfig,'--host','127.0.0.1','--port','5174','--strictPort'],path.join(sut,'frontend-admin'));await wait('http://localhost:5174');
+ }
  const jestBin=(()=>{for(const r of [tests,path.join(sut,'testing')]){try{return require.resolve('jest/bin/jest',{paths:[r]});}catch{}}throw Error('Jest not installed');})();
  const p=spawn(process.execPath,[jestBin,'--config',path.join(tests,'jest.config.cjs'),'--runInBand','--json','--outputFile',path.join(run,'jest.json'),'--testPathPatterns',fr.toLowerCase()+'.test.cjs'],{cwd:tests,env,windowsHide:true,stdio:'inherit'});
  code=await new Promise(resolve=>p.on('exit',resolve));

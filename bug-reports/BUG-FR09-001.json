@@ -1,0 +1,13 @@
+{
+  "id": "BUG-FR09-001",
+  "fr": "FR-09",
+  "title": "Mã phần trăm tính sai số tiền giảm và tổng thanh toán",
+  "cases": [
+    "FR-09-TC01"
+  ],
+  "run_id": "2026-10-18T06-19-03-842Z-FR-09",
+  "screenshots": [
+    "BUG-FR09-001-TC01.png"
+  ],
+  "issue_url": null
+}

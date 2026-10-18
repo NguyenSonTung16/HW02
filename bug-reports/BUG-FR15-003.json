@@ -1,0 +1,13 @@
+{
+  "id": "BUG-FR15-003",
+  "fr": "FR-15",
+  "title": "Chấp nhận và lưu sản phẩm có giá bằng 0",
+  "cases": [
+    "FR-15-TC10"
+  ],
+  "run_id": "2026-10-18T06-27-29-324Z-FR-15",
+  "screenshots": [
+    "BUG-FR15-003-TC10.png"
+  ],
+  "issue_url": null
+}
