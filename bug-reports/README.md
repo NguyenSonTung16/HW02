@@ -1,3 +1,11 @@
 # Báo cáo bug
 
-Mỗi bug đã tái hiện có một file Markdown, ảnh trong `screenshots/` và liên kết GitHub Issue chứa ảnh tương ứng. Chưa xác nhận bug từ việc đọc code đơn thuần.
+Ba bug dưới đây được tái hiện khi chạy FR-02. Năm TC Fail không được tính thành năm bug.
+
+| Bug | Nội dung | TC | GitHub Issue |
+| --- | --- | --- | --- |
+| [BUG-FR02-001](BUG-FR02-001.md) | Bộ đếm đăng nhập sai tăng 2 thay vì 1, làm tài khoản khóa sớm | FR-02-TC02, FR-02-TC03, FR-02-TC04 | Đang tạo |
+| [BUG-FR02-002](BUG-FR02-002.md) | Khóa đăng nhập khoảng 180 giây thay vì 30 giây | FR-02-TC04, FR-02-TC14 | Đang tạo |
+| [BUG-FR02-003](BUG-FR02-003.md) | Trường email dùng type=text nên HTML5 không chặn email sai định dạng | FR-02-TC07 | Đang tạo |
+
+Ảnh trong `screenshots/` được chụp trực tiếp từ trình duyệt khi chạy test. Thanh “HW02 TEST HARNESS” hiển thị expected/actual của runner; không phải UI gốc. Kết quả và ảnh của từng run được giữ nguyên.

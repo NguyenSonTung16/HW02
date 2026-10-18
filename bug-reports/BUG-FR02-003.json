@@ -1,0 +1,14 @@
+{
+  "id": "BUG-FR02-003",
+  "fr": "FR-02",
+  "title": "Trường email dùng type=text nên HTML5 không chặn email sai định dạng",
+  "cases": [
+    "FR-02-TC07"
+  ],
+  "run_id": "2026-10-18T05-49-37-116Z-FR-02",
+  "screenshots": [
+    "BUG-FR02-003-TC07.png"
+  ],
+  "issue_url": null,
+  "source_commit": "85af3ba875c88283615e22cb108f13e2fccaf0e9"
+}
