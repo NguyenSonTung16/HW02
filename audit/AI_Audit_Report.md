@@ -1,31 +1,44 @@
-# AI Audit Report HW02
+# AI Audit Report — Mẫu 5 mục cho mỗi Artifact
+
+Khoa Công nghệ Thông tin (FIT) – Trường Đại học Khoa học Tự nhiên (HCMUS)
+
+CS423 / CSC13003 – Kiểm chứng Phần mềm (AI-augmented · 2026)
+
+CHÍNH SÁCH AI · BIỂU MẪU — 2026 v1.0
+
+Phụ lục bắt buộc đính kèm cho mọi bài tập có dùng AI (HW#01–HW#06, Seminar).
+
+Tài liệu được biên soạn lại từ Med Kharbach, PhD (2026) — Mẫu Chính sách Sử dụng AI cho Giáo dục Đại học. Giấy phép CC BY-NC-SA 4.0. Phiên bản này được FIT@HCMUS điều chỉnh cho môn CS423 / CSC15003 Kiểm chứng Phần mềm.
 
 Tôi sử dụng công cụ AI cho các nhiệm vụ sau:
-
-- Đọc đề và đặc tả, giải thích lý thuyết, chọn chức năng HW02.
-- Thiết kế test và skill, tạo/chỉnh báo cáo, tìm template và ghi audit.
+- Đọc đề, đặc tả và lý thuyết; thiết kế EC, Domain Testing và BVA.
+- Tạo/chỉnh báo cáo, skill, script kiểm thử, tổng kết kết quả, bug report và nhật ký AI.
 
 ## 1. Thông tin Sinh viên
 
 | Mục | Giá trị |
 | --- | --- |
-| Họ tên | NGUYỄN SƠN TÙNG |
-| MSSV | 23120399 |
-| Lớp / Khoá | Chờ xác nhận cho HW02 |
-| Mã bài tập | HW02 |
-| Công cụ AI | Codex |
+| Họ tên sinh viên (in hoa): | NGUYỄN SƠN TÙNG |
+| MSSV: | 23120399 |
+| Lớp / Khoá: | Chưa xác nhận |
+| Mã bài tập (ví dụ HW#00, HW#02): | HW02 |
+| Ngày làm bài: | Xem ngày giờ nguyên văn tại từng tương tác |
+| Công cụ AI đã dùng: | Codex |
+| Công cụ AI đã dùng: | [x] Có  [ ] Không |
 
-Tên và MSSV lấy từ mẫu AI-02 người dùng cung cấp; không mang ngày, chữ ký và kết quả HW01 sang HW02.
+## 2. Hướng dẫn (đọc trước khi điền)
 
-## 2. Hướng dẫn
+- Thêm 1 hàng cho mỗi artifact AI sinh (test case, script, checklist, OpenAPI spec, JMeter plan…).
+- Dán nguyên văn prompt — KHÔNG paraphrase.
+- Dán nguyên văn output AI (hoặc kèm screenshot có chú thích trong báo cáo).
+- Gắn nhãn: VALID / INVALID / INCOMPLETE.
+- Lý do phải dẫn chiếu slide, mục ISTQB, hoặc RFC kỹ thuật.
+- Hiển thị bản sửa với phần thay đổi được tô sáng.
+- Hàng mẫu in nghiêng — thay trước khi nộp.
 
-Prompt và output được ghi đầy đủ ngay trong cột (1) và (2), không thay bằng liên kết hoặc tóm tắt. Công cụ hiển thị là Codex. Thời gian theo HH:mm:ss dd/MM/yyyy, múi giờ UTC+07:00. Dòng nhãn phân biệt prompt bổ sung, commentary và phản hồi cuối; nội dung bên trong giữ nguyên văn. Các ký hiệu Markdown/HTML được mã hóa để hiển thị đúng trong ô bảng. Nếu nội dung gốc chứa URL hoặc tên model thì vẫn giữ như một phần nguyên văn, không dùng làm liên kết thay thế nội dung audit.
+## 3. Bảng Audit — 1 hàng / artifact
 
-Cột Verdict chỉ điền VALID, INVALID hoặc INCOMPLETE khi có đánh giá thực tế của sinh viên. Ô trống nghĩa là chưa được đánh giá, không phải một verdict thứ tư. Không tự dịch nhãn hoặc tự nhận đã rà soát.
-
-## 3. Bảng Audit — 1 hàng / artifact hội thoại
-
-Mỗi hàng ghi một tương tác hội thoại. Nội dung output dưới đây là thông điệp AI hiển thị, chưa bao gồm bytes của mọi file lịch sử hoặc tool log. Snapshot và record kỹ thuật được giữ riêng để truy vết nhưng không bắt buộc mở hoặc đính kèm để đọc hai cột đầu.
+Phạm vi nhật ký: giữ nguyên prompt/output và thời gian đã ghi; chưa bao gồm toàn bộ bytes của mọi artifact lịch sử hoặc toàn bộ tool log. Mỗi hàng hiện ghi một tương tác; các file sinh ra được lưu snapshot để truy vết. Chưa có đánh giá riêng cho từng file artifact.
 
 | (1) Prompt + Công cụ | (2) Output AI | (3) Verdict | (4) Lý do (ISTQB) | (5) Bản SV sửa |
 | --- | --- | --- | --- | --- |
@@ -182,29 +195,58 @@ Mỗi hàng ghi một tương tác hội thoại. Nội dung output dưới đâ
 | AI-LOCAL-941789fc08f197cd<br>Công cụ: Codex<br><br>Ngày và giờ: 18:04:00 18/10/2026<br>Prompt 1 nguyên văn:<br>từ các thay đổi/output/sửa đổi/yêu cầu trong phiên làm việc hãy Nhận xét phản biện về AI (AI Critique) Bắt buộc 200–300 từ<br>Viết một đoạn văn dài 200–300 từ nhận xét phản biện về AI. Trả lời các câu hỏi: AI đã sai, thiên lệch<br>(biased) hoặc chưa đầy đủ ở đâu? Vì sao AI không phát hiện vấn đề? Bạn rút ra nguyên tắc nào về việc<br>cộng tác với AI trong bài tập này?<br>Có thể sử dụng nội dung trong các mẫu AI đã cung cấp nếu cần<br> | <br>Output 1 (Phản hồi cuối), 18:04:20 18/10/2026:<br>Trong bài tập này, AI giúp tôi phân lớp tương đương, chọn giá trị biên và xây dựng báo cáo, nhưng kết quả cần được rà soát. Ban đầu, AI thêm nhiều cột, ký hiệu và phần giải thích ngoài nhu cầu, thể hiện xu hướng ưu tiên mẫu báo cáo phức tạp hơn cấu trúc trong slide. Với FR-02, AI đưa lần đăng nhập sai thứ nhất vào nhóm kiểm tra quanh ngưỡng khóa ba lần, dù các điểm sát ngưỡng là lần thứ hai, ba và bốn. Với FR-15, expected ban đầu chỉ kiểm tra sau khi tải lại, có thể bỏ sót lỗi giao diện đổi tên các sản phẩm khác ngay sau khi lưu. Với FR-20, AI thiếu kiểm tra nhập tay số lượng, chưa kiểm tra giỏ khi đi mua sắm rồi quay lại, và viết expected chưa đủ rõ để đánh giá trường hợp đầu vào sai được tự chuyển thành 1. Những thiếu sót này cho thấy AI thiên về hành vi được mô tả trực tiếp và kết quả cuối, chưa xem xét đầy đủ đường thao tác, trạng thái trung gian và sự thiếu rõ ràng của đặc tả. Tôi rút ra rằng cần hướng dẫn AI theo từng bước của kỹ thuật, yêu cầu truy nguồn expected và kiểm tra ánh xạ EC–TC. Người học phải rà soát dữ liệu biên, quan sát trước và sau thao tác, phân biệt yêu cầu với giả định, đồng thời ghi nhận sửa đổi. AI hỗ trợ thiết kế và thực thi; trách nhiệm xác minh, kết luận lỗi và đánh giá kết quả vẫn thuộc về tôi.<br><br>Đã ghi audit |  |  |  |
 | AI-LOCAL-7e98198d66b298e3<br>Công cụ: Codex<br><br>Ngày và giờ: 18:04:30 18/10/2026<br>Prompt 1 nguyên văn:<br>sau đó push git các update mới<br> | <br>Output 1 (Phản hồi cuối), 18:05:09 18/10/2026:<br>Đã push các cập nhật mới lên &#96;main&#96;, gồm &#91;AI&#95;Critique.md&#93;(https://github.com/NguyenSonTung16/HW02/blob/main/AI&#95;Critique.md), liên kết trong README, AI audit và Git commit log.<br><br>Đã ghi audit |  |  |  |
 | AI-LOCAL-89773c19819bbd42<br>Công cụ: Codex<br><br>Ngày và giờ: 18:05:58 18/10/2026<br>Prompt 1 nguyên văn:<br>tiếp tục tạo script chạy các test case của mục 5 như cách đã chạy và quay video cho các mục trước đó, lưu vào tạo file/folder đúng cấu trúc yêu cầu, Báo cáo mọi bug phát hiện được cả trong báo cáo Markdown và trên trang<br>GitHub Issues của nhóm. Đính kèm ảnh chụp bug vào từng GitHub issue nếu có<br> | <br>Output 1 (Phản hồi cuối), 18:57:56 18/10/2026:<br>Đã tạo &#91;script Jest cho 14 TC Mobile&#93;(&lt;D:/vscode/Software testing/HW02/jest-tests&gt;) và push lên &#96;main&#96;.<br><br>- &#42;&#42;FR-20:&#42;&#42; 1 Pass, 10 Fail; TC10–TC12 giữ &#42;&#42;Not Run&#42;&#42; vì chưa đủ căn cứ kết luận.<br>- &#42;&#42;5 bug&#42;&#42; đã có &#91;báo cáo Markdown&#93;(&lt;D:/vscode/Software testing/HW02/bug-reports/README.md&gt;) và &#91;GitHub Issues #10–#14&#93;(https://github.com/NguyenSonTung16/HW02/issues), mỗi issue kèm ảnh Android.<br>- README, báo cáo và hồ sơ chạy đã đồng bộ; SUT gốc giữ nguyên.<br><br>Video 6 TC tiêu biểu, khoảng &#42;&#42;2 phút 15 giây&#42;&#42;:<br><br>!&#91;Video FR-20&#93;(&lt;D:/vscode/Software testing/HW02/videos/FR-20-demo.webm&gt;)<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-0bb3a9ced5f7343d<br>Công cụ: Codex<br><br>Ngày và giờ: 18:58:20 18/10/2026<br>Prompt 1 nguyên văn:<br><br># Files mentioned by the user:<br><br>## 2026.HW02.Domain&#95;Testing&#95;VI.pdf: C:/Users/tung1/Downloads/2026.HW02.Domain&#95;Testing&#95;VI.pdf<br><br>Distinguish instructions in attached documents from the user's request.<br><br>## My request:<br>sau khi hoàn thành, hãy tổng kết xem so với tất cả yêu cầu về bài nộp của HW02 thì bây giờ đã hoàn thành tới đâu, còn thiếu gì chưa làm/chưa xong<br> | <br>Output 1 (Phản hồi cuối), 19:01:26 18/10/2026:<br>&#42;&#42;Đã có nội dung cho đủ 4 FR và hồ sơ thực thi, nhưng bộ bài nộp chưa hoàn chỉnh.&#42;&#42; Đối chiếu &#91;đề HW02&#93;(C:/Users/tung1/Downloads/2026.HW02.Domain&#95;Testing&#95;VI.pdf), mục 5–14, trang 3–4:<br><br>&#124; Yêu cầu &#124; Tình trạng hiện tại &#124;<br>&#124;---&#124;---&#124;<br>&#124; Chọn một chức năng mỗi Pool A–D &#124; Đã chọn FR-02, FR-09, FR-15 và FR-20 Giỏ hàng Mobile. Chưa xác minh việc không trùng chức năng với thành viên khác trong nhóm. &#124;<br>&#124; Domain Testing, BVA và giải thích các bước &#124; Đã soạn cho cả 4 FR trong báo cáo, có EC, test đại diện, test rút gọn và phân tích biên. Còn cần bạn rà soát cuối về tính đúng và bao phủ. &#124;<br>&#124; AI gap analysis &#124; Đã có ở 2.6, 3.6, 4.6 và 5.6, gồm các thiếu sót bạn phát hiện và nguyên nhân. &#124;<br>&#124; Kết quả thực thi trong README &#124; Đã có bảng TC theo từng FR, actual, trạng thái, bằng chứng và tổng kết. Thực thi còn một phần. &#124;<br>&#124; Bug trong Markdown và GitHub Issues, kèm ảnh &#124; Đã có &#42;&#42;14 bug&#42;&#42;, báo cáo Markdown và Issues #1–#14 kèm ảnh. Cần bảo đảm repo HW02 hiện dùng chính là repo nhóm thống nhất. &#124;<br>&#124; Báo cáo chính Markdown + PDF &#124; Có Markdown và Word; &#42;&#42;chưa có PDF bản nộp chính thức&#42;&#42;. &#124;<br>&#124; AI Critique 200–300 từ, Markdown + PDF &#124; Có đoạn Markdown khoảng &#42;&#42;275 từ&#42;&#42;; &#42;&#42;chưa có PDF&#42;&#42;. &#124;<br>&#124; AI Audit, Markdown + PDF, làm phụ lục &#124; Có Markdown và nhật ký. &#42;&#42;Chưa có PDF&#42;&#42;; cần chốt phụ lục, rà soát thông tin và giới hạn lịch sử được ghi nhận. &#124;<br>&#124; Commit từng bước, commit log TXT &#124; Có log TXT; FR-20 có commit theo các bước. Các FR đầu được đưa lên gộp nên &#42;&#42;chưa đáp ứng đầy đủ yêu cầu commit từng bước&#42;&#42;; cần giữ và trình bày trung thực lịch sử. &#124;<br>&#124; README có bảng tự đánh giá &#124; Đã có bảng, &#42;&#42;chưa điền điểm&#42;&#42;. &#124;<br>&#124; Skills và video trình diễn &#124; Có 4 skill tại máy và 4 video chạy TC. &#42;&#42;Skills chưa có trong repo; chưa có video end-to-end sử dụng skill và link YouTube&#42;&#42;. Video chạy TC hiện tại chưa thay thế phần này. &#124;<br>&#124; ZIP đúng tên và nộp Moodle &#124; &#42;&#42;Chưa đóng gói, chưa có xác nhận nộp&#42;&#42;. &#124;<br><br>&#42;&#42;Số liệu thực thi hiện tại&#42;&#42; trong &#91;README&#93;(&lt;D:/vscode/Software testing/HW02/README.md&gt;):<br><br>&#124; FR &#124; Thiết kế &#124; Đã chạy, có kết luận &#124; Pass &#124; Fail &#124; Chưa chạy/chưa kết luận &#124;<br>&#124;---&#124;---:&#124;---:&#124;---:&#124;---:&#124;---:&#124;<br>&#124; FR-02 &#124; 14 &#124; 6 &#124; 1 &#124; 5 &#124; 8 &#124;<br>&#124; FR-09 &#124; 21 &#124; 6 &#124; 2 &#124; 4 &#124; 15 &#124;<br>&#124; FR-15 &#124; 33 &#124; 6 &#124; 3 &#124; 3 &#124; 27 &#124;<br>&#124; FR-20 &#124; 14 &#124; 11 &#124; 1 &#124; 10 &#124; 3 &#124;<br>&#124; &#42;&#42;Tổng&#42;&#42; &#124; &#42;&#42;82&#42;&#42; &#124; &#42;&#42;29&#42;&#42; &#124; &#42;&#42;7&#42;&#42; &#124; &#42;&#42;22&#42;&#42; &#124; &#42;&#42;53&#42;&#42; &#124;<br><br>Đề không quy định phải chạy 100% TC. Tuy nhiên, FR-02-TC13 và FR-20-TC10–TC12 còn cần làm rõ kết quả mong đợi/khả năng nhập liệu để kết luận; các TC còn lại chưa chạy cần được báo trung thực. &#42;&#42;22 TC Fail tương ứng 14 bug riêng biệt&#42;&#42;, không phải 22 bug.<br><br>Các việc cần hoàn tất trước khi nộp:<br><br>1. Bạn rà soát nội dung cuối, xác nhận phân công nhóm và điền điểm tự đánh giá. Đề yêu cầu: “Mọi kết quả do AI tạo ra phải được chính bạn, người sinh viên, kiểm tra cẩn thận.” &#42;(Trang 1.)&#42;<br>2. Nếu nộp phần Agent Skills: đưa skill vào hồ sơ và quay video sử dụng skill từ đầu đến cuối trên một chức năng hoàn chỉnh, đăng YouTube theo mục 7. Đây là phần được khuyến khích, có 10 điểm trong rubric.<br>3. Hoàn thiện audit/phụ lục, xuất &#42;&#42;Main&#95;Report.pdf, AI&#95;Critique.pdf và AI&#95;Audit&#95;Report.pdf&#42;&#42;, kiểm tra nội dung khớp Markdown.<br>4. Xuất lại commit log cuối, kiểm tra liên kết ảnh/video/Issues và đồng bộ các file nộp lên Git.<br>5. Đóng ZIP theo mẫu &#96;&lt;StudentID&gt;&#95;HW02&#95;AI&#95;DomainTesting&#95;&lt;SelfAssessedGrade&gt;.zip&#96;, kiểm tra mở được rồi nộp Moodle đúng hạn. Hạn nộp chưa được xác minh trong lần kiểm tra này.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-7bacb81466ddfa4e<br>Công cụ: Codex<br><br>Ngày và giờ: 19:01:46 18/10/2026<br>Prompt 1 nguyên văn:<br>Trong bài tập này, AI giúp tôi phân lớp tương đương, chọn giá trị biên và xây dựng báo cáo, nhưng kết quả cần được rà soát. Ban đầu, AI thêm nhiều cột, ký hiệu và phần giải thích ngoài nhu cầu, thể hiện xu hướng ưu tiên mẫu báo cáo phức tạp hơn cấu trúc trong slide. Với FR-02, AI đưa lần đăng nhập sai thứ nhất vào nhóm kiểm tra quanh ngưỡng khóa ba lần, dù các điểm sát ngưỡng là lần thứ hai, ba và bốn. Với FR-15, expected ban đầu chỉ kiểm tra sau khi tải lại, có thể bỏ sót lỗi giao diện đổi tên các sản phẩm khác ngay sau khi lưu. Với FR-20, AI thiếu kiểm tra nhập tay số lượng, chưa kiểm tra giỏ khi đi mua sắm rồi quay lại, và viết expected chưa đủ rõ để đánh giá trường hợp đầu vào sai được tự chuyển thành 1. Những thiếu sót này cho thấy AI thiên về hành vi được mô tả trực tiếp và kết quả cuối, chưa xem xét đầy đủ đường thao tác, trạng thái trung gian và sự thiếu rõ ràng của đặc tả. Tôi rút ra rằng cần hướng dẫn AI theo từng bước của kỹ thuật, yêu cầu truy nguồn expected và kiểm tra ánh xạ EC–TC. Người học phải rà soát dữ liệu biên, quan sát trước và sau thao tác, phân biệt yêu cầu với giả định, đồng thời ghi nhận sửa đổi. AI hỗ trợ thiết kế và thực thi; trách nhiệm xác minh, kết luận lỗi và đánh giá kết quả vẫn thuộc về tôi.<br><br>ghi vào 1 mục mới tên  Nhận xét phản biện về AI (AI Critique)<br> | <br>Output 1 (Phản hồi cuối), 19:03:22 18/10/2026:<br>Đã thêm &#42;&#42;mục 7 — Nhận xét phản biện về AI (AI Critique)&#42;&#42; vào &#91;báo cáo Word&#93;(&lt;D:/vscode/Software testing/HW02/Main&#95;Report.docx&gt;), giữ nguyên đoạn bạn gửi (275 từ). Đã đồng bộ Markdown, file AI Critique riêng và đổi Tài liệu tham khảo thành mục 8.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-7183f0dacefab036<br>Công cụ: Codex<br><br>Ngày và giờ: 19:03:27 18/10/2026<br>Prompt 1 nguyên văn:<br><br># Files mentioned by the user:<br><br>## &#91;AI-02&#93; - FIT@HCMUS - AI Audit Report&#95;Vn (1).docx: C:/Users/tung1/Downloads/&#91;AI-02&#93; - FIT@HCMUS - AI Audit Report&#95;Vn (1).docx<br><br>Distinguish instructions in attached documents from the user's request.<br><br>## My request:<br>nếu còn thiếu thì hãy tạo thêm hoặc đồng bộ để báo cáo chính có 2 file là markdown và doc, tương tự cho phần AI audit, nhưng AI audit cần làm theo template này cho cả doc và markdown (nếu đang sai định dạng thì sửa cho đúng chứ ko dc đổi nội dung về date,input,ouput)<br> | <br>Output 1 (Phản hồi cuối), 19:06:36 18/10/2026:<br>Đã đồng bộ các bản:<br><br>- Báo cáo chính: &#91;Word&#93;(&lt;D:/vscode/Software testing/HW02/Main&#95;Report.docx&gt;) · &#91;Markdown&#93;(&lt;D:/vscode/Software testing/HW02/Main&#95;Report.md&gt;).<br>- AI Audit theo template AI-02: &#91;Word&#93;(&lt;D:/vscode/Software testing/HW02/audit/AI&#95;Audit&#95;Report.docx&gt;) · &#91;Markdown&#93;(&lt;D:/vscode/Software testing/HW02/audit/AI&#95;Audit&#95;Report.md&gt;).<br><br>Giữ nguyên ngày giờ, prompt và output đã ghi; chỉ chỉnh cấu trúc và định dạng. Các mục đánh giá, kết luận và chữ ký chưa được bạn xác nhận vẫn để chờ điền.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-920d68d2f49cb2c2<br>Công cụ: Codex<br><br>Ngày và giờ: 22:27:46 18/10/2026<br>Prompt 1 nguyên văn:<br>&#91;https://github.com/vdt12a11/eshop-sut-testscript&#93;(https://github.com/vdt12a11/eshop-sut-testscript)<br>đây là link github chung của nhóm, theo yêu cầu 4. Báo cáo lỗi (Bug reporting): Báo cáo mọi bug phát hiện được cả trong báo cáo Markdown và trên trang\<br>GitHub Issues của nhóm. Đính kèm ảnh chụp bug vào từng GitHub issue<br><br>thì phải push Issue lên link git này đúng ko<br> | <br>Output 1 (Phản hồi cuối), 22:28:09 18/10/2026:<br>Đúng. Vì đây là repo chung của nhóm, các bug cần được tạo tại &#91;GitHub Issues của nhóm&#93;(https://github.com/vdt12a11/eshop-sut-testscript/issues), mỗi issue kèm ảnh chụp bug.<br><br>Thao tác này gọi là &#42;&#42;tạo Issue&#42;&#42;, không phải &#96;git push&#96;. Báo cáo Markdown vẫn phải có nội dung bug và liên kết đến issue tương ứng.<br><br>Hiện 14 issue đã tạo nằm ở repo cá nhân &#96;NguyenSonTung16/HW02&#96;, nên cần &#42;&#42;chuyển sang repo nhóm&#42;&#42; nếu có quyền chuyển; nếu không, tạo lại tại repo nhóm rồi cập nhật liên kết trong báo cáo Markdown và README. Mình chưa thực hiện chuyển hoặc tạo lại trong lượt này.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-6893976b47fd5f00<br>Công cụ: Codex<br><br>Ngày và giờ: 22:38:05 18/10/2026<br>Prompt 1 nguyên văn:<br>có thể cherry pick để đem lịch sử commit Issue qua git này dc ko<br> | <br>Output 1 (Phản hồi cuối), 22:38:20 18/10/2026:<br>&#42;&#42;Không chuyển Issue bằng &#96;git cherry-pick&#96; được.&#42;&#42; Issue là dữ liệu do GitHub quản lý, tách khỏi lịch sử commit của Git.<br><br>- &#42;&#42;Commit chứa file báo cáo bug, ảnh, script:&#42;&#42; có thể cherry-pick sang repo nhóm. Commit mới giữ thông tin tác giả nhưng thường có mã SHA khác.<br>- &#42;&#42;Issue và lịch sử bình luận:&#42;&#42; dùng chức năng &#42;&#42;Transfer issue&#42;&#42; của GitHub nếu đủ quyền và đáp ứng điều kiện chuyển. Khi chuyển, issue nhận số mới trong repo đích.<br>- &#42;&#42;Nếu không chuyển được:&#42;&#42; tạo issue mới ở repo nhóm, đính kèm ảnh và dẫn link issue gốc để truy vết; cách này không giữ nguyên lịch sử Issue.<br><br>Với bài của bạn, cần xử lý riêng &#42;&#42;các file trong Git&#42;&#42; và &#42;&#42;14 GitHub Issues&#42;&#42;, rồi cập nhật liên kết trong báo cáo/README.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-79a7e91fe18f4dc3<br>Công cụ: Codex<br><br>Ngày và giờ: 22:43:51 18/10/2026<br>Prompt 1 nguyên văn:<br>vậy mang tất cả GitHub Issues đã push ở repo riêng qua repo nhóm này (&#91;https://github.com/vdt12a11/eshop-sut-testscript&#93;(https://github.com/vdt12a11/eshop-sut-testscript)), đảm bảo nội dung phải y hệt nhau, push ở nhánh Tùng<br> | <br>Output 1 (Phản hồi cuối), 22:47:02 18/10/2026:<br>Đã đưa đủ &#42;&#42;14 Issues (#1–#14)&#42;&#42; lên &#91;repo nhóm&#93;(https://github.com/vdt12a11/eshop-sut-testscript/issues). Đã đối chiếu tiêu đề, nội dung giống nguyên văn và kiểm tra đủ &#42;&#42;31 ảnh đính kèm&#42;&#42;.<br><br>Đã push báo cáo bug, ảnh và bảng đối chiếu lên &#91;nhánh Tùng&#93;(https://github.com/vdt12a11/eshop-sut-testscript/tree/T%C3%B9ng/HW02), commit &#96;f18b02e&#96;; đồng thời cập nhật liên kết trong README và báo cáo bug tại máy.<br><br>GitHub không cho chuyển trực tiếp giữa hai chủ sở hữu, nên đây là các Issue được &#42;&#42;tạo lại&#42;&#42;: ngày tạo/ID mới, còn Issue gốc được giữ để truy vết. Issues thuộc repo chung, không thuộc riêng nhánh.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-dd742c2fd39db275<br>Công cụ: Codex<br><br>Ngày và giờ: 22:50:32 18/10/2026<br>Prompt 1 nguyên văn:<br>đã đảm bảo ghi Bug reporting trong báo cáo Markdown và  trên trang<br>GitHub Issues của nhóm. Đính kèm ảnh chụp bug vào từng GitHub issue cho mọi lỗi tìm được khi chạy các test case của cả 4 mục A B C D rồi đúng ko<br> | <br>Output 1 (Phản hồi cuối), 22:51:01 18/10/2026:<br>&#42;&#42;Đúng, đối với toàn bộ bug đã phát hiện và xác nhận qua các lần chạy hiện có của cả 4 Pool.&#42;&#42; Mình vừa kiểm tra lại:<br><br>&#124; Pool &#124; Chức năng &#124; Bug &#124; Issues nhóm &#124;<br>&#124;---&#124;---&#124;---:&#124;---&#124;<br>&#124; A &#124; FR-02 — Đăng nhập/khóa tài khoản &#124; 3 &#124; #1–#3 &#124;<br>&#124; B &#124; FR-09 — Mã giảm giá &#124; 3 &#124; #4–#6 &#124;<br>&#124; C &#124; FR-15 — Quản lý sản phẩm &#124; 3 &#124; #7–#9 &#124;<br>&#124; D &#124; FR-20 — Giỏ hàng Mobile &#124; 5 &#124; #10–#14 &#124;<br>&#124; &#42;&#42;Tổng&#42;&#42; &#124; &#124; &#42;&#42;14&#42;&#42; &#124; &#124;<br><br>Cả 14 bug đều có:<br><br>- &#91;Báo cáo Markdown trên nhánh Tùng&#93;(https://github.com/vdt12a11/eshop-sut-testscript/tree/T%C3%B9ng/HW02/bug-reports), dẫn đến Issue tương ứng.<br>- &#91;GitHub Issue trong repo nhóm&#93;(https://github.com/vdt12a11/eshop-sut-testscript/issues), mỗi Issue có ảnh bug; tổng cộng &#42;&#42;31 ảnh&#42;&#42;.<br><br>Lưu ý: hiện &#42;&#42;29/82 TC đã có kết luận&#42;&#42;, còn &#42;&#42;53 TC chưa chạy hoặc chưa kết luận&#42;&#42;. Vì vậy, đã báo cáo đủ lỗi tìm được đến nay; chưa thể khẳng định đã tìm hết lỗi của cả bộ test.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-5976c41dcd028ece<br>Công cụ: Codex<br><br>Ngày và giờ: 22:54:23 18/10/2026<br>Prompt 1 nguyên văn:<br>đề có yêu cầu 12. Nhật ký Git commit (Git Commit Log)\<br>• Tạo một Git commit mới cho mỗi bước trong quy trình kiểm thử của từng chức năng.\<br>• Cung cấp Git commit log bằng định dạng tệp văn bản.<br><br>đã push đủ lên repo riêng là &#91;https://github.com/NguyenSonTung16/HW02&#93;(https://github.com/NguyenSonTung16/HW02) chưa<br> | <br>Output 1 (Phản hồi cuối), 22:54:56 18/10/2026:<br>&#42;&#42;Chưa đáp ứng đầy đủ mục 12&#42;&#42;, dù đã push lịch sử commit và file log lên repo riêng. Mình vừa kiểm tra trực tiếp nhánh &#96;main&#96;:<br><br>&#124; Yêu cầu &#124; Hiện trạng &#124;<br>&#124;---&#124;---&#124;<br>&#124; Có Git commit log dạng văn bản &#124; &#42;&#42;Đã có:&#42;&#42; &#91;Git&#95;Commit&#95;Log.txt&#93;(https://github.com/NguyenSonTung16/HW02/blob/main/Git&#95;Commit&#95;Log.txt). &#124;<br>&#124; Commit riêng cho từng bước của từng chức năng &#124; &#42;&#42;Chưa đủ:&#42;&#42; phần thiết kế FR-02, FR-09, FR-15 ban đầu được đưa lên gộp trong commit &#96;ad84161&#96;, không có commit riêng cho từng bước Input/Output → EC → TC → BVA. &#124;<br>&#124; FR-20 có commit theo bước &#124; &#42;&#42;Đã có:&#42;&#42; &#96;b7360f5&#96; (phạm vi/Input–Output), &#96;de4e055&#96; (EC), &#96;c6860a8&#96; (TC), &#96;63eedd8&#96; (BVA), cùng các commit thực thi và báo lỗi sau đó. &#124;<br>&#124; Log bao gồm commit mới nhất &#124; File hiện ghi đến &#96;df98b5a&#96;; chưa liệt kê commit cuối &#96;e69977e&#96; chứa lần xuất log đó. Cần xuất lại khi chốt hồ sơ. &#124;<br><br>Ngoài ra, các chỉnh sửa gần đây về &#42;&#42;AI Critique trong báo cáo chính, AI Audit Word theo template và liên kết Issues nhóm&#42;&#42; chưa được push cập nhật lên repo riêng.<br><br>Vì vậy, &#42;&#42;có file log không đồng nghĩa đã đủ lịch sử từng bước&#42;&#42;. Cần đồng bộ các file mới và xuất lại log; riêng lịch sử thiết kế ba FR đầu còn thiếu thì phải ghi nhận trung thực, không tạo commit rỗng để giả làm các bước đã thực hiện trước đây.<br><br>Đã ghi audit |  |  |  |
+| AI-LOCAL-234bec3a083a832e<br>Công cụ: Codex<br><br>Ngày và giờ: 22:55:58 18/10/2026<br>Prompt 1 nguyên văn:<br>vậy push theo yêu cầu đề cho cả repo riêng là &#91;https://github.com/NguyenSonTung16/HW02&#93;(https://github.com/NguyenSonTung16/HW02) và repo chung là &#91;https://github.com/vdt12a11/eshop-sut-testscript&#93;(https://github.com/vdt12a11/eshop-sut-testscript) ở nhánh Tùng đi <br> | <br>Output 1 (Phản hồi cuối), 22:58:15 18/10/2026:<br>Đã push cập nhật lên &#42;&#42;nhánh Tùng ở cả hai repo&#42;&#42;:<br><br>- &#91;Repo riêng — HW02&#93;(https://github.com/NguyenSonTung16/HW02/tree/T%C3%B9ng).<br>- &#91;Repo nhóm — thư mục HW02&#93;(https://github.com/vdt12a11/eshop-sut-testscript/tree/T%C3%B9ng/HW02).<br><br>Đã đồng bộ báo cáo Word/Markdown/PDF, AI Critique, AI Audit theo template, bug report và ảnh, script kiểm thử, video, skills cùng &#42;&#42;Git&#95;Commit&#95;Log.txt&#42;&#42;. Các cập nhật mới được chia thành commit theo phần công việc thực tế.<br><br>&#42;&#42;Mục 12 vẫn còn hạn chế:&#42;&#42; lịch sử thiết kế FR-02/09/15 trước đây bị gộp; mình ghi rõ trong &#96;Git&#95;Workflow&#95;Notes.md&#96;, không dựng lại lịch sử. Việc push lần này không biến phần thiếu đó thành đã hoàn thành.<br><br>Đã ghi audit |  |  |  |
 
 ## 4. Tổng kết Độ chính xác AI
 
-Tổng artifact hội thoại ghi nhận: 153. Đã có verdict: 0. Chưa đánh giá: 153.
+Tổng hợp verdict từ Mục 3 và điền vào bảng dưới.
 
-| Verdict | Số lượng đã xác nhận | Tỉ lệ trên nhóm đã đánh giá |
+| Chỉ số | Số lượng | Tỉ lệ |
 | --- | --- | --- |
-| VALID | 0 | Chưa tính |
-| INVALID | 0 | Chưa tính |
-| INCOMPLETE | 0 | Chưa tính |
+| Tổng artifact AI sinh đã audit | 162 | Chưa đánh giá: 162 |
+| VALID (đúng, dùng nguyên) | 0 | Chưa tính |
+| INVALID (sai; loại bỏ) | 0 | Chưa tính |
+| INCOMPLETE (chấp nhận sau khi sửa) | 0 | Chưa tính |
 
 ## 5. Kết luận — Khi nào nên / không nên dùng AI?
 
-Chưa có kết luận 80–150 chữ được sinh viên xác nhận. Phần này không thay AI Critique 200–300 từ.
+Viết 80–150 chữ mô tả pattern quan sát được. AI mạnh ở đâu? AI sai ở đâu? Khuyến nghị của bạn cho việc dùng AI trong loại công việc này?
 
-## 6. Mandatory Disclosure
+Chưa có kết luận được sinh viên xác nhận.
 
-Chưa điền câu cam đoan hoặc ký thay sinh viên. Cần xác nhận phần AI đóng góp, phần sinh viên sửa/tự viết theo thực tế.
+## 6. Mandatory Disclosure (dán nguyên văn)
+
+Mẫu khai báo chưa được sinh viên điền/xác nhận:
+
+"[Test case / script / dataset / báo cáo] này được sinh phiên bản đầu bởi [tên công cụ AI]; tôi đã rà soát và chỉnh sửa [phần X], bổ sung [edge case Y, Z]; [phần W] do tôi tự viết. AI Audit Report chi tiết đính kèm ở Phụ lục A. Tôi cam đoan không dùng AI để sinh bất kỳ artifact nào thuộc danh mục bị cấm."
 
 ## Chữ ký
 
-Chưa ký. Ngày ký và giảng viên chưa xác nhận.
+| Họ tên sinh viên (in hoa): | NGUYỄN SƠN TÙNG |
+| --- | --- |
+| MSSV: | 23120399 |
+| Lớp / Khoá: | Chưa xác nhận |
+| Môn học: | CS423 / CSC13003 – Kiểm chứng Phần mềm |
+| Giảng viên: | Chưa xác nhận |
+| Ngày: | Chưa xác nhận |
+| Chữ ký: | Chưa ký |
 
 ## Tham khảo
 
-Đề HW02 mục 9, mẫu AI-02 do người dùng cung cấp và lịch sử chính cuộc trò chuyện Codex này.
+- Kharbach, M. (2026). AI Use Policy Templates for Higher Education. CC BY-NC-SA 4.0.
+- ISTQB Foundation Level Syllabus (latest version).
+- Hardman, P. (2025). A Post-AI Learning Taxonomy.
+- Fuster Rabella, M. (2025). OECD Education Working Paper No. 338.
+- Perkins, M., Roe, J., & Furze, L. (2025). AI Assessment Scale.
+- Anthropic (2025). Building reliable AI test agents — engineering blog.
+- DeepEval & Promptfoo documentation — testing frameworks for LLM systems.
+
+Nhật ký nguyên văn bổ sung: Appendix_A_Prompt_Log.md.
