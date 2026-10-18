@@ -516,7 +516,7 @@ Tách lớp theo thao tác và trạng thái làm thay đổi kết quả: thêm
 | EC15 | Lựa chọn xác nhận xóa | Hủy thao tác trong hộp thoại |
 | EC16 | Điều chỉnh số lượng | Tăng/giảm một đơn vị, số lượng kết quả vẫn >= 1 |
 | EC17 | Hiển thị giỏ có hàng | Hiển thị sản phẩm, đơn giá, số lượng, thành tiền và thao tác; có nút +/- |
-| EC18 | Kết quả thêm sản phẩm đã có | Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm |
+| EC18 | Kết quả thêm sản phẩm đã có | Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm và có phản hồi trực quan |
 | EC19 | Kết quả điều chỉnh số lượng | Chỉ dòng đích đổi đúng số lượng; các dòng khác giữ nguyên |
 | EC20 | Thành tiền và tổng tiền | Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" |
 | EC21 | Kết quả nhập số lượng không hợp lệ | Không chấp nhận giá trị số lượng ngoài miền số nguyên dương |
@@ -525,7 +525,7 @@ Tách lớp theo thao tác và trạng thái làm thay đổi kết quả: thêm
 | EC24 | Kết quả hủy xóa | Giữ nguyên sản phẩm, số lượng và tổng tiền |
 | EC25 | Kết quả tiếp tục mua sắm | Quay về trang chủ |
 | EC26 | Hiển thị giỏ trống | Có hình minh họa và thông báo giỏ hàng trống rõ ràng |
-| EC27 | Kết quả thêm sản phẩm chưa có | Tạo một dòng mới với đúng sản phẩm và số lượng |
+| EC27 | Kết quả thêm sản phẩm chưa có | Tạo một dòng mới với đúng sản phẩm và số lượng, có phản hồi trực quan |
 | EC28 | Giỏ hàng trước khi xóa | Chỉ còn sản phẩm đích; xóa được xác nhận sẽ làm giỏ trống |
 
 ### 5.4 Domain Testing Bước 3 Chọn đại diện và xây dựng test case
@@ -553,7 +553,7 @@ Chọn một tình huống cụ thể cho từng EC, sau đó gộp các dòng d
 | EC15 | Hủy thao tác trong hộp thoại | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Hủy<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Có hộp thoại xác nhận; trước khi chọn và sau khi Hủy, A vẫn số lượng 2, B vẫn số lượng 1; Tổng cộng = 250.000 đ. |
 | EC16 | Tăng/giảm một đơn vị, số lượng kết quả vẫn >= 1 | Thao tác: Bấm + một lần ở SP_A, quan sát; sau đó bấm - một lần ở SP_A, quan sát<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Sau +: A số lượng 3, thành tiền 300.000 đ, Tổng cộng = 350.000 đ. Sau -: A số lượng 2, thành tiền 200.000 đ, Tổng cộng = 250.000 đ. B luôn giữ số lượng 1 và thành tiền 50.000 đ. |
 | EC17 | Hiển thị sản phẩm, đơn giá, số lượng, thành tiền và thao tác; có nút +/- | Thao tác: Mở màn hình Giỏ hàng trên Mobile<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Hiển thị đúng hai sản phẩm, đơn giá, số lượng, thành tiền, thao tác và nút +/-; thành tiền A = 200.000 đ, B = 50.000 đ; Tổng cộng = 250.000 đ. |
-| EC18 | Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 3<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | SP_A chỉ có một dòng, số lượng 5, thành tiền 500.000 đ; SP_B giữ số lượng 1, thành tiền 50.000 đ; Tổng cộng = 550.000 đ. Có phản hồi trực quan khi thêm. |
+| EC18 | Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm và có phản hồi trực quan | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 3<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | SP_A chỉ có một dòng, số lượng 5, thành tiền 500.000 đ; SP_B giữ số lượng 1, thành tiền 50.000 đ; Tổng cộng = 550.000 đ. Có phản hồi trực quan khi thêm. |
 | EC19 | Chỉ dòng đích đổi đúng số lượng; các dòng khác giữ nguyên | Thao tác: Bấm + một lần ở SP_A, quan sát; sau đó bấm - một lần ở SP_A, quan sát<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Sau +: A số lượng 3, thành tiền 300.000 đ, Tổng cộng = 350.000 đ. Sau -: A số lượng 2, thành tiền 200.000 đ, Tổng cộng = 250.000 đ. B luôn giữ số lượng 1 và thành tiền 50.000 đ. |
 | EC20 | Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Mở màn hình Giỏ hàng trên Mobile<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Hiển thị đúng hai sản phẩm, đơn giá, số lượng, thành tiền, thao tác và nút +/-; thành tiền A = 200.000 đ, B = 50.000 đ; Tổng cộng = 250.000 đ. |
 | EC21 | Không chấp nhận giá trị số lượng ngoài miền số nguyên dương | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 0<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 1. | Không chấp nhận 0 làm số lượng SP_A trong giỏ; không làm thay đổi SP_B. Không quy định câu chữ thông báo hoặc cơ chế chặn/default vì đặc tả chưa nêu. |
@@ -562,7 +562,7 @@ Chọn một tình huống cụ thể cho từng EC, sau đó gộp các dòng d
 | EC24 | Giữ nguyên sản phẩm, số lượng và tổng tiền | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Hủy<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Có hộp thoại xác nhận; trước khi chọn và sau khi Hủy, A vẫn số lượng 2, B vẫn số lượng 1; Tổng cộng = 250.000 đ. |
 | EC25 | Quay về trang chủ | Thao tác: Bấm Tiếp tục mua sắm<br>Trạng thái ban đầu: Đang ở màn hình Giỏ hàng có SP_A số lượng 1. | Chuyển về trang chủ, hiển thị màn hình danh sách sản phẩm. |
 | EC26 | Có hình minh họa và thông báo giỏ hàng trống rõ ràng | Thao tác: Mở màn hình Giỏ hàng trên Mobile<br>Trạng thái ban đầu: Giỏ trống. | Hiển thị hình minh họa và thông báo giỏ hàng trống rõ ràng; không hiển thị dòng sản phẩm giả. |
-| EC27 | Tạo một dòng mới với đúng sản phẩm và số lượng | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 2. | Có thêm đúng một dòng SP_A số lượng 1, thành tiền 100.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 200.000 đ. Có phản hồi trực quan khi thêm. |
+| EC27 | Tạo một dòng mới với đúng sản phẩm và số lượng, có phản hồi trực quan | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 2. | Có thêm đúng một dòng SP_A số lượng 1, thành tiền 100.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 200.000 đ. Có phản hồi trực quan khi thêm. |
 | EC28 | Chỉ còn sản phẩm đích; xóa được xác nhận sẽ làm giỏ trống | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Đồng ý<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: Chỉ có SP_A số lượng 1. | Có xác nhận trước khi xóa; sau khi đồng ý, không còn dòng SP_A; hiển thị hình minh họa và thông báo giỏ trống rõ ràng. |
 
 #### 5.4.2 Tập ca kiểm thử rút gọn
@@ -571,8 +571,8 @@ Chọn một tình huống cụ thể cho từng EC, sau đó gộp các dòng d
 | --- | --- | --- | --- |
 | TC01 | EC1: Xem giỏ hàng; EC12: Giỏ trống, không có dòng sản phẩm; EC26: Có hình minh họa và thông báo giỏ hàng trống rõ ràng | Thao tác: Mở màn hình Giỏ hàng trên Mobile<br>Trạng thái ban đầu: Giỏ trống. | Hiển thị hình minh họa và thông báo giỏ hàng trống rõ ràng; không hiển thị dòng sản phẩm giả. |
 | TC02 | EC1: Xem giỏ hàng; EC13: Giỏ có ít nhất một dòng sản phẩm; EC17: Hiển thị sản phẩm, đơn giá, số lượng, thành tiền và thao tác; có nút +/-; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Mở màn hình Giỏ hàng trên Mobile<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Hiển thị đúng hai sản phẩm, đơn giá, số lượng, thành tiền, thao tác và nút +/-; thành tiền A = 200.000 đ, B = 50.000 đ; Tổng cộng = 250.000 đ. |
-| TC03 | EC2: Thêm sản phẩm vào giỏ; EC6: Sản phẩm chưa có trong giỏ trước khi thêm; EC8: Số nguyên dương q >= 1; EC27: Tạo một dòng mới với đúng sản phẩm và số lượng; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 2. | Có thêm đúng một dòng SP_A số lượng 1, thành tiền 100.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 200.000 đ. Có phản hồi trực quan khi thêm. |
-| TC04 | EC2: Thêm sản phẩm vào giỏ; EC7: Sản phẩm đã có trong giỏ trước khi thêm; EC8: Số nguyên dương q >= 1; EC18: Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 3<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | SP_A chỉ có một dòng, số lượng 5, thành tiền 500.000 đ; SP_B giữ số lượng 1, thành tiền 50.000 đ; Tổng cộng = 550.000 đ. Có phản hồi trực quan khi thêm. |
+| TC03 | EC2: Thêm sản phẩm vào giỏ; EC6: Sản phẩm chưa có trong giỏ trước khi thêm; EC8: Số nguyên dương q >= 1; EC27: Tạo một dòng mới với đúng sản phẩm và số lượng, có phản hồi trực quan; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 2. | Có thêm đúng một dòng SP_A số lượng 1, thành tiền 100.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 200.000 đ. Có phản hồi trực quan khi thêm. |
+| TC04 | EC2: Thêm sản phẩm vào giỏ; EC7: Sản phẩm đã có trong giỏ trước khi thêm; EC8: Số nguyên dương q >= 1; EC18: Giữ một dòng cho cùng sản phẩm, cộng đúng số lượng thêm và có phản hồi trực quan; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 3<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | SP_A chỉ có một dòng, số lượng 5, thành tiền 500.000 đ; SP_B giữ số lượng 1, thành tiền 50.000 đ; Tổng cộng = 550.000 đ. Có phản hồi trực quan khi thêm. |
 | TC05 | EC3: Điều chỉnh số lượng trong giỏ; EC16: Tăng/giảm một đơn vị, số lượng kết quả vẫn >= 1; EC19: Chỉ dòng đích đổi đúng số lượng; các dòng khác giữ nguyên; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Bấm + một lần ở SP_A, quan sát; sau đó bấm - một lần ở SP_A, quan sát<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Sau +: A số lượng 3, thành tiền 300.000 đ, Tổng cộng = 350.000 đ. Sau -: A số lượng 2, thành tiền 200.000 đ, Tổng cộng = 250.000 đ. B luôn giữ số lượng 1 và thành tiền 50.000 đ. |
 | TC06 | EC4: Xóa sản phẩm khỏi giỏ; EC15: Hủy thao tác trong hộp thoại; EC22: Hiện xác nhận trước khi thay đổi giỏ; EC24: Giữ nguyên sản phẩm, số lượng và tổng tiền | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Hủy<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Có hộp thoại xác nhận; trước khi chọn và sau khi Hủy, A vẫn số lượng 2, B vẫn số lượng 1; Tổng cộng = 250.000 đ. |
 | TC07 | EC4: Xóa sản phẩm khỏi giỏ; EC14: Đồng ý xóa trong hộp thoại; EC22: Hiện xác nhận trước khi thay đổi giỏ; EC23: Bỏ đúng sản phẩm đích, giữ các sản phẩm khác; EC20: Thành tiền = đơn giá x số lượng; tổng = tổng thành tiền; nhãn "Tổng cộng" | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Đồng ý<br>Sản phẩm đích: "SP_A"<br>Trạng thái ban đầu: SP_A số lượng 2; SP_B số lượng 1. | Có xác nhận và giỏ chưa đổi trước khi đồng ý. Sau khi đồng ý, chỉ A bị xóa; B vẫn số lượng 1, thành tiền 50.000 đ; Tổng cộng = 50.000 đ. |
@@ -586,19 +586,27 @@ Chọn một tình huống cụ thể cho từng EC, sau đó gộp các dòng d
 
 Khi thử 1.5 hoặc "abc", kiểm tra giá trị ô nhập trước khi gửi. Nếu bàn phím/ô nhập Mobile chặn giá trị ngay tại UI, ghi nhận cơ chế chặn thực tế; không sửa mã ứng dụng để ép dữ liệu và không tự coi phần chưa tới được là đã chạy. Trường hợp nhập rỗng chưa có oracle vì đặc tả chưa nêu mặc định. Các expected chưa quy định câu chữ lỗi cụ thể.
 
+### 5.5 Boundary Value Analysis
+
+Theo S04 trang 26–27, số lượng khi thêm có miền số nguyên q >= 1, biên dưới đóng tại 1 và bước δ = 1. Chọn 0 (ngay dưới), 1 (tại biên), 2 (ngay trên); giữ sản phẩm chưa có trong giỏ và các điều kiện còn lại hợp lệ. Giá trị trong miền đã có ở TC04 với q = 3. Không có biên trên trong đặc tả nên không tự tạo giá trị tối đa.
+
+| Test case | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
+| --- | --- | --- | --- |
+| TC10 | Số lượng thêm = 0, ngay dưới biên dưới 1; EC2, EC6, EC9, EC21. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 0<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 1. | Không chấp nhận 0 làm số lượng SP_A trong giỏ; không làm thay đổi SP_B. Không quy định câu chữ thông báo hoặc cơ chế chặn/default vì đặc tả chưa nêu. |
+| TC03 | Số lượng thêm = 1, tại biên dưới; EC2, EC6, EC8, EC20, EC27. | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 2. | Có thêm đúng một dòng SP_A số lượng 1, thành tiền 100.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 200.000 đ. Có phản hồi trực quan khi thêm. |
+| TC13 | Số lượng thêm = 2, ngay trên biên dưới; EC2, EC6, EC8, EC20, EC27. | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 2<br>Trạng thái ban đầu: Chỉ có SP_B số lượng 2. | Có đúng một dòng SP_A số lượng 2, thành tiền 200.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 300.000 đ. Có phản hồi trực quan khi thêm. |
+
+BVA có 3 TC: TC10 và TC03 dùng chung với Domain Testing, TC13 bổ sung; FR-20 có 13 TC thiết kế duy nhất. Dòng biên ghi cả EC đầu vào/ngữ cảnh và EC đầu ra dự kiến để kiểm tra kết quả, không chỉ kiểm tra giá trị ô nhập.
+
+Thành tiền và tổng tiền là đầu ra phụ thuộc đơn giá/số lượng, không có khoảng giới hạn riêng để chọn BVA; kiểm bằng phép tính cụ thể trong các TC. Trạng thái giỏ trống và chuyển một dòng thành trống đã có TC01/TC08; lựa chọn xác nhận là phân lớp rời rạc. Chưa có giới hạn UI Mobile được đo để bổ sung điểm cực trị. Tất cả TC ở mục 5 mới là thiết kế, chưa có kết quả thực thi hoặc human review.
+
+### 5.6 AI gap analysis
+
+Chưa có thiếu sót AI của FR-20 được sinh viên xác nhận. Việc tham chiếu FR-06/FR-07 và các điểm thiếu đặc tả được nêu ở 5.1 để rà soát; chưa xem là bug hoặc kết quả chạy thực tế.
+
 ## 6 Tổng kết và hồ sơ hỗ trợ
 
-| Chức năng | Designed | Executed | Pass | Fail | Not Run |
-| --- | --- | --- | --- | --- | --- |
-| FR-02 | 11 | 1 | 1 | 0 | 10 |
-| FR-09 | 0 | 0 | 0 | 0 | 0 |
-| FR-15 | 0 | 0 | 0 | 0 | 0 |
-| Pool D chưa chọn | 0 | 0 | 0 | 0 | 0 |
-| Tổng | 11 | 1 | 1 | 0 | 10 |
-
-Executed là số test đã hoàn tất đánh giá; TC09 kiểm một phần nằm trong 10 chưa kết luận. Không đếm trùng Domain/BVA. Các số 0 ở phần chưa làm không có nghĩa đã hoàn thành.
-
-Đã có bốn skill trong skills/: domain-testing, boundary-value-analysis, test-execution-reporting, ai-audit-report; chưa có video demo hoàn chỉnh. Hồ sơ còn cần BVA, các pool chưa làm, bug report/issue nếu có bug, AI Critique, AI Audit và Git log tổng hợp, README tự chấm, PDF và video. Bản Word chỉ hỗ trợ chỉnh sửa, không thay PDF.
+Kết quả thực thi, số TC đã thiết kế/đã chạy/Pass/Fail/chưa chạy, bug và video của FR-02/FR-09/FR-15 được theo dõi trong README.md. FR-20 Giỏ hàng Mobile có 13 TC thiết kế, chưa chạy; chưa có video hoặc bug được xác nhận. Không đếm trùng TC dùng chung Domain Testing/BVA. Hồ sơ nộp và tự đánh giá tiếp tục đối chiếu đề HW02; không suy ra đã hoàn thành thực thi từ báo cáo thiết kế.
 
 ## 7 Tài liệu tham khảo
 
