@@ -9,8 +9,8 @@ Thống kê theo TC duy nhất; TC dùng chung Domain Testing/BVA chỉ tính m�
 | FR-02 — Đăng nhập và khóa tài khoản | 14 | 6 | 1 | 5 | 8 | 3 |
 | FR-09 — Mã giảm giá | 21 | 6 | 2 | 4 | 15 | 3 |
 | FR-15 — Quản lý sản phẩm (Product management CRUD) | 33 | 6 | 3 | 3 | 27 | 3 |
-| FR-20 — Giỏ hàng Mobile | 13 | 0 | 0 | 0 | 13 | 0 |
-| **Tổng** | 81 | 18 | 6 | 12 | 63 | 9 |
+| FR-20 — Giỏ hàng Mobile | 14 | 0 | 0 | 0 | 14 | 0 |
+| **Tổng** | 82 | 18 | 6 | 12 | 64 | 9 |
 
 TC chưa có oracle đủ rõ hoặc chưa chạy có Actual/Tester/Tested Date để trống và Status = Not Run. Các lần chạy trước được giữ trong `jest-tests/runs/`.
 
@@ -103,6 +103,8 @@ TC chưa có oracle đủ rõ hoặc chưa chạy có Actual/Tester/Tested Date 
 
 Thiết kế theo mục 5 của báo cáo chính; tham chiếu FR-20/FR-07/FR-06 trong README SUT. Chưa thực thi trên Mobile; chưa có script Jest hoặc video cho FR-20. TC dùng chung Domain Testing/BVA chỉ tính một lần.
 
+Ghi chú TC10–TC12: không đưa 0, 1.5 hoặc "abc" làm số lượng trong giỏ; SP_B giữ nguyên. Nếu ứng dụng tự chuyển thành 1 rồi thêm SP_A, ghi nhận actual và chờ xác nhận quy tắc trước khi kết luận Pass/Fail cho toàn bộ TC. Việc lưu chính giá trị không hợp lệ là vi phạm miền số nguyên dương.
+
 | ID | Test case name | Precondition | Test step | Expected Result | Actual Result | Status | Tester | Tested Date | Remark |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | FR-20-TC01 | Xem giỏ trống | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Giỏ trống. | Thao tác: Mở màn hình Giỏ hàng trên Mobile | Hiển thị hình minh họa và thông báo giỏ hàng trống rõ ràng; không hiển thị dòng sản phẩm giả. |  | Not Run |  |  | Domain Testing |
@@ -113,11 +115,12 @@ Thiết kế theo mục 5 của báo cáo chính; tham chiếu FR-20/FR-07/FR-06
 | FR-20-TC06 | Hủy xác nhận xóa | SP_A giá 100.000 đ, SP_B giá 50.000 đ; SP_A số lượng 2; SP_B số lượng 1. | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Hủy<br>Sản phẩm đích: "SP_A" | Có hộp thoại xác nhận; trước khi chọn và sau khi Hủy, A vẫn số lượng 2, B vẫn số lượng 1; Tổng cộng = 250.000 đ. |  | Not Run |  |  | Domain Testing |
 | FR-20-TC07 | Đồng ý xóa một trong hai sản phẩm | SP_A giá 100.000 đ, SP_B giá 50.000 đ; SP_A số lượng 2; SP_B số lượng 1. | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Đồng ý<br>Sản phẩm đích: "SP_A" | Có xác nhận và giỏ chưa đổi trước khi đồng ý. Sau khi đồng ý, chỉ A bị xóa; B vẫn số lượng 1, thành tiền 50.000 đ; Tổng cộng = 50.000 đ. |  | Not Run |  |  | Domain Testing |
 | FR-20-TC08 | Xóa sản phẩm cuối cùng | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_A số lượng 1. | Thao tác: Bấm Xóa SP_A; quan sát trước khi chọn; chọn Đồng ý<br>Sản phẩm đích: "SP_A" | Có xác nhận trước khi xóa; sau khi đồng ý, không còn dòng SP_A; hiển thị hình minh họa và thông báo giỏ trống rõ ràng. |  | Not Run |  |  | Domain Testing |
-| FR-20-TC09 | Tiếp tục mua sắm | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Đang ở màn hình Giỏ hàng có SP_A số lượng 1. | Thao tác: Bấm Tiếp tục mua sắm | Chuyển về trang chủ, hiển thị màn hình danh sách sản phẩm. |  | Not Run |  |  | Domain Testing |
-| FR-20-TC10 | Số lượng thêm bằng 0 | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 1. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 0 | Không chấp nhận 0 làm số lượng SP_A trong giỏ; không làm thay đổi SP_B. Không quy định câu chữ thông báo hoặc cơ chế chặn/default vì đặc tả chưa nêu. |  | Not Run |  |  | Domain Testing / BVA |
-| FR-20-TC11 | Số lượng thêm không nguyên | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 1. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1.5 | Không chấp nhận 1.5 làm số lượng SP_A trong giỏ; không làm thay đổi SP_B. Không quy định câu chữ thông báo hoặc cơ chế chặn/default vì đặc tả chưa nêu. |  | Not Run |  |  | Domain Testing |
-| FR-20-TC12 | Số lượng thêm không phải số | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 1. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: "abc" | Không chấp nhận "abc" làm số lượng SP_A trong giỏ; không làm thay đổi SP_B. Không quy định câu chữ thông báo hoặc cơ chế chặn/default vì đặc tả chưa nêu. |  | Not Run |  |  | Domain Testing |
+| FR-20-TC09 | Tiếp tục mua sắm | SP_A giá 100.000 đ, SP_B giá 50.000 đ; SP_A số lượng 2; SP_B số lượng 1; Tổng cộng = 250.000 đ. | Thao tác: Ghi nhận giỏ; bấm Tiếp tục mua sắm; không thêm/xóa hoặc sửa hàng; mở lại Giỏ hàng trong cùng phiên | Chuyển về trang chủ, hiển thị danh sách sản phẩm. Khi quay lại giỏ, vẫn đúng hai sản phẩm: A số lượng 2, thành tiền 200.000 đ; B số lượng 1, thành tiền 50.000 đ; Tổng cộng = 250.000 đ. |  | Not Run |  |  | Domain Testing |
+| FR-20-TC10 | Số lượng thêm bằng 0 | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 1. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 0 | Không đưa số lượng không hợp lệ 0 vào giỏ. SP_B giữ nguyên số lượng 1 và thành tiền 50.000 đ. Việc tự chuyển thành 1 rồi thêm SP_A cần xác nhận quy tắc trước khi kết luận toàn bộ TC (xem ghi chú TC10–TC12). |  | Not Run |  |  | Domain Testing / BVA |
+| FR-20-TC11 | Số lượng thêm không nguyên | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 1. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 1.5 | Không đưa số lượng không hợp lệ 1.5 vào giỏ. SP_B giữ nguyên số lượng 1 và thành tiền 50.000 đ. Việc tự chuyển thành 1 rồi thêm SP_A cần xác nhận quy tắc trước khi kết luận toàn bộ TC (xem ghi chú TC10–TC12). |  | Not Run |  |  | Domain Testing |
+| FR-20-TC12 | Số lượng thêm không phải số | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 1. | Thao tác: Mở chi tiết SP_A, nhập giá trị thử và bấm Thêm vào giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: "abc" | Không đưa số lượng không hợp lệ "abc" vào giỏ. SP_B giữ nguyên số lượng 1 và thành tiền 50.000 đ. Việc tự chuyển thành 1 rồi thêm SP_A cần xác nhận quy tắc trước khi kết luận toàn bộ TC (xem ghi chú TC10–TC12). |  | Not Run |  |  | Domain Testing |
 | FR-20-TC13 | Số lượng thêm bằng 2, ngay trên biên dưới | SP_A giá 100.000 đ, SP_B giá 50.000 đ; Chỉ có SP_B số lượng 2. | Thao tác: Mở chi tiết SP_A, nhập số lượng rồi bấm Thêm vào giỏ; mở giỏ<br>Sản phẩm: "SP_A"<br>Số lượng thêm: 2 | Có đúng một dòng SP_A số lượng 2, thành tiền 200.000 đ; SP_B vẫn số lượng 2, thành tiền 100.000 đ; Tổng cộng = 300.000 đ. Có phản hồi trực quan khi thêm. |  | Not Run |  |  | BVA |
+| FR-20-TC14 | Nhập tay số lượng trong giỏ | SP_A giá 100.000 đ, SP_B giá 50.000 đ; SP_A số lượng 2; SP_B số lượng 1; Tổng cộng = 250.000 đ. | Thao tác: Chọn ô số lượng của SP_A trong giỏ, thay toàn bộ nội dung bằng "3"; kết thúc chỉnh sửa theo UI và quan sát giỏ<br>Sản phẩm đích: "SP_A"<br>Số lượng nhập: "3" | SP_A có đúng số lượng 3, thành tiền 300.000 đ; SP_B vẫn số lượng 1, thành tiền 50.000 đ; Tổng cộng = 350.000 đ. Không tạo thêm dòng SP_A. |  | Not Run |  |  | Domain Testing |
 
 ## Script Jest và cách chạy
 
