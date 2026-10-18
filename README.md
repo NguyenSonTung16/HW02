@@ -157,5 +157,6 @@ Video thực thi TC khác với video demo end-to-end sử dụng skill ở mụ
 ## Báo cáo thiết kế và AI audit
 
 - [Báo cáo chính](Main_Report.md).
+- [AI Critique](AI_Critique.md).
 - [AI Audit Report](audit/AI_Audit_Report.md).
 - [Nhật ký prompt](audit/Appendix_A_Prompt_Log.md).
