@@ -22,3 +22,7 @@ FR-02 TC13 giữ Not Run vì expected tại đúng 30 giây chưa được xác 
 FR-09 dùng API và sản phẩm có giá được lưu để chuẩn bị tổng giỏ. FR-15 dùng API cho dữ liệu biên/thiếu/sai kiểu; riêng TC03 đi qua giao diện admin và quan sát cả ngay sau lưu lẫn sau reload. Không coi kiểm API là đã kiểm UI. Các script FR-09/FR-15 chưa được thực thi ở giai đoạn quay video đầu tiên.
 
 Sau video FR-02 phải dừng để sinh viên xem và đồng ý trước hai video tiếp theo. Video này minh họa chạy TC; chưa phải video dùng skill từ đầu đến cuối.
+
+## Nhịp video để người xem theo dõi
+
+Yêu cầu cuối của người dùng: đọc mục tiêu 4 giây; nhập từng ô và dừng 1,5 giây sau mỗi ô; dừng 2 giây trước khi gửi; giữ kết quả 3,5 giây. Không dừng riêng ở tiền điều kiện. Chú thích tiếng Việt. Timestamps lấy lúc request thật được gửi; thời gian gõ không được tính vào phép đo khóa. Ở TC14, nhập sẵn dữ liệu và dành 2 giây cuối của thời gian chờ làm khoảng dừng trước khi gửi quanh mốc 31 giây thật.

@@ -7,7 +7,6 @@ for(const tc of catalog){
  if(tc.tc==='TC13'||(process.env.HW02_DEMO==='1'&&!demo.has(tc.tc))){test.skip(tc.id+' — '+tc.name,()=>{});continue;}
  test(tc.id+' — '+tc.name,()=>h.runCase(tc,async function(){
   const n=Number(tc.tc.slice(2));await this.resetUser([2,3,4].includes(n)?n-2:0);
-  await this.explain(tc.id+' | Tiền điều kiện',`Tài khoản test@eshop.com tồn tại; chưa khóa.\nSố lần sai trước khi thử: n=${[2,3,4].includes(n)?n-2:0}.\nTrạng thái được thiết lập riêng cho case này, không kế thừa kết quả case trước.`,5000);
   if(n===1){
    const r=await this.submit('test@eshop.com','Test1234!');this.check('Login HTTP',r?.status,200);this.check('JWT returned',typeof r?.data?.token,'string');
    await delay(800);const token=await this.page.evaluate(()=>localStorage.getItem('token'));this.check('Client stores returned JWT',!!token&&token===r?.data?.token,true);
@@ -26,8 +25,7 @@ for(const tc of catalog){
   if(n===7){const r=await this.submit('abc','Test1234!');this.check('Email input type',await this.page.locator('form input').nth(0).getAttribute('type'),'email');this.check('HTML5 validity blocks invalid email',await this.page.locator('form input').nth(0).evaluate(e=>e.checkValidity()),false);this.check('No login request sent',r===null,true);this.observations={login_http:r?.status||null,login_requests:this.events.filter(e=>e.url.endsWith('/api/login')).length};return;}
   // Real lock activation uses consecutive wrong-login requests, not a fabricated lock timestamp.
   let state,activationStart,activationEnd;
-  await this.explain(tc.id+' | Chuẩn bị khóa mới','Gửi mật khẩu sai từng lần để tạo khóa thật.\nĐây là bước chuẩn bị cho kiểm tra sau thời hạn khóa, chưa phải thao tác đăng nhập đúng cần đánh giá.',6500);
-  for(let i=0;i<3;i++){await this.submit('test@eshop.com','WrongPass9!');state=await this.user();activationStart=this.lastSubmit.requestAt;activationEnd=this.lastSubmit.responseAt;await this.explain(tc.id+' | Kết quả chuẩn bị',`Đã gửi sai ${i+1} lần. Bộ đếm thực tế: ${state.login_attempts}.\nTrạng thái thực tế: ${state.locked_until?'đã khóa':'chưa khóa'}.\nCác giá trị này đọc từ CSDL thử, không phải expected giả lập.`,4000);if(state.locked_until)break;}
+  for(let i=0;i<3;i++){await this.submit('test@eshop.com','WrongPass9!');state=await this.user();activationStart=this.lastSubmit.requestAt;activationEnd=this.lastSubmit.responseAt;await this.explain(tc.id+' | Chuẩn bị khóa mới',`Đã gửi sai ${i+1} lần. Bộ đếm thực tế: ${state.login_attempts}.\nTrạng thái thực tế: ${state.locked_until?'đã khóa':'chưa khóa'}.`,1000);if(state.locked_until)break;}
   if(!state?.locked_until)throw Error('Unable to establish locked-account precondition');
   this.observations={activated_state:state,activation_interval:[activationStart,activationEnd]};
   const waits={5:10000,8:35000,9:0,10:0,11:1000,12:29000,14:31000};const wait=waits[n];
@@ -35,7 +33,9 @@ for(const tc of catalog){
   const target=activationEnd+wait;
   // Prepare credentials before waiting so slow typing does not shift the timed request.
   await this.enterCredentials('test@eshop.com',n===9?'WrongPass9!':'Test1234!');
-  while(Date.now()<target){const left=Math.ceil((target-Date.now())/1000);await this.banner(tc.id+' | '+tc.name,`Khóa mới đã được kích hoạt bằng đăng nhập sai.\nChờ đồng hồ thật: còn ${left} giây; không tua nhanh hoặc sửa đồng hồ backend.`);await delay(Math.min(1000,target-Date.now()));}
+  while(Date.now()<target-2000){const left=Math.ceil((target-Date.now())/1000);await this.banner(tc.id+' | '+tc.name,`Khóa mới đã được kích hoạt bằng đăng nhập sai.\nChờ đồng hồ thật: còn ${left} giây; không tua nhanh hoặc sửa đồng hồ backend.`);await delay(Math.min(1000,target-2000-Date.now()));}
+  await this.banner(tc.id+' | Bước 3: trước khi gửi','Đã nhập xong dữ liệu. Dừng 2 giây trước khi gửi đăng nhập.');
+  if(Date.now()<target)await delay(target-Date.now());
   await this.banner(tc.id+' | '+tc.name,'Gửi yêu cầu tại thời điểm đã chọn; đọc trạng thái thực tế.');
   const r=await this.clickSubmit({timed:true});const requestAt=this.lastSubmit.requestAt;
   this.observations.elapsed_since_activation_ms=[requestAt-activationEnd,requestAt-activationStart];

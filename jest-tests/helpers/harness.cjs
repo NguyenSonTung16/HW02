@@ -37,37 +37,38 @@ class Harness{
   const emailInput=this.page.locator('form input').nth(0),passwordInput=this.page.locator('form input').nth(1);
   if(this.demo){
    await this.banner(this.currentCase+' | Bước 1: nhập email','Nhập email: '+email+'\nQuan sát dữ liệu đang được gõ vào form.');
-   await emailInput.evaluate(e=>e.style.outline='3px solid #2563eb');await emailInput.fill('');await emailInput.pressSequentially(email,{delay:130});await delay(1700);await emailInput.evaluate(e=>e.style.outline='');
+   await emailInput.evaluate(e=>e.style.outline='3px solid #2563eb');await emailInput.fill('');await emailInput.pressSequentially(email,{delay:60});await delay(1500);await emailInput.evaluate(e=>e.style.outline='');
    await this.banner(this.currentCase+' | Bước 2: nhập mật khẩu','Nhập mật khẩu của tài khoản demo.\nSau khi điền xong sẽ dừng để kiểm tra dữ liệu trước khi gửi.');
-   await passwordInput.evaluate(e=>e.style.outline='3px solid #2563eb');await passwordInput.fill('');await passwordInput.pressSequentially(password,{delay:150});await delay(1700);await passwordInput.evaluate(e=>e.style.outline='');
+   await passwordInput.evaluate(e=>e.style.outline='3px solid #2563eb');await passwordInput.fill('');await passwordInput.pressSequentially(password,{delay:60});await delay(1500);await passwordInput.evaluate(e=>e.style.outline='');
   }else{await emailInput.fill(email);await passwordInput.fill(password);}
  }
  async clickSubmit({timed=false}={}){
   const button=this.page.getByRole('button',{name:'Sign In',exact:true});
-  if(this.demo&&!timed){await this.banner(this.currentCase+' | Bước 3: gửi đăng nhập','Kiểm tra email và mật khẩu vừa nhập.\nTiếp theo: bấm Sign In rồi đối chiếu kết quả với yêu cầu.');await button.hover();await delay(3500);}
+  if(this.demo&&!timed){await this.banner(this.currentCase+' | Bước 3: gửi đăng nhập','Kiểm tra email và mật khẩu vừa nhập.\nTiếp theo: bấm Sign In rồi đối chiếu kết quả với yêu cầu.');await button.hover();await delay(2000);}
   const pending=this.page.waitForResponse(r=>r.url().endsWith('/api/login')&&r.request().method()==='POST',{timeout:3500}).catch(()=>null);
   const beforeClick=Date.now();await button.click();const r=await pending;
   const responseAt=Date.now();const event=[...this.events].reverse().find(e=>e.url.endsWith('/api/login')&&e.method==='POST'&&e.time>=beforeClick);
   this.lastSubmit={requestAt:event?.time||beforeClick,responseAt};
-  await delay(this.demo&&!timed?1700:350);return r?{status:r.status(),data:await r.json()}:null;
+  await delay(350);return r?{status:r.status(),data:await r.json()}:null;
  }
  async submit(email,password){await this.enterCredentials(email,password);return this.clickSubmit();}
  check(label,actual,expected){this.checks.push({label,actual,expected,pass:JSON.stringify(actual)===JSON.stringify(expected)});}
  async runCase(tc,fn){
   this.checks=[];this.observations={};this.events=[];this.currentCase=tc.id;await this.context.clearCookies();await this.loginPage();await this.page.evaluate(()=>localStorage.clear());await this.loginPage();
-  if(this.demo&&this.results.cases.length===0){await this.banner('FR-02 — Đăng nhập và khóa tài khoản','Video minh họa 6 test case: TC01, TC02, TC03, TC04, TC07, TC14.\nMỗi case: đọc mục tiêu → xem tiền điều kiện → nhập dữ liệu → gửi → đối chiếu kết quả.\nThanh này là công cụ minh họa kiểm thử; không phải giao diện gốc EShop.');await delay(11000);}
-  await this.banner(tc.id+' | '+tc.name,'MỤC TIÊU KIỂM TRA\n'+tc.expected+'\nMỗi test được thiết lập tiền điều kiện độc lập.');
-  if(this.demo)await delay(8500);
+  if(this.demo&&this.results.cases.length===0){await this.banner('FR-02 — Đăng nhập và khóa tài khoản','6 TC minh họa: TC01, TC02, TC03, TC04, TC07, TC14.\nChú thích kiểm thử do runner hiển thị; không phải UI gốc EShop.');await delay(2000);}
+  const number=Number(tc.tc.slice(2));
+  await this.banner(tc.id+' | '+tc.name,'MỤC TIÊU: '+tc.expected+'\nTiền điều kiện riêng: tài khoản tồn tại, chưa khóa; n='+([2,3,4].includes(number)?number-2:0)+'.');
+  if(this.demo)await delay(4000);
   const started=new Date().toISOString();let infra;
   try{await fn.call(this,tc);}catch(e){infra=e;}
   const failed=this.checks.filter(c=>!c.pass);const status=infra?'Not Run':failed.length?'Fail':'Pass';
   const summary=this.checks.map(c=>(c.pass?'PASS':'FAIL')+' '+c.label+': '+JSON.stringify(c.actual)+(c.pass?'':' (expected '+JSON.stringify(c.expected)+')')).join('\n');
-  const labels={'Login HTTP':'HTTP đăng nhập','JWT returned':'Có JWT trả về','Client stores returned JWT':'Client lưu đúng JWT trả về','Client sends same JWT in Authorization':'Client gửi đúng JWT trong Authorization','JWT accepted by backend':'Backend chấp nhận JWT (HTTP)','JWT identifies correct account':'JWT xác định đúng tài khoản','Rejected; no JWT issued':'Từ chối đăng nhập, không cấp JWT','Counter after wrong login':'Bộ đếm sau lần đăng nhập sai','Account lock activated':'Tài khoản bị khóa','Lock duration is 30 seconds':'Thời hạn khóa đúng 30 giây','Generic UI error displayed':'Có thông báo lỗi phù hợp trên giao diện','Email input type':'Kiểu của trường email','HTML5 validity blocks invalid email':'HTML5 chặn email sai định dạng','No login request sent':'Không gửi request đăng nhập','Successful login after lock expiry':'Đăng nhập đúng sau khi hết khóa (HTTP)','JWT issued after expiry':'Có JWT sau khi hết khóa'};
+  const labels={'Login HTTP':'HTTP đăng nhập','JWT returned':'Có JWT trả về','Client stores returned JWT':'Client lưu đúng JWT trả về','Client sends same JWT in Authorization':'Client gửi đúng JWT trong Authorization','JWT accepted by backend':'Backend chấp nhận JWT (HTTP)','JWT identifies correct account':'JWT xác định đúng tài khoản','Rejected; no JWT issued':'Từ chối đăng nhập, không cấp JWT','Counter after wrong login':'Bộ đếm sau lần đăng nhập sai','Account lock activated':'Tài khoản bị khóa','Lock duration is 30 seconds':'Thời hạn khóa đúng 30 giây','Generic UI error displayed':'Có thông báo lỗi phù hợp trên giao diện','Email input type':'Kiểu của trường email','HTML5 validity blocks invalid email':'HTML5 xem email nhập vào là hợp lệ','No login request sent':'Không gửi request đăng nhập','Successful login after lock expiry':'Đăng nhập đúng sau khi hết khóa (HTTP)','JWT issued after expiry':'Có JWT sau khi hết khóa'};
   const display=v=>v===true?'có / đúng':v===false?'không / sai':v==='string'?'chuỗi JWT':v==='undefined'?'không có':JSON.stringify(v);
   const readable=this.checks.map(c=>(c.pass?'ĐẠT':'LỖI')+' — '+(labels[c.label]||c.label)+': '+display(c.actual)+(c.pass?'':' | Mong đợi: '+display(c.expected))).join('\n');
   const duration=this.observations.lock_ms_from_request_start;const extra=duration?'\nThời hạn khóa đo được: khoảng '+Math.round(duration/1000)+' giây; yêu cầu: 30 giây.':'';
   await this.banner(tc.id+' — '+status,infra?'Lỗi hạ tầng: '+infra.message:'Bước 4: ĐỐI CHIẾU KẾT QUẢ\n'+readable+extra,status==='Pass'?'#14532d':status==='Fail'?'#7f1d1d':'#5b4612');
-  if(this.demo)await delay(Math.max(14000,this.checks.length*2200+2500));
+  if(this.demo)await delay(3500);
   const shot=path.join(run,tc.id+'.png');await this.page.screenshot({path:shot,fullPage:true});
   const result={id:tc.id,status,tested_at:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Ho_Chi_Minh'})+' UTC+07:00',started_at:started,actual:summary,checks:this.checks,observations:this.observations,evidence:path.relative(root,shot).replaceAll('\\','/'),...(infra?{reason:infra.message}:{})};
   this.results.cases.push(result);fs.writeFileSync(path.join(run,'results.json'),JSON.stringify(this.results,null,2));
@@ -77,9 +78,9 @@ class Harness{
   if(infra)throw infra;if(failed.length)throw new Error(failed.map(c=>`${c.label}: expected ${JSON.stringify(c.expected)}, received ${JSON.stringify(c.actual)}`).join('; '));
  }
  async finish(){
-  if(this.demo&&this.page){const pass=this.results.cases.filter(r=>r.status==='Pass').length,fail=this.results.cases.filter(r=>r.status==='Fail').length;await this.banner('FR-02 — Tổng kết video đầu tiên',`${this.results.cases.length} TC minh họa | Pass: ${pass} | Fail: ${fail}\nCác kết quả được lưu vào README và hồ sơ chạy test.\nDừng tại đây và chờ sinh viên duyệt trước video FR-09/FR-15.`);await delay(11000);}
+  if(this.demo&&this.page){const pass=this.results.cases.filter(r=>r.status==='Pass').length,fail=this.results.cases.filter(r=>r.status==='Fail').length;await this.banner('FR-02 — Tổng kết video đầu tiên',`${this.results.cases.length} TC minh họa | Pass: ${pass} | Fail: ${fail}\nCác kết quả được lưu vào README và hồ sơ chạy test.\nDừng tại đây và chờ sinh viên duyệt trước video FR-09/FR-15.`);await delay(3500);}
   const video=this.page?.video();await this.context?.close();
-  if(video){const v=path.join(root,'videos',this.fr+'-demo.webm');await video.saveAs(v);fs.copyFileSync(v,path.join(run,this.fr+'-demo.webm'));this.results.video=path.relative(root,v).replaceAll('\\','/');}
+  if(video){const v=path.join(root,'videos',this.fr==='FR-02'&&this.demo?'FR-02-demo-paced.webm':this.fr+'-demo.webm');await video.saveAs(v);fs.copyFileSync(v,path.join(run,this.fr+'-demo.webm'));this.results.video=path.relative(root,v).replaceAll('\\','/');}
   await this.browser?.close();if(this.db)await new Promise(res=>this.db.close(res));
   fs.writeFileSync(path.join(run,'demo-timeline.json'),JSON.stringify(this.timeline,null,2));
   fs.writeFileSync(path.join(run,'results.json'),JSON.stringify(this.results,null,2));
