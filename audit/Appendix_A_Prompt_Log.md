@@ -5057,3 +5057,178 @@ Commit mới nhất: `b162ed9`. **Chưa merge vào `main`**. `Main_Report.md` v�
 
 Đã ghi audit
 
+## AI-LOCAL-3187a15fff9e6b45
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+14:53:40 18/10/2026
+
+### Prompt của bạn
+
+đưa vào nhanh main đi, ko tách nhánh
+
+
+### Output của AI
+
+Đã đưa toàn bộ nội dung từ `codex/hw02-execution` vào [main](https://github.com/NguyenSonTung16/HW02/tree/main) và push thành công. Từ giờ mình sẽ cập nhật trực tiếp trên `main`.
+
+Đã ghi audit
+
+## AI-LOCAL-f361be10d0aeee14
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+14:55:26 18/10/2026
+
+### Prompt của bạn
+
+GitHub Issues là gì
+
+
+### Output của AI
+
+**GitHub Issues là nơi ghi nhận và theo dõi lỗi hoặc công việc của một dự án trên GitHub.** Mỗi issue là một mục riêng, có mã như `#1`, `#2`, trạng thái mở/đóng và phần bình luận.
+
+Trong bài HW02, mỗi bug được tạo thành một issue, gồm:
+
+- Tên lỗi và các bước tái hiện.
+- Kết quả mong đợi và kết quả thực tế.
+- Ảnh chụp bằng chứng.
+
+Ví dụ: **đăng nhập sai 1 lần nhưng bộ đếm tăng 2** → tạo một issue để mô tả và theo dõi việc sửa lỗi.
+
+Bạn xem các lỗi đã ghi tại [Issues của repository HW02](https://github.com/NguyenSonTung16/HW02/issues). Các file trong `bug-reports/` là bản báo cáo lưu trong repository; Issues là nơi theo dõi và trao đổi về từng lỗi.
+
+Đã ghi audit
+
+## AI-LOCAL-ea1ecf0fa4f6d4c7
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+14:56:30 18/10/2026
+
+### Prompt của bạn
+
+làm sao để tạo GitHub Issues trên git
+
+
+### Output của AI
+
+Bạn tạo trực tiếp trên **GitHub** như sau:
+
+1. Đăng nhập rồi mở [Issues của HW02](https://github.com/NguyenSonTung16/HW02/issues).
+2. Bấm **New issue**; chọn mẫu nếu repository có mẫu.
+3. Điền **tiêu đề lỗi** và **nội dung**: bước tái hiện, kết quả mong đợi, kết quả thực tế.
+4. Kéo thả ảnh chụp bug vào ô nội dung để đính kèm.
+5. Bấm **Create** để đăng issue. GitHub sẽ cấp mã như `#10`. [Hướng dẫn GitHub](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue).
+
+Ví dụ nội dung:
+
+```markdown
+### Bước tái hiện
+1. Mở trang đăng nhập bằng tài khoản chưa khóa.
+2. Nhập đúng email nhưng sai mật khẩu.
+3. Bấm đăng nhập một lần.
+
+### Kết quả mong đợi
+Bộ đếm số lần sai tăng từ 0 lên 1.
+
+### Kết quả thực tế
+Bộ đếm tăng từ 0 lên 2.
+
+### Bằng chứng
+[Kéo thả ảnh chụp vào đây]
+```
+
+**Push file Markdown lên Git không tự tạo issue.** Bạn cần đăng riêng trên GitHub; các bug đã có issue trong HW02 thì không cần tạo lại.
+
+Đã ghi audit
+
+## AI-LOCAL-ed5c114925d3d2c1
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+14:59:45 18/10/2026
+
+### Prompt của bạn
+
+đề yêu cầu  trên trang
+GitHub Issues của nhóm.
+vậy phải tạo repo cho nhóm push lên chung à
+
+
+### Output của AI
+
+**Nhóm nên thống nhất một repository để đăng và theo dõi bug chung, nhưng không bắt buộc tạo repository mới.**
+
+Đề ghi ở **mục 6.4, trang 3**:
+
+> Báo cáo mọi bug phát hiện được cả trong báo cáo Markdown và trên trang GitHub Issues của nhóm. Đính kèm ảnh chụp bug vào từng GitHub issue.
+
+Câu này yêu cầu **Issues dùng chung của nhóm**; không nói bắt buộc mọi thành viên phải push toàn bộ báo cáo cá nhân vào cùng repository.
+
+Bạn có thể dùng ngay [repository HW02 hiện tại](https://github.com/NguyenSonTung16/HW02) nếu nhóm thống nhất chọn nó. Nếu muốn các thành viên cùng push tài liệu, chủ repository thêm họ vào **Collaborators**.
+
+**Các issue mình đã tạo hiện nằm trong repository của bạn.** Chúng đáp ứng phần “của nhóm” khi nhóm thống nhất dùng repository này; nếu nhóm dùng repository khác thì cần đăng các bug sang nơi đó.
+
+Đã ghi audit
+
+## AI-LOCAL-74c89d6073f0288f
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+15:06:12 18/10/2026
+
+### Prompt của bạn
+
+hiện tại còn thiếu mục D chưa chọn, nhưng mục D là làm mobile và ko ghi cụ thể thông tin , từ nội dung README thì có thể chọn 1 nội dung trong mục FR-20 là Giỏ hàng dc ko
+
+
+### Output của AI
+
+**Có thể chọn “FR-20 — Giỏ hàng trên ứng dụng Mobile”; đây là cách chọn hợp lý theo hai tài liệu, nhưng đề chưa quy định rõ cách chia chức năng trong Pool D.**
+
+- **Đề, trang 3:** chỉ ghi “Pool D Ứng dụng di động (Mobile App)” và yêu cầu mỗi sinh viên chọn một chức năng ở mỗi pool; không liệt kê chức năng cụ thể của Pool D.
+- **[README EShop](<D:/vscode/Software testing/eshop-sut/README.md:233>), FR-20:** ghi “Đầy đủ các chức năng: Xem sản phẩm, Đăng nhập, Đăng xuất, Đăng ký, Giỏ hàng, Thanh toán, Hồ sơ, Lịch sử đơn hàng.”
+
+Vì vậy, bạn có thể ghi phạm vi mục D là **“FR-20 — Giỏ hàng (Mobile)”**, rồi thiết kế Domain Testing/BVA riêng cho chức năng này. Không cần tự mở rộng sang toàn bộ các chức năng Mobile.
+
+Cần kiểm thử **giỏ hàng của ứng dụng Mobile**, đồng thời bảo đảm không trùng chức năng Mobile với thành viên khác. Có thể tham chiếu nghiệp vụ giỏ hàng tại FR-07, nhưng phải ghi rõ nguồn tham chiếu vì FR-20 không mô tả chi tiết từng quy tắc.
+
+Đã ghi audit
+
+## AI-LOCAL-a6fef8996c297c0a
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+17:21:11 18/10/2026
+
+### Prompt của bạn
+
+dùng skill làm tương tự cho mục 5:FR-20 Giỏ hàng mobile
+
+
+### Output của AI
+
+Đã cập nhật **mục 5.1–5.6 — FR-20 Giỏ hàng Mobile** trong [báo cáo Word](<D:/vscode/Software testing/HW02/Main_Report.docx>) và Markdown, theo cấu trúc các mục trước.
+
+- **28 EC**, bảng đại diện từng EC và **12 TC rút gọn**.
+- BVA tại số lượng **0, 1, 2**; tổng **13 TC duy nhất**.
+- Ghi rõ nguồn tham chiếu FR-06/FR-07 và các điểm chưa đủ đặc tả.
+
+Đã bổ sung TC vào README và push lên `main`. **FR-20 mới thiết kế, chưa chạy test Mobile.**
+
+Đã ghi audit
+
