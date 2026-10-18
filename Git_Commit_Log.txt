@@ -1,3 +1,5 @@
+3c93bac | 2026-10-18T18:05:08+07:00 | Add AI critique based on student review and link it from README
+5ce3f16 | 2026-10-18T18:03:48+07:00 | Audit student corrections to FR20 design and update commit log
 b92e6fc | 2026-10-18T18:03:47+07:00 | Address student review of FR20 manual quantity navigation and invalid input oracles
 7f731b3 | 2026-10-18T17:29:31+07:00 | Audit FR20 mobile cart design and export workflow commit log
 43ed1ac | 2026-10-18T17:29:19+07:00 | List thirteen unexecuted FR20 mobile cart cases in README
