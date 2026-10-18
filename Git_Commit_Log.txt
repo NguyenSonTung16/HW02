@@ -1,3 +1,7 @@
+df98b5a | 2026-10-18T18:57:02+07:00 | Link five FR20 native bugs to GitHub Issues with verified screenshots
+76e7419 | 2026-10-18T18:54:22+07:00 | Execute FR20 Android cart tests and record six native demos with five confirmed bugs
+aff4723 | 2026-10-18T18:27:08+07:00 | Prepare native Android Jest execution and recorded demos for FR20 mobile cart
+3e41a8e | 2026-10-18T18:05:09+07:00 | Record AI critique publication audit and update commit log
 3c93bac | 2026-10-18T18:05:08+07:00 | Add AI critique based on student review and link it from README
 5ce3f16 | 2026-10-18T18:03:48+07:00 | Audit student corrections to FR20 design and update commit log
 b92e6fc | 2026-10-18T18:03:47+07:00 | Address student review of FR20 manual quantity navigation and invalid input oracles

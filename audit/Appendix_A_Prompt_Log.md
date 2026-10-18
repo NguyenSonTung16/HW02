@@ -5362,3 +5362,31 @@ sau đó push git các update mới
 
 Đã ghi audit
 
+## AI-LOCAL-89773c19819bbd42
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+18:05:58 18/10/2026
+
+### Prompt của bạn
+
+tiếp tục tạo script chạy các test case của mục 5 như cách đã chạy và quay video cho các mục trước đó, lưu vào tạo file/folder đúng cấu trúc yêu cầu, Báo cáo mọi bug phát hiện được cả trong báo cáo Markdown và trên trang
+GitHub Issues của nhóm. Đính kèm ảnh chụp bug vào từng GitHub issue nếu có
+
+
+### Output của AI
+
+Đã tạo [script Jest cho 14 TC Mobile](<D:/vscode/Software testing/HW02/jest-tests>) và push lên `main`.
+
+- **FR-20:** 1 Pass, 10 Fail; TC10–TC12 giữ **Not Run** vì chưa đủ căn cứ kết luận.
+- **5 bug** đã có [báo cáo Markdown](<D:/vscode/Software testing/HW02/bug-reports/README.md>) và [GitHub Issues #10–#14](https://github.com/NguyenSonTung16/HW02/issues), mỗi issue kèm ảnh Android.
+- README, báo cáo và hồ sơ chạy đã đồng bộ; SUT gốc giữ nguyên.
+
+Video 6 TC tiêu biểu, khoảng **2 phút 15 giây**:
+
+![Video FR-20](<D:/vscode/Software testing/HW02/videos/FR-20-demo.webm>)
+
+Đã ghi audit
+
