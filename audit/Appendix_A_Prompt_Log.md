@@ -4902,3 +4902,99 @@ Dùng Playwright cục bộ với trình duyệt hiển thị vì phiên không 
 
 Đã ghi audit
 
+## AI-LOCAL-8c70614a060e72c6
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+12:56:13 18/10/2026
+
+### Prompt của bạn
+
+video bạn thao tác quá nhanh khiến cho người xem ko nhận thấy dc bạn đang demo gì, cần giảm tốc độ xuống sao cho con người có thể xem
+
+
+### Output của AI
+
+Mình sẽ quay lại video FR-02 với nhịp chậm hơn: giới thiệu từng TC trước khi chạy, nhập dữ liệu chậm, dừng rõ ở thao tác gửi và giữ kết quả đủ lâu để đọc. Mình vẫn chỉ làm video đầu tiên, rồi chờ bạn duyệt.
+
+
+Mình đã chỉnh nhịp video: mỗi TC có khoảng **8 giây đọc mục tiêu**, **5 giây xem tiền điều kiện**, dữ liệu được gõ từng ký tự, dừng **3,5 giây trước khi gửi** và giữ kết quả ít nhất **14 giây**. Chú thích thao tác và kết quả sẽ bằng tiếng Việt. Riêng test chờ hết khóa vẫn đo thời gian thật.
+
+
+Bản quay lại đang chạy với các bước và kết quả hiển thị lâu hơn, kèm chú thích tiếng Việt. Mình cũng tách thời gian nhập liệu khỏi thời điểm gửi request để việc giảm tốc thao tác không làm sai phép đo thời hạn khóa.
+
+
+Mình đã xem ảnh ở phần đối chiếu kết quả: chữ và số liệu đều đọc được, kết quả được giữ đủ lâu trước khi chuyển TC. Bản mới đang tiếp tục các case còn lại; kết quả đến lúc này vẫn khớp với lần chạy trước.
+
+
+Năm TC đầu đã quay xong. Case cuối đang tạo khóa mới và chờ đủ 31 giây thật trước khi thử đăng nhập lại. Sau đó mình sẽ kiểm tra video hoàn chỉnh và gửi bản mới để bạn duyệt.
+
+
+## AI-LOCAL-7e2607d30aa3cca3
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+13:05:55 18/10/2026
+
+### Prompt của bạn
+
+chậm quá, cần giảm xuống khoảng 2s đọc mục tiêu, sau đó thao tác dữ liệu luonoroifo dừng 2s **trước khi gửi** và giữ kết quả ít nhất  3s
+
+
+### Output của AI
+
+Mình sẽ chỉnh đúng nhịp bạn chốt: **2 giây đọc mục tiêu → nhập dữ liệu ngay → dừng 2 giây trước khi gửi → giữ kết quả ít nhất 3 giây**. Mình bỏ phần dừng riêng 5 giây ở tiền điều kiện và quay lại FR-02 để bạn duyệt.
+
+
+## AI-LOCAL-d8e8edc79d324768
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+13:07:32 18/10/2026
+
+### Prompt của bạn
+
+chỉnh lại khoảng 4s đọc mục tiêu
+
+
+### Output của AI
+
+Mình chỉnh thành **4 giây đọc mục tiêu**, rồi nhập dữ liệu ngay, **dừng 2 giây trước khi gửi** và **giữ kết quả ít nhất 3 giây**. Các mốc còn lại giữ như bạn vừa yêu cầu.
+
+
+## AI-LOCAL-911e0182ef1747e5
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+13:09:41 18/10/2026
+
+### Prompt của bạn
+
+ở bước nhập mỗi ô phải dừng lại khoảng 1,5s sau khi nhập
+
+
+### Output của AI
+
+Đã quay lại theo nhịp bạn chốt:
+
+- Đọc mục tiêu **4 giây**.
+- Dừng **1,5 giây sau mỗi ô nhập**.
+- Dừng **2 giây trước khi gửi**.
+- Giữ kết quả **3,5 giây**.
+
+Video mới dài khoảng **2 phút 16 giây**:
+
+![Video FR-02 đã điều chỉnh](<D:/vscode/Software testing/HW02/videos/FR-02-demo-paced.webm>)
+
+Mình dừng tại đây, chờ bạn duyệt trước khi làm FR-09 và FR-15.
+
+Đã ghi audit
+
