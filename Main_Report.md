@@ -605,11 +605,11 @@ Theo S04 trang 26–27, số lượng khi thêm có miền số nguyên q >= 1, 
 
 BVA có 3 TC: TC10 và TC03 dùng chung với Domain Testing, TC13 bổ sung; FR-20 có 14 TC thiết kế duy nhất sau khi thêm TC14 nhập tay. Dòng biên ghi cả EC đầu vào/ngữ cảnh và EC đầu ra dự kiến để kiểm tra kết quả, không chỉ kiểm tra giá trị ô nhập.
 
-Thành tiền và tổng tiền là đầu ra phụ thuộc đơn giá/số lượng, không có khoảng giới hạn riêng để chọn BVA; kiểm bằng phép tính cụ thể trong các TC. Trạng thái giỏ trống và chuyển một dòng thành trống đã có TC01/TC08; lựa chọn xác nhận là phân lớp rời rạc. Chưa có giới hạn UI Mobile được đo để bổ sung điểm cực trị. Sinh viên đã rà soát và phát hiện ba điểm ở mục 5.6; tất cả TC Mobile vẫn chưa được thực thi.
+Thành tiền và tổng tiền là đầu ra phụ thuộc đơn giá/số lượng, không có khoảng giới hạn riêng để chọn BVA; kiểm bằng phép tính cụ thể trong các TC. Trạng thái giỏ trống và chuyển một dòng thành trống đã có TC01/TC08; lựa chọn xác nhận là phân lớp rời rạc. Chưa có giới hạn UI Mobile được đo để bổ sung điểm cực trị. Sinh viên đã rà soát và phát hiện ba điểm ở mục 5.6. Kết quả thực thi Android native, ảnh và video được cập nhật trong README.md; TC10–TC12 còn chờ xác nhận oracle/giới hạn nhập liệu.
 
 ### 5.6 AI gap analysis
 
-Sinh viên phát hiện ba điểm sau khi rà soát thiết kế FR-20; AI đã đối chiếu và sửa. Đây là thiếu sót của bộ thiết kế/expected, chưa phải bug Mobile đã được chạy và xác nhận.
+Sinh viên phát hiện ba điểm sau khi rà soát thiết kế FR-20; AI đã đối chiếu và sửa. Đây là thiếu sót của bộ thiết kế/expected. Bug thực tế của Mobile được báo cáo riêng trong bug-reports và GitHub Issues, không đồng nhất số thiếu sót thiết kế với số bug.
 
 - Thiếu đường nhập tay số lượng: TC05 ban đầu chỉ kiểm tra +/-. AI tập trung vào thao tác được FR-07 nêu mà chưa kiểm đủ đường nhập trực tiếp trên UI Mobile. Hiệu chỉnh: thêm EC29, dòng đại diện và TC14 nhập "3" vào giỏ; kiểm đúng số lượng, thành tiền, tổng tiền và sản phẩm đối chứng giữ nguyên. Không thay TC05.
 
@@ -617,9 +617,11 @@ Sinh viên phát hiện ba điểm sau khi rà soát thiết kế FR-20; AI đã
 
 - Expected dữ liệu không hợp lệ chưa đủ rõ: TC10–TC12 chưa tách ràng buộc số nguyên dương khỏi quy tắc chuẩn hóa chưa được đặc tả. AI đã nêu điểm chưa rõ nhưng chưa hướng dẫn đánh giá khi ứng dụng tự chuyển thành 1 rồi thêm hàng. Hiệu chỉnh: viết rõ không đưa giá trị 0, 1.5, "abc" làm số lượng trong giỏ, giữ SP_B; bổ sung ghi chú chờ xác nhận quy tắc chuẩn hóa trước khi chốt toàn bộ TC, đồng bộ TC10 ở BVA. Không tự kết luận phải từ chối toàn bộ thao tác.
 
+Kết quả sau khi bổ sung kiểm thử: TC14 nhập tay do sinh viên đề xuất đã tái hiện việc nhập 3 nhưng ứng dụng hiển thị 4, làm sai thành tiền và tổng tiền; SP_B đối chứng giữ nguyên. Đã lập BUG-FR20-005 kèm ảnh Android và hồ sơ chạy. Với TC10–TC12, không tự coi việc chuẩn hóa thành 1 là bug khi chưa có quy tắc xác nhận.
+
 ## 6 Tổng kết và hồ sơ hỗ trợ
 
-Kết quả thực thi, số TC đã thiết kế/đã chạy/Pass/Fail/chưa chạy, bug và video của FR-02/FR-09/FR-15 được theo dõi trong README.md. FR-20 Giỏ hàng Mobile có 14 TC thiết kế, chưa chạy; chưa có video hoặc bug được xác nhận. Không đếm trùng TC dùng chung Domain Testing/BVA. Hồ sơ nộp và tự đánh giá tiếp tục đối chiếu đề HW02; không suy ra đã hoàn thành thực thi từ báo cáo thiết kế.
+Kết quả thực thi, số TC đã thiết kế/đã chạy/Pass/Fail/chưa chạy, bug và video của bốn FR được theo dõi trong README.md. FR-20 Giỏ hàng Mobile có 14 TC thiết kế; hồ sơ Android native và video lưu trong jest-tests/runs và videos. TC10–TC12 chưa thể chốt toàn bộ kết quả do oracle/giới hạn nhập liệu. Không đếm trùng TC dùng chung Domain Testing/BVA; không suy ra đã hoàn thành toàn bộ kiểm thử từ số TC thiết kế.
 
 ## 7 Tài liệu tham khảo
 
