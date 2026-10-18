@@ -623,7 +623,11 @@ Kết quả sau khi bổ sung kiểm thử: TC14 nhập tay do sinh viên đề 
 
 Kết quả thực thi, số TC đã thiết kế/đã chạy/Pass/Fail/chưa chạy, bug và video của bốn FR được theo dõi trong README.md. FR-20 Giỏ hàng Mobile có 14 TC thiết kế; hồ sơ Android native và video lưu trong jest-tests/runs và videos. TC10–TC12 chưa thể chốt toàn bộ kết quả do oracle/giới hạn nhập liệu. Không đếm trùng TC dùng chung Domain Testing/BVA; không suy ra đã hoàn thành toàn bộ kiểm thử từ số TC thiết kế.
 
-## 7 Tài liệu tham khảo
+## 7 Nhận xét phản biện về AI (AI Critique)
+
+Trong bài tập này, AI giúp tôi phân lớp tương đương, chọn giá trị biên và xây dựng báo cáo, nhưng kết quả cần được rà soát. Ban đầu, AI thêm nhiều cột, ký hiệu và phần giải thích ngoài nhu cầu, thể hiện xu hướng ưu tiên mẫu báo cáo phức tạp hơn cấu trúc trong slide. Với FR-02, AI đưa lần đăng nhập sai thứ nhất vào nhóm kiểm tra quanh ngưỡng khóa ba lần, dù các điểm sát ngưỡng là lần thứ hai, ba và bốn. Với FR-15, expected ban đầu chỉ kiểm tra sau khi tải lại, có thể bỏ sót lỗi giao diện đổi tên các sản phẩm khác ngay sau khi lưu. Với FR-20, AI thiếu kiểm tra nhập tay số lượng, chưa kiểm tra giỏ khi đi mua sắm rồi quay lại, và viết expected chưa đủ rõ để đánh giá trường hợp đầu vào sai được tự chuyển thành 1. Những thiếu sót này cho thấy AI thiên về hành vi được mô tả trực tiếp và kết quả cuối, chưa xem xét đầy đủ đường thao tác, trạng thái trung gian và sự thiếu rõ ràng của đặc tả. Tôi rút ra rằng cần hướng dẫn AI theo từng bước của kỹ thuật, yêu cầu truy nguồn expected và kiểm tra ánh xạ EC–TC. Người học phải rà soát dữ liệu biên, quan sát trước và sau thao tác, phân biệt yêu cầu với giả định, đồng thời ghi nhận sửa đổi. AI hỗ trợ thiết kế và thực thi; trách nhiệm xác minh, kết luận lỗi và đánh giá kết quả vẫn thuộc về tôi.
+
+## 8 Tài liệu tham khảo
 
 - Đề HW02 mục 6, 9 và 14; slide S04 Domain Testing.
 - README eshop-sut, FR-02/09/15/20.
