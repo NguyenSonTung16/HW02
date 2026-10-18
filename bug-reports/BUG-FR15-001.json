@@ -10,5 +10,7 @@
     "BUG-FR15-001-TC03-immediate.png",
     "BUG-FR15-001-TC03.png"
   ],
-  "issue_url": null
+  "issue_url": "https://github.com/NguyenSonTung16/HW02/issues/7",
+  "issue_number": 7,
+  "evidence_commit": "55830418e8cde0a0680a3eb276560358e3548441"
 }

@@ -9,5 +9,7 @@
   "screenshots": [
     "BUG-FR09-002-TC09.png"
   ],
-  "issue_url": null
+  "issue_url": "https://github.com/NguyenSonTung16/HW02/issues/5",
+  "issue_number": 5,
+  "evidence_commit": "55830418e8cde0a0680a3eb276560358e3548441"
 }
