@@ -1,0 +1,1 @@
+Đã rõ. Từ lúc này đến hết phiên, mình sẽ không ghi AI Audit.

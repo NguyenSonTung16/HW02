@@ -1,0 +1,3 @@
+# Preserve exact report/audit bytes, including immutable snapshot hashes.
+Main_Report.md -text
+audit/** -text

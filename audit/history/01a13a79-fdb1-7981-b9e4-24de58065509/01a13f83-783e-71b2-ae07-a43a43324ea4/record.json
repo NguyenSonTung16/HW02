@@ -1,0 +1,38 @@
+{
+  "turn_id": "01a13f83-783e-71b2-ae07-a43a43324ea4",
+  "started_at": "2026-10-15T12:22:23.286Z",
+  "prompts": [
+    {
+      "message_id": "msg_01a13f83-79e6-72a0-8435-dd314ec7df71",
+      "timestamp_utc": "2026-10-15T12:22:23.463Z",
+      "timestamp_local": "2026-10-15T19:22:23.463+07:00",
+      "role": "user",
+      "phase": null,
+      "text": "cho path file đã làm báo cáo\n",
+      "source_line": 1082
+    }
+  ],
+  "outputs": [
+    {
+      "message_id": "msg_09382bc0e8fb8d21016ad0c583fadc819190d65d66b92fe670",
+      "timestamp_utc": "2026-10-15T12:22:29.145Z",
+      "timestamp_local": "2026-10-15T19:22:29.145+07:00",
+      "role": "assistant",
+      "phase": "final_answer",
+      "text": "- [Báo cáo Markdown](<D:/vscode/Software testing/HW02/Main_Report.md>)\n- [Báo cáo Word](<D:/vscode/Software testing/HW02/Main_Report.docx>)\n\nThư mục: `D:\\vscode\\Software testing\\HW02`",
+      "source_line": 1085
+    }
+  ],
+  "source_lines": [
+    1082,
+    1085
+  ],
+  "model": "gpt-6.1-sol",
+  "complete": true,
+  "completed_at": "2026-10-15T12:22:29.641Z",
+  "interaction_id": "AI-HW02-041",
+  "tool": "Codex Desktop",
+  "extracted_at": "2026-10-15T20:13:35+07:00",
+  "source_session": "01a13a79-fdb1-7981-b9e4-24de58065509",
+  "source_file": "C:\\Users\\tung1\\.codex\\sessions\\2026\\10\\14\\rollout-2026-10-14T19-53-55-01a13a79-fdb1-7981-b9e4-24de58065509.jsonl"
+}

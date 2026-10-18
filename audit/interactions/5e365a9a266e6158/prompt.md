@@ -1,0 +1,1 @@
+nghĩa là vẫn phải mang toàn bộ nội dung audit đưa vào báo cáo chính đúng ko

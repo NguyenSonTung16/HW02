@@ -1,0 +1,10 @@
+{
+  "request_key": "hw02-terminal-verify-jwt-command-20261016",
+  "tool": "Codex",
+  "recorded_at": "2026-10-16T13:50:16+07:00",
+  "prompt": "cho lệnh chạy trên terminal đi, ko mwor dc console",
+  "final_output": "Mở **terminal PowerShell mới** trong VS Code, giữ nguyên terminal đang chạy server. Dán đoạn này:\n\n```powershell\n$fr02Token = Read-Host 'Dan token tu Network hoac Local Storage, khong kem dau ngoac kep'\n\n$fr02Response = Invoke-WebRequest `\n  -Uri 'http://localhost:3000/api/users/me' `\n  -Method Get `\n  -Headers @{ Authorization = \"Bearer $fr02Token\" }\n\n$fr02User = $fr02Response.Content | ConvertFrom-Json\n\n[PSCustomObject]@{\n  Status = $fr02Response.StatusCode\n  Id     = $fr02User.id\n  Email  = $fr02User.email\n}\n```\n\nKhi terminal hỏi, dán token rồi nhấn **Enter**. Không thêm dấu `\"` quanh token.\n\nKết quả mong đợi:\n\n```text\nStatus Id Email\n------ -- -----\n   200  2 test@eshop.com\n```\n\nNếu đúng như trên, bạn đã xác nhận backend chấp nhận token — hoàn tất phần kiểm JWT của **TC01**. Chụp kết quả bảng, tránh chụp dòng nhập token. Đây chưa phải kiểm header tự động của client trong TC10.\n\nĐã ghi audit",
+  "task": "Cung cấp lệnh PowerShell kiểm backend chấp nhận JWT cho TC01",
+  "snapshots": [],
+  "interaction_id": "a1022680e4e2bd73"
+}

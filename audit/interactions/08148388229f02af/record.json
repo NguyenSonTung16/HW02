@@ -1,0 +1,10 @@
+{
+  "request_key": "hw02-explain-appendix-20261015",
+  "tool": "Codex",
+  "recorded_at": "2026-10-15T20:31:05+07:00",
+  "prompt": "Báo cáo kiểm toán sử dụng AI (AI Audit Report) Phụ lục bắt buộc\nĐính kèm AI Audit Report dưới dạng phụ lục (appendix) nghĩa là gì",
+  "final_output": "Nghĩa là **đặt AI Audit Report ở phần phụ lục cuối báo cáo chính**, sau các phần nội dung và tài liệu tham khảo.\n\nVí dụ bố cục:\n\n```text\nBÁO CÁO CHÍNH HW02\n1. Giới thiệu và phạm vi\n2. Kiểm thử FR-02\n3. Kiểm thử FR-09\n4. Kiểm thử FR-15\n5. Kiểm thử Mobile\n6. Tổng kết\n7. Tài liệu tham khảo\n\nPHỤ LỤC A — AI AUDIT REPORT\n- Khai báo sử dụng AI\n- Công cụ, ngày giờ, prompt và output\n- Bảng đánh giá theo mẫu AI-02\n```\n\n**Phụ lục vẫn thuộc bài báo cáo**, nhưng được đặt cuối để nội dung kiểm thử không bị ngắt bởi nhật ký AI dài.\n\nVới HW02, cách tổ chức rõ nhất là **đưa AI Audit vào cuối báo cáo chính**, đồng thời giữ **file AI Audit riêng dạng Markdown và PDF** trong ZIP theo danh sách hồ sơ cần nộp. Hai bản phải cùng nội dung.\n\nĐã ghi audit",
+  "task": "Giải thích vị trí phụ lục AI Audit trong báo cáo HW02",
+  "snapshots": [],
+  "interaction_id": "08148388229f02af"
+}

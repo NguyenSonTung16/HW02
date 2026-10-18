@@ -1,0 +1,11 @@
+{
+  "request_key": "hw02-network-login-filter-help-20261016",
+  "tool": "Codex",
+  "recorded_at": "2026-10-16T13:34:26+07:00",
+  "prompt": "ấn login xong ko thấy response",
+  "final_output": "Trong ảnh, **bạn đang lọc sai**, chưa phải bằng chứng API không trả response. Network hiển thị **0/13 requests**, còn giao diện đã hiện **“Chào, Test User”**.\n\nLàm như sau:\n\n1. Xóa `POST /api/login` trong ô Filter, thay bằng **`login`**. Nếu request còn được lưu, nó sẽ xuất hiện.\n2. Tích **Keep log** để giữ request khi chuyển trang.\n3. Nếu vẫn không có: bấm **Thoát**, quay lại đăng nhập rồi thực hiện lại một lần khi Network đang mở.\n4. Chọn dòng **login** có phương thức **POST**; nếu có dòng `OPTIONS` thì đó là request kiểm tra trước, không phải request đăng nhập chính.\n5. Trong khung chi tiết, chọn **Response** hoặc **Preview** để xem dữ liệu trả về. Tab **Headers** cho biết URL, phương thức và mã trạng thái; **Payload** là dữ liệu bạn gửi.\n\n**Ô Filter chỉ cần nhập `login`, không nhập cả `POST /api/login`.** Khi chụp bằng chứng, che giá trị token.\n\nĐã ghi audit",
+  "task": "Hướng dẫn sửa bộ lọc Network và xem response đăng nhập theo ảnh người dùng",
+  "log_scope": "Prompt và phản hồi cuối nguyên văn; ảnh đính kèm codex-clipboard-fb24fb81-0285-43d2-b1cb-79949d96ad04.png được dùng làm bằng chứng quan sát, không nhúng bytes ảnh vào ô audit.",
+  "snapshots": [],
+  "interaction_id": "ea89ae47f320547b"
+}

@@ -1,0 +1,38 @@
+{
+  "turn_id": "01a13a99-3cd8-73f0-be65-566fc0014e29",
+  "started_at": "2026-10-14T13:28:03.588Z",
+  "prompts": [
+    {
+      "message_id": "msg_01a13a99-3d37-77e1-86d4-afeea825c913",
+      "timestamp_utc": "2026-10-14T13:28:03.639Z",
+      "timestamp_local": "2026-10-14T20:28:03.639+07:00",
+      "role": "user",
+      "phase": null,
+      "text": "vậy HW02 cần làm gì xoay quanh 3 mục này (mục D để sau)\n",
+      "source_line": 235
+    }
+  ],
+  "outputs": [
+    {
+      "message_id": "msg_09382bc0e8fb8d21016acf836af17481918b69e1573f4dee3f",
+      "timestamp_utc": "2026-10-14T13:28:35.968Z",
+      "timestamp_local": "2026-10-14T20:28:35.968+07:00",
+      "role": "assistant",
+      "phase": "final_answer",
+      "text": "Với **FR-02, FR-09 và FR-15**, bạn cần làm một bộ kiểm thử và báo cáo cho **từng chức năng**, gồm các phần sau. Pool D bổ sung sau.\n\n**1. Phân tích yêu cầu và thiết kế test bằng hai kỹ thuật**\n\n| Chức năng | Domain Testing: phân tích những miền nào? | Boundary Value Analysis: kiểm tra biên nào? |\n|---|---|---|\n| **FR-02 — Đăng nhập & khóa tài khoản** | Email/tài khoản hợp lệ hoặc không hợp lệ; mật khẩu đúng/sai; tài khoản bình thường/đang khóa | Số lần sai quanh ngưỡng **3 lần**; thời điểm trước, tại và sau khi hết **30 giây khóa** |\n| **FR-09 — Coupon** | Mã tồn tại/không tồn tại; active/inactive; còn hạn/hết hạn; đủ/thiếu tổng tiền; có/không đăng nhập; còn/hết lượt dùng | Tổng tiền ngay dưới, bằng và trên ngưỡng; thời điểm hết hạn; số lượt dùng quanh giới hạn |\n| **FR-15 — Quản lý sản phẩm** | Tên hợp lệ/rỗng/quá dài; giá hợp lệ/không hợp lệ; danh mục hợp lệ/thiếu/không tồn tại; thao tác thêm/xem/sửa/xóa | Tên **254/255/256 ký tự**; giá âm, **0**, dương; giá gần 0 theo độ chính xác hệ thống hỗ trợ |\n\nVới mỗi kỹ thuật, phải **giải thích từng bước thiết kế**, không chỉ đưa bảng test case. Expected result phải lấy từ **README**, không lấy hành vi hiện tại của source làm chuẩn.\n\n**2. Viết test case rồi thực hiện kiểm thử**\n\nMỗi test case nên có:\n\n- ID, yêu cầu được kiểm tra và kỹ thuật sử dụng.\n- Điều kiện chuẩn bị, dữ liệu đầu vào.\n- Các bước thực hiện.\n- Kết quả mong đợi, kết quả thực tế.\n- Trạng thái **Pass/Fail/Not Run** và bằng chứng.\n\nRiêng FR-02 cần cách đặt lại trạng thái tài khoản và kiểm soát thời gian; FR-09 cần chuẩn bị coupon/lịch sử sử dụng; FR-15 cần dữ liệu sản phẩm và danh mục để kiểm tra cả việc sửa đúng sản phẩm.\n\n**3. Báo cáo lỗi**\n\nMọi bug xác nhận được phải ghi vào **báo cáo Markdown** và **GitHub Issues của nhóm**, kèm ảnh. Nội dung nên đủ để tái hiện: môi trường, dữ liệu, bước thực hiện, expected/actual và liên kết test case.\n\n**4. Ghi lại quá trình dùng AI và Git**\n\n- Dùng AI theo từng bước phân tích và thiết kế; bạn kiểm tra, sửa kết quả.\n- **AI Audit Report:** tên công cụ, ngày giờ, prompt, output của từng tương tác.\n- **AI gap analysis:** test case/bug AI bỏ sót và nguyên nhân, nếu có.\n- **AI Critique 200–300 từ:** nhận xét sai sót, hạn chế và bài học phối hợp với AI.\n- **Commit sau mỗi bước kiểm thử của từng chức năng**, rồi xuất Git log ra file văn bản.\n\n**5. Tập hợp hồ sơ nộp**\n\nChuẩn bị báo cáo chính **Markdown + PDF**, bug report, AI Audit/AI Critique **Markdown + PDF**, Git log và `README.md` có bảng tự chấm điểm cùng thống kê test.\n\nBa chức năng này chiếm **75 điểm** trong rubric. Bạn có thể hoàn thành chúng trước, nhưng bản nộp cuối vẫn cần **Pool D**, các tài liệu bắt buộc và phần Agent Skills nếu muốn đạt điểm hạng mục đó.\n\nTrình tự làm hợp lý là: **đọc bài giảng → phân tích yêu cầu → thiết kế Domain Testing → thiết kế BVA → rà soát test → chạy test → báo bug → tổng kết**, lặp lại cho từng chức năng.",
+      "source_line": 238
+    }
+  ],
+  "source_lines": [
+    235,
+    238
+  ],
+  "model": "gpt-6.1-sol",
+  "complete": true,
+  "completed_at": "2026-10-14T13:28:36.085Z",
+  "interaction_id": "AI-HW02-013",
+  "tool": "Codex Desktop",
+  "extracted_at": "2026-10-15T20:13:35+07:00",
+  "source_session": "01a13a79-fdb1-7981-b9e4-24de58065509",
+  "source_file": "C:\\Users\\tung1\\.codex\\sessions\\2026\\10\\14\\rollout-2026-10-14T19-53-55-01a13a79-fdb1-7981-b9e4-24de58065509.jsonl"
+}

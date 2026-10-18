@@ -1,0 +1,11 @@
+{
+  "request_key": "hw02-login-response-user-evidence-20261016",
+  "tool": "Codex",
+  "recorded_at": "2026-10-16T13:36:49+07:00",
+  "prompt": "{\n    \"message\": \"Login successful\",\n    \"token\": \"[ĐÃ CHE TOKEN XÁC THỰC]\",\n    \"user\": {\n        \"id\": 2,\n        \"name\": \"Test User\",\n        \"email\": \"test@eshop.com\",\n        \"password\": \"[ĐÃ CHE GIÁ TRỊ MẬT KHẨU]\",\n        \"role\": \"user\",\n        \"login_attempts\": 0,\n        \"locked_until\": null,\n        \"reset_token\": null,\n        \"shipping_address\": null,\n        \"phone\": null\n    }\n}\n\nđây là token phản hồi",
+  "final_output": "Đúng, đây là **response đăng nhập**, trong đó trường `token` chứa JWT.\n\nBạn đã quan sát được hai điểm của **TC01**:\n\n- Server báo `Login successful`.\n- Response có token và thông tin tài khoản `test@eshop.com`.\n\n**Chưa nên kết luận Pass toàn bộ TC01 chỉ từ response này.** Cần kiểm tra token được backend chấp nhận:\n\n1. Trong DevTools → **Application → Local Storage → `http://localhost:5173`**, xem key `token` có khớp token vừa nhận không. Đây đồng thời là bằng chứng cho TC09.\n2. Gửi request **GET `http://localhost:3000/api/users/me`** với header `Authorization: Bearer <token>`.\n3. Nếu backend chấp nhận và trả đúng tài khoản id `2`, bạn có bằng chứng token sử dụng được. Ghi thêm mã HTTP thực tế của request login và request này.\n\n**Điểm cần ghi riêng:** response đang trả cả `user.password` dạng rõ. Đây là dữ liệu mật khẩu bị lộ qua API; chụp bằng chứng đã che giá trị và ghi nhận để lập bug report phù hợp, không chỉ nhìn thông báo thành công.\n\nTrong bảng test, hiện có thể ghi actual: “Response báo Login successful, có JWT, user.id=2; chưa kiểm request xác thực”. Chưa đánh dấu Pass hoặc hoàn thành thay bạn. Khi chia sẻ ảnh/log, che token và mật khẩu; token trong audit lượt này cũng được che.\n\nĐã ghi audit",
+  "task": "Giải thích response đăng nhập do sinh viên cung cấp và hướng dẫn xác minh TC01",
+  "log_scope": "Prompt đã che token và giá trị password để tránh nhân bản thông tin xác thực; trường và các dữ liệu còn lại giữ nguyên. Phản hồi cuối nguyên văn. Chưa tự chạy request xác thực hoặc cập nhật kết quả test.",
+  "snapshots": [],
+  "interaction_id": "6b25afb076414ab0"
+}

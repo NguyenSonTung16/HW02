@@ -1,0 +1,38 @@
+{
+  "turn_id": "01a13dcd-1d75-71d2-8c66-8a48d9cc018e",
+  "started_at": "2026-10-15T04:23:35.089Z",
+  "prompts": [
+    {
+      "message_id": "msg_01a13dcd-1df3-7742-b54f-e7bcd9b626f5",
+      "timestamp_utc": "2026-10-15T04:23:35.156Z",
+      "timestamp_local": "2026-10-15T11:23:35.156+07:00",
+      "role": "user",
+      "phase": null,
+      "text": "vậy HW02 cần nộp những gì\n",
+      "source_line": 696
+    }
+  ],
+  "outputs": [
+    {
+      "message_id": "msg_09382bc0e8fb8d21016ad05549d8588191a0060de998a2d451",
+      "timestamp_utc": "2026-10-15T04:23:44.650Z",
+      "timestamp_local": "2026-10-15T11:23:44.650+07:00",
+      "role": "assistant",
+      "phase": "final_answer",
+      "text": "HW02 cần nộp **một file ZIP trên Moodle**, gồm:\n\n| Thành phần | Nội dung/định dạng |\n|---|---|\n| **Báo cáo chính** | **Markdown + PDF**, trình bày Domain Testing và BVA cho **4 tính năng A/B/C/D**, giải thích từng bước, test case và kết quả |\n| **Bug report** | Báo cáo lỗi trong Markdown; lỗi được đăng trên **GitHub Issues của nhóm**, mỗi issue kèm screenshot |\n| **AI Audit Report** | **Markdown + PDF**, phụ lục ghi công cụ AI, ngày giờ, prompt và output từng tương tác |\n| **AI Critique** | **Markdown + PDF**, đoạn **200–300 từ** nhận xét sai sót/hạn chế của AI, nguyên nhân và bài học |\n| **Git commit log** | File văn bản; quá trình làm phải có commit cho từng bước kiểm thử của từng chức năng |\n| **`README.md`** | Bảng tự chấm điểm; số tính năng; số test thiết kế/đã chạy/pass/fail/chưa chạy; số bug; link video demo |\n| **Agent Skills và demo** | Vì bạn chọn làm skill: nộp các thư mục skill cùng **link YouTube demo toàn bộ quy trình trên một tính năng** |\n| **Tài liệu hỗ trợ** | Ảnh, dữ liệu test, script, log… được sử dụng trong bài |\n\nTên ZIP:\n\n```text\n<MSSV>_HW02_AI_DomainTesting_<ĐiểmTựChấm>.zip\n```\n\nVí dụ: `23120399_HW02_AI_DomainTesting_090.zip`, điểm tự chấm gồm **3 chữ số từ 000 đến 100**.\n\n**Hiện tại**, bạn đã có bộ skill và bản nháp Domain Testing của FR-02. Chưa đủ để nộp: còn rà soát/chạy test FR-02, làm BVA, FR-09, FR-15, **Pool D**, tổng hợp báo cáo và video demo.\n\nHạn nộp xem trên Moodle. Đề quy định **thiếu tài liệu bắt buộc bị 0 điểm**.",
+      "source_line": 699
+    }
+  ],
+  "source_lines": [
+    696,
+    699
+  ],
+  "model": "gpt-6.1-sol",
+  "complete": true,
+  "completed_at": "2026-10-15T04:23:44.991Z",
+  "interaction_id": "AI-HW02-033",
+  "tool": "Codex Desktop",
+  "extracted_at": "2026-10-15T20:13:35+07:00",
+  "source_session": "01a13a79-fdb1-7981-b9e4-24de58065509",
+  "source_file": "C:\\Users\\tung1\\.codex\\sessions\\2026\\10\\14\\rollout-2026-10-14T19-53-55-01a13a79-fdb1-7981-b9e4-24de58065509.jsonl"
+}

@@ -1,0 +1,1 @@
+chỉ sửa trên 1 file báo cáo duy nhất, ko tạo các bản sao, tránh gây nhầm lẫn (chỉ có 1 bản markdown và 1 bản doc thôi)

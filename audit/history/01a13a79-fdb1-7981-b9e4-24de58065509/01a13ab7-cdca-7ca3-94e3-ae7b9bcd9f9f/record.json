@@ -1,0 +1,38 @@
+{
+  "turn_id": "01a13ab7-cdca-7ca3-94e3-ae7b9bcd9f9f",
+  "started_at": "2026-10-14T14:01:26.776Z",
+  "prompts": [
+    {
+      "message_id": "msg_01a13ab7-ce47-7d32-95e6-744227b949ae",
+      "timestamp_utc": "2026-10-14T14:01:26.855Z",
+      "timestamp_local": "2026-10-14T21:01:26.855+07:00",
+      "role": "user",
+      "phase": null,
+      "text": "có thể chia nhiều EC trong 1 case dc mà đúng ko\n",
+      "source_line": 437
+    }
+  ],
+  "outputs": [
+    {
+      "message_id": "msg_09382bc0e8fb8d21016acf8b3cd2f88191aa25e38635213135",
+      "timestamp_utc": "2026-10-14T14:01:39.034Z",
+      "timestamp_local": "2026-10-14T21:01:39.034+07:00",
+      "role": "assistant",
+      "phase": "final_answer",
+      "text": "Đúng, nhưng cần phân biệt **một yêu cầu có nhiều EC** và **một test case bao phủ nhiều EC**.\n\n- **Một yêu cầu** có thể chia thành nhiều EC: ví dụ trên có EC1–EC5.\n- **Một test case hợp lệ** có thể bao phủ nhiều EC cùng lúc. Ví dụ `x = 5` bao phủ **EC1** (số nguyên) và **EC3** (`0 < x < 100`).\n- **Với test case không hợp lệ**, theo cách chọn test trong slide, mỗi test chỉ nên vi phạm **một lớp không hợp lệ**, để xác định điều kiện nào gây lỗi.\n\nVí dụ:\n\n| Test | Dữ liệu | EC được bao phủ |\n|---|---|---|\n| TC1 | `5` | EC1 + EC3 — hợp lệ |\n| TC2 | `5.5` | EC2 — sai kiểu số nguyên, vẫn nằm trong khoảng |\n| TC3 | `0` | EC1 + EC4 — đúng kiểu số nguyên, sai khoảng |\n| TC4 | `100` | EC1 + EC5 — đúng kiểu số nguyên, sai khoảng |\n\nVậy **một test case có thể bao phủ nhiều EC**, nhưng các EC đó phải cùng phù hợp với dữ liệu của test.",
+      "source_line": 440
+    }
+  ],
+  "source_lines": [
+    437,
+    440
+  ],
+  "model": "gpt-6.1-sol",
+  "complete": true,
+  "completed_at": "2026-10-14T14:01:39.190Z",
+  "interaction_id": "AI-HW02-020",
+  "tool": "Codex Desktop",
+  "extracted_at": "2026-10-15T20:13:35+07:00",
+  "source_session": "01a13a79-fdb1-7981-b9e4-24de58065509",
+  "source_file": "C:\\Users\\tung1\\.codex\\sessions\\2026\\10\\14\\rollout-2026-10-14T19-53-55-01a13a79-fdb1-7981-b9e4-24de58065509.jsonl"
+}

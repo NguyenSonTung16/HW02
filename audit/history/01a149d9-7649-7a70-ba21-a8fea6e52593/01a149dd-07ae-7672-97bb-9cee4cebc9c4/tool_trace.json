@@ -1,0 +1,41 @@
+[
+  {
+    "timestamp_utc": "2026-10-17T12:36:31.012Z",
+    "source_line": 69,
+    "payload": {
+      "type": "custom_tool_call",
+      "id": "ctc_07cdde04acdeb384016ad36bcfcb7081918a5fd3af29c5ac6d",
+      "status": "completed",
+      "call_id": "call_08e03386023b4dd79792b08fe83326c1",
+      "name": "exec",
+      "input": "text(await tools.exec_command({cmd:\"Get-Content -LiteralPath work/hw.txt -Encoding utf8 | Select-Object -Skip 92 -First 105\",\"max_output_tokens\":6500}));\n",
+      "internal_chat_message_metadata_passthrough": {
+        "turn_id": "01a149dd-07ae-7672-97bb-9cee4cebc9c4",
+        "create_time": 1792240591.7985063
+      }
+    }
+  },
+  {
+    "timestamp_utc": "2026-10-17T12:36:32.582Z",
+    "source_line": 72,
+    "payload": {
+      "type": "custom_tool_call_output",
+      "id": "ctco_01a149dd-26c6-7090-85d2-b6d2626461a3",
+      "call_id": "call_08e03386023b4dd79792b08fe83326c1",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script completed\nWall time 1.4 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "{\"chunk_id\":\"71bf40\",\"wall_time_seconds\":0.9730696,\"exit_code\":0,\"original_token_count\":1627,\"output\":\"3\\r\\n• FR-17: Quản lý mã giảm giá (Coupon management CRUD).\\r\\n• FR-18: Quản lý đơn hàng dành cho quản trị viên (Order management admin).\\r\\n• FR-19: Quản lý người dùng dành cho quản trị viên (User management admin).\\r\\nPool D Ứng dụng di động (Mobile App)\\r\\n5. Lựa chọn chức năng (Feature Selection)\\r\\nTrong mỗi nhóm, mỗi sinh viên phải chọn bốn (4) chức năng, mỗi pool một chức năng, đồng thời bảo đảm\\r\\nkhông có chức năng nào được chọn trùng giữa các thành viên trong nhóm.\\r\\n6. Yêu cầu (Requirements)\\r\\nVới mỗi chức năng đã chọn, thực hiện các nhiệm vụ sau:\\r\\n1. Kiểm thử miền (Domain Testing): Với sự hỗ trợ của công cụ AI, áp dụng kỹ thuật kiểm thử miền để thiết\\r\\nkế một bộ test case toàn diện. Khuyến khích bổ sung test case khi cần để bao phủ kỹ lưỡng. Giải thích chi\\r\\ntiết từng bước đã áp dụng kỹ thuật. Ôn lại bài giảng trước khi bắt đầu.\\r\\n2. Phân tích giá trị biên (Boundary Value Analysis): Tương tự, áp dụng kỹ thuật phân tích giá trị biên để\\r\\nthiết kế bộ test case toàn diện, bổ sung khi cần để bao phủ kỹ lưỡng. Giải thích chi tiết từng bước đã áp\\r\\ndụng kỹ thuật. Một lần nữa, cần ôn lại bài giảng trước khi thực hiện.\\r\\n3. Phân tích thiếu sót của AI (AI gap analysis): Nếu công cụ AI bỏ sót test case hoặc bug, bạn phải báo\\r\\ncáo các thiếu sót đó. Giải thích vì sao AI bỏ sót, chẳng hạn do chất lượng đầu vào hoặc prompt, giới hạn\\r\\ncủa công cụ AI, hay độ phức tạp vốn có của chức năng được kiểm thử.\\r\\n4. Báo cáo lỗi (Bug reporting): Báo cáo mọi bug phát hiện được cả trong báo cáo Markdown và trên trang\\r\\nGitHub Issues của nhóm. Đính kèm ảnh chụp bug vào từng GitHub issue.\\r\\n7. Kỹ năng tác tử (Agent Skill)\\r\\n• Khuyến khích xây dựng Agent Skills áp dụng kỹ thuật kiểm thử miền và phân tích giá trị biên để có thể tái\\r\\nsử dụng trên các chức năng khác trong những nhiệm vụ kiểm thử về sau.\\r\\n• Nộp các skill cùng video trình diễn (liên kết YouTube), cho thấy toàn bộ quá trình từ đầu đến cuối (end to\\r\\nend) sử dụng các skill trên một chức năng hoàn chỉnh.\\r\\n8. Công cụ được phép và mức Bloom-AI\\r\\nBạn có thể sử dụng các công cụ sau, nhưng phải khai báo trong AI Audit Report:\\r\\n• Bất kỳ công cụ AI nào bạn chọn, ví dụ ChatGPT, Claude, Gemini, Copilot, Cursor.\\r\\n• Tùy chọn: công cụ AI sinh test (AI test-generation tools), ví dụ Diffblue, để kiểm tra chéo\\r\\n(cross-checking).\\r\\nMức Bloom-AI yêu cầu cho bài này là G9.2 Áp dụng (Apply) và G9.3 Phân tích (Analyse).\\r\\n9. Báo cáo kiểm toán sử dụng AI (AI Audit Report) Phụ lục bắt buộc\\r\\nĐính kèm AI Audit Report dưới dạng phụ lục (appendix). Có thể sử dụng nội dung trong các mẫu AI (AI\\r\\nTemplates) đã cung cấp nếu cần.\\r\\n• Nếu không dùng AI, khai báo: “Tôi không sử dụng bất kỳ sự hỗ trợ nào của AI trong bài tập này.” Câu\\r\\nkhai báo gốc: “I do not use any AI help in this exercise.”\\r\\n\\r\\n\\r\\n=== PDF PAGE 4 ===\\r\\nHW02 • Kiểm thử miền trên EShop • Bản dịch tiếng Việt\\r\\n4\\r\\n• Nếu có dùng AI, khai báo: “Tôi sử dụng công cụ AI cho các nhiệm vụ sau”, đồng thời ghi các thông tin\\r\\ndưới đây cho từng lần tương tác. Câu khai báo gốc: “I use AI tools for the following tasks,”.\\r\\nThông tin cho mỗi tương tác:\\r\\n• Tên công cụ AI.\\r\\n• Ngày và giờ.\\r\\n• Prompt của bạn.\\r\\n• Output của AI.\\r\\nĐể đơn giản hóa quá trình này, khuyến khích tạo một skill hoặc quy tắc (rule) tự động trích xuất các thông\\r\\ntin trên sau mỗi phiên làm việc với AI.\\r\\n10. Nhận xét phản biện về AI (AI Critique) Bắt buộc 200–300 từ\\r\\nViết một đoạn văn dài 200–300 từ nhận xét phản biện về AI. Trả lời các câu hỏi: AI đã sai, thiên lệch\\r\\n(biased) hoặc chưa đầy đủ ở đâu? Vì sao AI không phát hiện vấn đề? Bạn rút ra nguyên tắc nào về việc\\r\\ncộng tác với AI trong bài tập này?\\r\\nCó thể sử dụng nội dung trong các mẫu AI đã cung cấp nếu cần.\\r\\n11. Ràng buộc chống gian lận bằng AI (Anti-AI-Cheat Constraints)\\r\\nKhông có.\\r\\n12. Nhật ký Git commit (Git Commit Log)\\r\\n• Tạo một Git commit mới cho mỗi bước trong quy trình kiểm thử của từng chức năng.\\r\\n• Cung cấp Git commit log bằng định dạng tệp văn bản.\\r\\n13. Vấn đáp (Oral Defense)\\r\\n30% sinh viên được chọn ngẫu nhiên có thể được mời tham gia vấn đáp trong 5–7 phút vào tuần sau hạn\\r\\nnộp để giải thích cách hoàn thành bài tập.\\r\\n14. Quy định nộp bài (Submission Regulations)\\r\\n• Định dạng tên file: <StudentID>_HW02_AI_DomainTesting_<SelfAssessedGrade>.zip\\r\\n• SelfAssessedGrade là điểm tự chấm gồm 3 chữ số, nằm trong khoảng [000, 100].\\r\\n• Ví dụ: 25127001_HW02_AI_DomainTesting_090.zip\\r\\nCác nội dung bắt buộc trong file .zip:\\r\\n• Báo cáo chính (Main report), Markdown + PDF, bao gồm báo cáo Domain Testing và báo cáo Boundary\\r\\nValue Analysis.\\r\\n• Báo cáo lỗi (Bug report), kèm ảnh chụp bug trên trang GitHub Issues.\\r\\n• AI Critique và AI Audit Report, Markdown + PDF.\\r\\n• Git commit log, tệp văn bản.\\r\\n• README.md chứa bảng tự đánh giá ở mục dưới và báo cáo tổng kết kiểm thử (test summary report): số\\r\\nchức năng; số test case đã thiết kế, đã chạy, pass, fail và chưa chạy; số bug; video demo.\\r\\n\\r\\n\\r\\n=== PDF PAGE 5 ===\\r\\nHW02 • Kiểm thử miền trên EShop • Bản dịch tiếng Việt\\r\\n5\\r\\n• Các tài liệu hỗ trợ khác.\\r\\nNộp lên Moodle. Hạn nộp xem tại liên kết nộp bài.\\r\\n15. Bảng đánh giá (Assessment Template)\\r\\nSTT\\r\\nTiêu chí\\r\\nĐiểm\\r\\nĐiểm tự chấm\\r\\n1\\r\\nChức năng A Domain + Boundary\\r\\n25\\r\\n2\\r\\nChức năng B Domain + Boundary\\r\\n25\\r\\n3\\r\\nChức năng C Domain + Boundary\\r\\n25\\r\\n4\\r\\nChức năng D Mobile Domain + Boundary\\r\\n15\\r\\n5\\r\\nAgent Skills\\r\\n10\\r\\nTổng\\r\\n100\\r\\n\"}"
+        }
+      ],
+      "internal_chat_message_metadata_passthrough": {
+        "turn_id": "01a149dd-07ae-7672-97bb-9cee4cebc9c4",
+        "create_time": 1792240592.5820713
+      }
+    }
+  }
+]

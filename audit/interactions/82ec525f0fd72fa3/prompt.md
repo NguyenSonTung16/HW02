@@ -1,0 +1,1 @@
+đây là 1 vd cho dạng appdendix, vậy yêu cầu Đính kèm AI Audit Report dưới dạng phụ lục (appendix) là mang cả bảng AI audit để ở dưới cùng của báo cáo chính đúng ko

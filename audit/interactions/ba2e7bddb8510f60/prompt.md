@@ -1,0 +1,1 @@
+ghi audit từ lúc bắt đầu yêu cầu bạn cho cấu trúc report chính nhưng bám sát yêu cầu đề, ko thêm nội dung thừa, dùng skill ghi audit của D:\vscode\Software testing, đã có sẵn file audit, bạn chỉ cần ghi thêm

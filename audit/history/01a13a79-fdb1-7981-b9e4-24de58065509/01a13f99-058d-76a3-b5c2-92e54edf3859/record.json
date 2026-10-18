@@ -1,0 +1,48 @@
+{
+  "turn_id": "01a13f99-058d-76a3-b5c2-92e54edf3859",
+  "started_at": "2026-10-15T12:45:55.602Z",
+  "prompts": [
+    {
+      "message_id": "msg_01a13f99-0652-76e0-924c-1623da92e82e",
+      "timestamp_utc": "2026-10-15T12:45:55.666Z",
+      "timestamp_local": "2026-10-15T19:45:55.666+07:00",
+      "role": "user",
+      "phase": null,
+      "text": "14. Quy định nộp bài (Submission Regulations)\n• Định dạng tên file: <StudentID>_HW02_AI_DomainTesting_<SelfAssessedGrade>.zip\n• SelfAssessedGrade là điểm tự chấm gồm 3 chữ số, nằm trong khoảng [000, 100].\n• Ví dụ: 25127001_HW02_AI_DomainTesting_090.zip\nCác nội dung bắt buộc trong file .zip:\n• Báo cáo chính (Main report), Markdown + PDF, bao gồm báo cáo Domain Testing và báo cáo Boundary\nValue Analysis.\n• Báo cáo lỗi (Bug report), kèm ảnh chụp bug trên trang GitHub Issues.\n• AI Critique và AI Audit Report, Markdown + PDF.\n• Git commit log, tệp văn bản.\n• README.md chứa bảng tự đánh giá ở mục dưới và báo cáo tổng kết kiểm thử (test summary report): số\nchức năng; số test case đã thiết kế, đã chạy, pass, fail và chưa chạy; số bug; video demo.\n4\nHW02 • Kiểm thử miền trên EShop • Bản dịch tiếng Việt\n• Các tài liệu hỗ trợ khác.\nNộp lên Moodle. Hạn nộp xem tại liên kết nộp bài\n\nhãy lưu các quy định nộp bài bao gồm các file cần nộp để kiểm tra đối chiếu khi làm\n",
+      "source_line": 1126
+    }
+  ],
+  "outputs": [
+    {
+      "message_id": "msg_09382bc0e8fb8d21016ad0cb0790948191bbe42883f97cf218",
+      "timestamp_utc": "2026-10-15T12:46:00.726Z",
+      "timestamp_local": "2026-10-15T19:46:00.726+07:00",
+      "role": "assistant",
+      "phase": "commentary",
+      "text": "Mình sẽ lưu riêng quy định nộp bài thành checklist Markdown, gồm danh sách file, nội dung cần có và cách đối chiếu trước khi đóng gói ZIP.\n",
+      "source_line": 1129
+    },
+    {
+      "message_id": "msg_09382bc0e8fb8d21016ad0cb479d9481918c0e085709ee8ffb",
+      "timestamp_utc": "2026-10-15T12:47:05.534Z",
+      "timestamp_local": "2026-10-15T19:47:05.534+07:00",
+      "role": "assistant",
+      "phase": "final_answer",
+      "text": "Đã lưu tại [HW02_Submission_Checklist.md](<D:/vscode/Software testing/HW02/HW02_Submission_Checklist.md>), gồm:\n\n- Các file cần nộp và định dạng.\n- Nội dung cần đối chiếu trong từng file.\n- Quy tắc đặt tên ZIP, bảng tự chấm và yêu cầu video skill.\n- Tình trạng hồ sơ hiện tại.\n\nĐã liên kết file này trong checklist tiến độ để dùng khi làm bài. Chưa tích hoàn thành hạng mục nào.",
+      "source_line": 1141
+    }
+  ],
+  "source_lines": [
+    1126,
+    1129,
+    1141
+  ],
+  "model": "gpt-6.1-sol",
+  "complete": true,
+  "completed_at": "2026-10-15T12:47:05.720Z",
+  "interaction_id": "AI-HW02-044",
+  "tool": "Codex Desktop",
+  "extracted_at": "2026-10-15T20:13:35+07:00",
+  "source_session": "01a13a79-fdb1-7981-b9e4-24de58065509",
+  "source_file": "C:\\Users\\tung1\\.codex\\sessions\\2026\\10\\14\\rollout-2026-10-14T19-53-55-01a13a79-fdb1-7981-b9e4-24de58065509.jsonl"
+}

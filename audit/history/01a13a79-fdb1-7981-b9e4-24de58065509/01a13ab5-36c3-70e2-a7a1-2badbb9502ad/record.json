@@ -1,0 +1,38 @@
+{
+  "turn_id": "01a13ab5-36c3-70e2-a7a1-2badbb9502ad",
+  "started_at": "2026-10-14T13:58:37.030Z",
+  "prompts": [
+    {
+      "message_id": "msg_01a13ab5-371d-7bc1-bc89-0f7a0753f4f7",
+      "timestamp_utc": "2026-10-14T13:58:37.085Z",
+      "timestamp_local": "2026-10-14T20:58:37.085+07:00",
+      "role": "user",
+      "phase": null,
+      "text": "vì sao phải phân ra EC1,EC2\n",
+      "source_line": 427
+    }
+  ],
+  "outputs": [
+    {
+      "message_id": "msg_09382bc0e8fb8d21016acf8a9330308191aae5dfb7abc5a000",
+      "timestamp_utc": "2026-10-14T13:58:50.850Z",
+      "timestamp_local": "2026-10-14T20:58:50.850+07:00",
+      "role": "assistant",
+      "phase": "final_answer",
+      "text": "Vì **EC1 và EC2 đại diện cho hai nhóm đầu vào cần được xử lý khác nhau** đối với điều kiện C1 “phải là số nguyên”:\n\n- **EC1 — Là số nguyên:** ví dụ `5`, `10`, `20`. Đạt điều kiện C1.\n- **EC2 — Không phải số nguyên:** ví dụ `5.5`, `\"abc\"`. Không đạt C1, chương trình phải từ chối.\n\nChia như vậy giúp bạn **chọn dữ liệu kiểm thử có cơ sở**. Nếu chỉ thử `5`, `10`, `20`, bạn mới kiểm tra EC1 và có thể bỏ sót lỗi chương trình chấp nhận số thập phân.\n\nThay vì thử mọi giá trị, bạn chọn đại diện từ mỗi lớp, chẳng hạn:\n\n| Dữ liệu | Lớp | Kết quả mong đợi |\n|---|---|---|\n| `5` | EC1: số nguyên | Chấp nhận vì cũng thỏa `0 < x < 100` |\n| `5.5` | EC2: không phải số nguyên | Từ chối |\n\n**Nếu các giá trị trong EC2 có thể được xử lý khác nhau**, chẳng hạn số thập phân và chuỗi chữ, bạn có thể chia EC2 thành các lớp nhỏ hơn để kiểm thử riêng.",
+      "source_line": 430
+    }
+  ],
+  "source_lines": [
+    427,
+    430
+  ],
+  "model": "gpt-6.1-sol",
+  "complete": true,
+  "completed_at": "2026-10-14T13:58:50.958Z",
+  "interaction_id": "AI-HW02-019",
+  "tool": "Codex Desktop",
+  "extracted_at": "2026-10-15T20:13:35+07:00",
+  "source_session": "01a13a79-fdb1-7981-b9e4-24de58065509",
+  "source_file": "C:\\Users\\tung1\\.codex\\sessions\\2026\\10\\14\\rollout-2026-10-14T19-53-55-01a13a79-fdb1-7981-b9e4-24de58065509.jsonl"
+}

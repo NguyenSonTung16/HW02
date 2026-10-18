@@ -1,0 +1,1 @@
+giữ cấu trúc báo cáo chính hiện tại; dùng mẫu **Test cases_Template_En.xlsx** cho phần bảng test, bổ sung các cột **kỹ thuật, EC đầu vào, EC đầu ra, giá trị biên và bằng chứng**. Các phần giải thích từng bước Domain Testing/BVA vẫn cần trình bày riêng trong báo cáo.  
