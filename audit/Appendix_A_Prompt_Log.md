@@ -5027,3 +5027,33 @@ tốt, hãy thực hiện tiếp cho FR-09 và FR-15, nhớ lưu video vào fold
 
 Đã ghi audit
 
+## AI-LOCAL-12dc9ef3a4637db3
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+13:34:56 18/10/2026
+
+### Prompt của bạn
+
+bạn đã push những gì lên nhánh hw02-execution
+
+
+### Output của AI
+
+Đã push lên nhánh [codex/hw02-execution](https://github.com/NguyenSonTung16/HW02/tree/codex/hw02-execution) các nội dung sau:
+
+| File/thư mục | Nội dung |
+|---|---|
+| `README.md` | TC chia theo FR-02, FR-09, FR-15; thống kê **68 TC: 18 đã chạy, 6 Pass, 12 Fail, 50 chưa chạy**. |
+| `jest-tests/` | Danh sách TC, script Jest, hỗ trợ thao tác Playwright, log chạy và ảnh kết quả. |
+| `videos/` | **3 video demo** FR-02, FR-09, FR-15 theo nhịp đã duyệt; hướng dẫn và metadata. |
+| `bug-reports/` | Báo cáo **9 bug**, dữ liệu JSON và ảnh bằng chứng; liên kết GitHub Issues **#1–#9**. |
+| `audit/` | Chỉ 3 file: `AI_Audit_Report.md`, `Appendix_A_Prompt_Log.md`, `generated_report_state.json`. |
+| `Git_Commit_Log.txt` | Nhật ký commit thực hiện kiểm thử. |
+
+Commit mới nhất: `b162ed9`. **Chưa merge vào `main`**. `Main_Report.md` và `Main_Report.docx` trên nhánh này vẫn là bản kế thừa từ `main`, chưa được cập nhật trong các commit thực thi test.
+
+Đã ghi audit
+
