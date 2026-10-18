@@ -1,1 +1,0 @@
-ở cách chia EC , bổ sung quy tắc với khoảng hai phía, xét lớp trong khoảng và hai lớp ngoài khoảng. Với điều kiện bắt buộc, xét lớp thỏa/không thỏa. Với các nhóm được xử lý khác nhau, tách EC riêng. Chia nhỏ EC nếu các phần tử có hành vi khác nhau.

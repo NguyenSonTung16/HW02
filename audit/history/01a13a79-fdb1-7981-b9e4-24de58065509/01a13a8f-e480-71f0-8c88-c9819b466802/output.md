@@ -1,1 +1,0 @@
-Được, nội dung rõ và lịch sự rồi, bạn gửi được. Chỉ cần bỏ cụm **“làm phần Database Testing”** để câu hỏi tập trung vào HW02, và thêm **“Em cảm ơn thầy ạ.”** ở cuối.

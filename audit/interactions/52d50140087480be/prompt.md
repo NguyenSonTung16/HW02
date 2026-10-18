@@ -1,1 +1,0 @@
-vậy bổ sung thêm cho điều kiện activate skill là trigger ngay sau khi mỗi prompt hoàn thành output, để check xem có ghi audit chưa thì phải in ra thêm dòng chữ "Đã ghi audit", tuân theo đúng cấu trúc của template audit

@@ -1,1 +1,0 @@
-Hãy sử dụng file json của codex chứa lịch sử phiên trò chuyện này và trích xuất các nội dung theo cấu trúc của audit và ghi vào theo đúng format của skill

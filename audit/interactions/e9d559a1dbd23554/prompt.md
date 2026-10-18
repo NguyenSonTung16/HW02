@@ -1,1 +1,0 @@
-cho path file báo cáo đã viết cho mục FR-02

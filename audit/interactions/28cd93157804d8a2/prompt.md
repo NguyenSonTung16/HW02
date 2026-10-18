@@ -1,1 +1,0 @@
-[https://courses.fit.hcmus.edu.vn/mod/url/view.php?id=127522](https://courses.fit.hcmus.edu.vn/mod/url/view.php?id=127522) kiểm tra xem file nào liên quan tới template test case

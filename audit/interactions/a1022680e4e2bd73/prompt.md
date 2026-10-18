@@ -1,1 +1,0 @@
-cho lệnh chạy trên terminal đi, ko mwor dc console

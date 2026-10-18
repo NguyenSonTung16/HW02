@@ -1,1 +1,0 @@
-đã xác nhận trên local storage

@@ -1,1 +1,0 @@
-trước request là sao

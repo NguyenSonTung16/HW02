@@ -1,1 +1,0 @@
-update trạng thái report cho tôi

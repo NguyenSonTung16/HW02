@@ -1,1 +1,0 @@
-có cách nào để các input output ngắn gọn hơn ko

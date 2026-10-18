@@ -1,0 +1,4 @@
+/audit/*
+!/audit/AI_Audit_Report.md
+!/audit/Appendix_A_Prompt_Log.md
+!/audit/generated_report_state.json
