@@ -1,6 +1,5 @@
 # Báo cáo HW02 Domain Testing trên EShop
 
-Cập nhật 16/10/2026. Phạm vi đã chọn: A FR-02, B FR-09, C FR-15; Pool D chờ chốt. Hiện có thiết kế Domain Testing của FR-02 và kết quả TC01 Pass; BVA chưa thực hiện, nên chưa hoàn thành hai yêu cầu kỹ thuật của HW02. Nội dung AI còn chờ sinh viên rà soát đầy đủ.
 
 ## 1 Phạm vi kiểm thử
 
@@ -9,7 +8,7 @@ Cập nhật 16/10/2026. Phạm vi đã chọn: A FR-02, B FR-09, C FR-15; Pool 
 | A | FR-02 | Đăng nhập và khóa tài khoản |
 | B | FR-09 | Mã giảm giá |
 | C | FR-15 | Quản lý sản phẩm |
-| D | Chưa chọn | Chức năng Mobile |
+| D | FR-20 | Giỏ hàng Mobile |
 
 ## 2 Pool A FR02 Đăng nhập và khóa tài khoản
 
@@ -23,15 +22,17 @@ Cập nhật 16/10/2026. Phạm vi đã chọn: A FR-02, B FR-09, C FR-15; Pool 
 
 ### 2.2 Domain Testing Bước 1 Xác định Input và Output
 
+Từ yêu cầu đăng nhập, xác định email và mật khẩu là dữ liệu người dùng nhập; đầu ra cần quan sát gồm kết quả xác thực, JWT, thông báo và thay đổi trạng thái tài khoản, cùng việc lưu và gửi token ở client.
+
 | Chức năng | Đầu vào | Đầu ra |
 | --- | --- | --- |
 | FR-02 Đăng nhập và khóa tài khoản | Email; mật khẩu. | Kết quả đăng nhập; thông báo lỗi; JWT; bộ đếm và trạng thái khóa sau request; token được client lưu; header Authorization trên request cần xác thực. |
 
-Ngữ cảnh trước request: số lần sai liên tiếp n, trạng thái khóa và thời gian từ lúc bắt đầu khóa. Các trạng thái này được xét khi phân lớp ở bước 2.
+Ngữ cảnh trước request: số lần sai liên tiếp n, trạng thái khóa và thời gian từ lúc bắt đầu khóa. Đây là trạng thái trước khi gửi yêu cầu đăng nhập đang xét, được dùng để phân lớp ở bước 2.
 
 ### 2.3 Domain Testing Bước 2 Xác định điều kiện và EC
 
-Phân lớp theo điều kiện của Input, trạng thái tài khoản và hành vi Output. Email hợp định dạng được tách thành tồn tại/không tồn tại; n=1 và n=2 được tách vì lần sai tiếp theo dẫn đến chưa khóa hoặc kích hoạt khóa. Output được phân lớp theo kết quả mong đợi; thông báo lỗi trong test âm vẫn là đầu ra đúng. Dữ liệu đại diện và cách chọn test trình bày ở mục 2.4.
+Phân lớp theo điều kiện đầu vào, trạng thái tài khoản và kết quả mong đợi. Email hợp định dạng được tách thành tài khoản tồn tại/không tồn tại vì việc xác thực và quan sát bộ đếm chỉ có ý nghĩa với tài khoản tồn tại. n là số lần đăng nhập sai liên tiếp trước khi gửi yêu cầu đang xét: n=0 chưa có lần sai; n=1 và n=2 được tách vì lần sai tiếp theo lần lượt vẫn chưa khóa hoặc kích hoạt khóa. Trạng thái chưa khóa, đang khóa và hết khóa được tách theo khả năng đăng nhập. Các EC đầu ra dùng để kiểm tra kết quả, thông báo, JWT và thay đổi trạng thái; thông báo lỗi trong test âm vẫn là đầu ra đúng.
 
 | ID | Đầu vào/đầu ra | Lớp tương đương |
 | --- | --- | --- |
@@ -110,7 +111,7 @@ Chọn một bộ dữ liệu và đầu ra mong đợi cho từng EC, sau đó 
 | TC07 | EC3: Email không rỗng, sai định dạng HTML5; EC15: UI chặn submit email sai định dạng | Email: "abc"<br>Mật khẩu: "Test1234!"<br>Trạng thái ban đầu: Mở form đăng nhập; submit qua UI. | HTML5 chặn email sai định dạng; không gửi request đăng nhập. |
 | TC08 | EC1: Email hợp định dạng, tài khoản tồn tại; EC4: Mật khẩu đúng của tài khoản tồn tại; EC12: Tài khoản đã hết thời hạn khóa; EC13: Đăng nhập thành công khi thông tin đúng, chưa khóa; EC19: Có JWT xác thực được khi đăng nhập thành công; EC24: Hết khóa sau thời hạn; đăng nhập đúng thành công | Email: "test@eshop.com"<br>Mật khẩu: "Test1234!"<br>Trạng thái ban đầu: Tạo khóa mới; không gửi yêu cầu xen giữa; thử đăng nhập sau khoảng 35 giây từ lúc khóa. | Hết khóa; đăng nhập thành công và trả JWT. Không kết luận bộ đếm được reset; chưa kiểm đúng biên 30 giây. |
 
-26 dòng theo EC được gộp thành 8 tình huống TC01–TC08, bao phủ đủ EC1–EC26. TC01 kết hợp kiểm tra đăng nhập, JWT, lưu và gửi token; kiểm tra thông báo lỗi được ghép vào TC02, TC05 và TC06. Đây là bộ thiết kế rút gọn cho các EC đã xác định, chưa phải kết quả thực thi hoặc khẳng định tối thiểu tuyệt đối. Bảng TC01–TC11 và kết quả đã ghi được giữ tại mục 2.6; kết quả Pass cũ không xác nhận toàn bộ TC01 mở rộng. Dữ liệu tài khoản cần xác nhận trước khi chạy; tiêu chí chi tiết của thông báo lỗi còn cần làm rõ.
+26 dòng đại diện được gộp thành 8 TC, bao phủ EC1–EC26. Ví dụ, các dòng EC1, EC4, EC7, EC10, EC13, EC19, EC25 và EC26 cùng dùng tài khoản đúng, chưa khóa, n=0; gộp thành TC01 và giữ đủ kiểm tra đăng nhập, JWT, lưu token và gửi token trong request cần xác thực. Các tình huống sai mật khẩu tại n=0/1/2, đang khóa, tài khoản không tồn tại, sai định dạng và hết khóa được giữ riêng thành TC02–TC08 vì khác dữ liệu hoặc trạng thái ban đầu. Đây là bộ thiết kế rút gọn, chưa khẳng định tối thiểu tuyệt đối hoặc đã thực thi; dữ liệu tài khoản và tiêu chí chi tiết của thông báo lỗi cần xác nhận trước khi chạy.
 
 ### 2.5 Boundary Value Analysis
 
@@ -133,7 +134,7 @@ Theo S04 trang 26–27, chọn điểm tại biên và hai phía của biên, gi
 | TC13 | t = 30 giây: tại đúng thời hạn khóa. | Email: "test@eshop.com"<br>Mật khẩu: "Test1234!"<br>Trạng thái ban đầu: Tạo khóa mới; dùng đồng hồ kiểm soát được để thử đăng nhập đúng tại t = 30 giây. | Cần xác nhận quy ước xử lý đúng mốc hết hạn (t ≥ 30 hay t > 30) và độ chính xác thời gian trước khi chốt expected; chưa kết luận Pass/Fail. |
 | TC14 | t = 31 giây: ngay sau thời hạn 30 giây theo bước chọn 1 giây. | Email: "test@eshop.com"<br>Mật khẩu: "Test1234!"<br>Trạng thái ban đầu: Tạo khóa mới; không có yêu cầu xen giữa; thử đăng nhập đúng tại t = 31 giây. | Khóa đã hết hiệu lực; đăng nhập thành công và trả JWT. Không kết luận bộ đếm được reset. |
 
-Các dòng trên là thiết kế, chưa phải kết quả chạy. Đo t tại thời điểm hệ thống xử lý yêu cầu; đợi bằng đồng hồ bấm tay không chứng minh đã kiểm đúng t = 30 giây. Mốc đúng hạn ở TC13 còn chờ xác nhận, theo điểm chưa rõ về đồng hồ trong phân tích FR-02.
+Các dòng trên là thiết kế, chưa phải kết quả chạy. Đo t tại thời điểm hệ thống xử lý yêu cầu; đợi bằng đồng hồ bấm tay không chứng minh đã kiểm đúng t = 30 giây. Mốc đúng hạn ở TC13 còn chờ xác nhận quy ước hết hạn và độ chính xác thời gian trước khi chốt expected.
 
 
 ### 2.6 AI gap analysis
@@ -161,6 +162,8 @@ Các dòng trên là thiết kế, chưa phải kết quả chạy. Đo t tại 
 - Dữ liệu mẫu: SAVE10 giảm 10%, ngưỡng 300.000 đ, giới hạn 1 lượt; BIGBUY giảm 50.000 đ, ngưỡng 500.000 đ, giới hạn 1 lượt; VIP100 giảm 100.000 đ, ngưỡng 300.000 đ, giới hạn 2 lượt. Nguồn: eshop-sut/README.md, mục FR-09.
 
 ### 3.2 Domain Testing Bước 1 Xác định Input và Output
+
+Từ quy tắc áp dụng mã, xác định mã giảm giá là dữ liệu nhập; kết quả áp dụng/từ chối, số tiền giảm và tổng tiền sau giảm là đầu ra cần quan sát. Các điều kiện phụ thuộc giỏ hàng, tài khoản và bản ghi mã được chuẩn bị làm ngữ cảnh kiểm thử.
 
 | Chức năng | Đầu vào | Đầu ra |
 | --- | --- | --- |
@@ -251,7 +254,7 @@ Chọn dữ liệu đại diện cho từng EC; giữ các điều kiện khác 
 | TC11 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC13: Số lượt đã dùng = max_uses_per_user; EC25: Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
 | TC12 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC14: Số lượt đã dùng > max_uses_per_user; EC25: Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
 
-25 dòng đại diện được gộp thành 12 TC, bao phủ EC1–EC25. EC và TC trong mục 3 chỉ thuộc FR-09. Đặc tả chưa nêu quy tắc làm tròn tiền, chuẩn hóa mã hoặc thời điểm tăng lượt dùng; không tự đặt expected cho các điểm này.
+25 dòng đại diện có 11 bộ dữ liệu, ngữ cảnh và kết quả khác nhau; gộp các dòng trùng thành 11 tình huống. Ví dụ, các dòng EC1, EC4, EC7, EC9, EC12, EC15, EC17 và EC19 dùng SAVE10, tổng 400.000 đ, JWT hợp lệ, chưa dùng lượt và còn hạn được gộp thành TC01, kiểm tra giảm 40.000 đ và còn 360.000 đ. Bổ sung TC03 dùng VIP100, đã dùng 1/2 lượt, để kiểm tra vẫn áp dụng được mã khi đã dùng một lượt nhưng chưa đạt giới hạn; tình huống này chưa có trong bảng đại diện. Vì vậy bộ cuối có 12 TC bao phủ EC1–EC25, gồm các tình huống đã gộp và một tình huống bổ sung. Đặc tả chưa nêu quy tắc làm tròn tiền, chuẩn hóa mã hoặc thời điểm tăng lượt dùng; không tự đặt expected cho các điểm này.
 
 ### 3.5 Boundary Value Analysis
 
@@ -296,6 +299,8 @@ Chưa có thiếu sót AI của FR-09 được sinh viên xác nhận. Các đi�
 - Khi Sửa, chỉ sản phẩm đích thay đổi; các sản phẩm khác giữ nguyên. Nguồn: eshop-sut/README.md, mục FR-15.
 
 ### 4.2 Domain Testing Bước 1 Xác định Input và Output
+
+Từ các thao tác CRUD, xác định thao tác, sản phẩm đích và dữ liệu tên, giá, danh mục là đầu vào tương ứng. Đầu ra gồm dữ liệu hiển thị, kết quả lưu/xóa, phản hồi khi dữ liệu không hợp lệ và việc các sản phẩm khác giữ nguyên khi sửa.
 
 | Chức năng | Đầu vào | Đầu ra |
 | --- | --- | --- |
@@ -348,7 +353,7 @@ Phân lớp theo thao tác CRUD và ràng buộc tên, giá, danh mục. Các l�
 
 ### 4.4 Domain Testing Bước 3 Chọn đại diện và xây dựng test case
 
-Chọn đại diện cho từng EC, sau đó gộp các dòng dùng cùng dữ liệu, thao tác và kết quả. Mỗi test âm chỉ thay một điều kiện không hợp lệ. Các phép Sửa phải tải lại sản phẩm đích và đối chiếu dữ liệu các sản phẩm khác trước/sau.
+Chọn đại diện cho từng EC, sau đó gộp các dòng dùng cùng dữ liệu, thao tác và kết quả. Mỗi test âm chỉ thay một điều kiện không hợp lệ. Với phép Sửa, đối chiếu sản phẩm đích và các sản phẩm khác ngay sau khi lưu thành công và sau khi tải lại để kiểm tra cả giao diện lẫn dữ liệu được lưu.
 
 #### 4.4.1 Các ca kiểm thử bao phủ phân vùng
 
@@ -419,7 +424,7 @@ Chọn đại diện cho từng EC, sau đó gộp các dòng dùng cùng dữ l
 | TC22 | EC1: Thêm sản phẩm; EC25: ID danh mục không tồn tại trong danh sách trong thao tác Thêm; EC5: Tên không rỗng, dài từ 1 đến 255 ký tự; EC11: Giá là số dương (> 0); EC34: Không lưu dữ liệu danh mục vi phạm ràng buộc; EC35: Không tạo sản phẩm mới từ dữ liệu không hợp lệ | Thao tác: Thêm<br>Tên sản phẩm: "SP_THU_FR15"<br>Giá: 100.000 đ (số)<br>Danh mục: ID 999999 (xác nhận không tồn tại trước khi chạy)<br>Trạng thái ban đầu: Admin đã đăng nhập; danh mục thử có sẵn. Ghi nhận số sản phẩm trước khi gửi yêu cầu. | Không lưu dữ liệu danh mục không hợp lệ; không tạo bản ghi sản phẩm mới; số sản phẩm không tăng. |
 | TC23 | EC3: Sửa sản phẩm; EC26: ID danh mục không tồn tại trong danh sách trong thao tác Sửa; EC5: Tên không rỗng, dài từ 1 đến 255 ký tự; EC11: Giá là số dương (> 0); EC34: Không lưu dữ liệu danh mục vi phạm ràng buộc; EC36: Không ghi dữ liệu không hợp lệ vào sản phẩm đích; EC30: Các sản phẩm khác giữ nguyên sau thao tác sửa | Thao tác: Sửa<br>Sản phẩm đích: ID của SP_MUC_TIEU đã chuẩn bị<br>Tên sản phẩm: "SP_THU_FR15"<br>Giá: 100.000 đ (số)<br>Danh mục: ID 999999 (xác nhận không tồn tại trước khi chạy)<br>Trạng thái ban đầu: Admin đã đăng nhập; danh mục thử có sẵn. SP_MUC_TIEU đang tồn tại với dữ liệu hợp lệ; chụp dữ liệu của mọi sản phẩm khác làm đối chứng trước khi sửa. | Không lưu dữ liệu danh mục không hợp lệ; tải lại để xác nhận sản phẩm đích giữ dữ liệu hợp lệ ban đầu và các sản phẩm khác không đổi. |
 
-36 dòng đại diện được gộp thành 23 TC, bao phủ EC1–EC36. Payload bỏ trường, giá sai kiểu và ID danh mục ngoài danh sách cần gửi qua API hoặc đường nhập cho phép kiểm tra; với tên 256 ký tự, bảo đảm dữ liệu không bị UI cắt trước khi gửi. Các test có tiền điều kiện độc lập, chưa phải kết quả đã chạy.
+36 dòng đại diện được gộp thành 23 TC, bao phủ EC1–EC36. Ví dụ, EC1, EC5, EC11, EC21 và EC27 cùng dùng thao tác Thêm với tên, giá, danh mục hợp lệ được gộp thành TC01, giữ kiểm tra sản phẩm mới được lưu đúng sau khi tải lại. Các tình huống Thêm/Sửa hoặc lỗi tên, giá, danh mục được giữ riêng khi khác thao tác hay điều kiện cần kiểm tra. Payload bỏ trường, giá sai kiểu và ID danh mục ngoài danh sách cần gửi qua API hoặc đường nhập cho phép kiểm tra; với tên 256 ký tự, bảo đảm dữ liệu không bị UI cắt trước khi gửi. Các test có tiền điều kiện độc lập, chưa phải kết quả đã chạy.
 
 Chưa đặt expected cho chuỗi toàn khoảng trắng, cách đếm Unicode, cập nhật từng phần khi bỏ trường, hoặc xóa sản phẩm đang được đơn hàng tham chiếu vì FR-15 chưa quy định rõ. Chuỗi dài dùng ký tự ASCII để tránh khác biệt cách đếm; không áp quy tắc không trùng tên của danh mục cho sản phẩm.
 
@@ -462,9 +467,31 @@ BVA có 18 dòng: 8 TC dùng chung với Domain Testing và 10 TC mới; FR-15 c
 
 - Hiệu chỉnh: bổ sung quan sát và expected tại cả hai thời điểm — ngay sau khi lưu thành công và sau khi tải lại — vào TC03, đồng bộ các dòng đại diện EC3, EC29 và EC30. Không thêm TC/EC mới. Đây là thiếu sót trong thiết kế test, chưa phải bug thực tế đã được xác nhận trên EShop.
 
-## 5 Pool D Mobile
+## 5 Pool D FR20 Giỏ hàng Mobile
 
-Chưa chốt chức năng. Bản cuối vẫn cần một chức năng Pool D, không được bỏ qua.
+### 5.1 Yêu cầu làm cơ sở kiểm thử
+
+Phạm vi: phần Giỏ hàng trong FR-20 của ứng dụng React Native/Expo; không gồm thanh toán, mã giảm giá hoặc lịch sử đơn hàng. FR-20 chỉ liệt kê chức năng Mobile, nên dùng nghiệp vụ FR-07 và điều kiện số lượng khi thêm ở FR-06 làm cơ sở tham chiếu cho bản thiết kế này; cần sinh viên rà soát phạm vi tham chiếu trước khi thực thi.
+
+- Hiển thị sản phẩm, đơn giá, số lượng có nút +/-, thành tiền và thao tác; thành tiền bằng đơn giá nhân số lượng, tổng tiền bằng tổng thành tiền và có nhãn "Tổng cộng".
+
+- Thêm cùng sản phẩm phải cộng đúng số lượng vào một dòng; số lượng khi thêm là số nguyên dương, tối thiểu 1; có phản hồi trực quan sau khi thêm.
+
+- Xóa sản phẩm phải có hộp thoại xác nhận; đồng ý thì xóa đúng sản phẩm, hủy thì giữ giỏ. Có nút Tiếp tục mua sắm để về trang chủ.
+
+- Giỏ trống có hình minh họa và thông báo rõ ràng. Nguồn: eshop-sut/README.md, FR-20; tham chiếu FR-06, FR-07 và FR-24 về xác nhận xóa/trạng thái trống.
+
+Chưa có quy định về số lượng tối đa, tồn kho, lưu giỏ sau khi đóng ứng dụng, mặc định khi để trống số lượng hoặc cách xử lý nút giảm tại số lượng 1. Không tự đặt expected cho các điểm này; không áp yêu cầu DOM/HTML của Web cho React Native.
+
+### 5.2 Domain Testing Bước 1 Xác định Input và Output
+
+Từ các hành vi giỏ hàng, xác định thao tác, sản phẩm đích, số lượng thêm và lựa chọn xác nhận là đầu vào. Đầu ra cần quan sát gồm các dòng giỏ, số lượng, tiền, hộp thoại, trạng thái trống và màn hình sau điều hướng.
+
+| Chức năng | Đầu vào | Đầu ra |
+| --- | --- | --- |
+| FR-20 Giỏ hàng Mobile | Thao tác xem/thêm/điều chỉnh/xóa/tiếp tục mua sắm; sản phẩm đích; số lượng khi thêm; lựa chọn đồng ý/hủy xóa. | Danh sách giỏ và số lượng; thành tiền, tổng tiền; phản hồi thêm/chặn giá trị không hợp lệ; hộp thoại xóa; trạng thái giỏ trống; màn hình trang chủ. |
+
+Ngữ cảnh: nội dung giỏ trước thao tác và sản phẩm đã/chưa có trong giỏ là trạng thái thiết lập, không phải ô nhập. Dữ liệu chuẩn bị: SP_A giá 100.000 đ; SP_B giá 50.000 đ; hai sản phẩm tồn tại, khác ID, giá không đổi trong lần thử. Mỗi TC bắt đầu với giỏ đã chuẩn bị riêng; quan sát trên ứng dụng Mobile, không thay bằng giao diện Web thu nhỏ.
 
 ## 6 Tổng kết và hồ sơ hỗ trợ
 
