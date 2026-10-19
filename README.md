@@ -154,9 +154,9 @@ Video thực thi TC khác với video demo end-to-end sử dụng skill ở mụ
 | Pool C | 25 | |
 | Pool D | 15 | |
 | Agent Skills | 10 | |
-| Tổng | 100 | |
+| Tổng | 100 | 90 |
 
-Điểm do sinh viên tự đánh giá; Pool D đã chọn FR-20 — Giỏ hàng Mobile.
+Điểm do sinh viên tự đánh giá: 90/100; điểm thành phần chưa được phân bổ. Pool D đã chọn FR-20 — Giỏ hàng Mobile.
 
 ## Báo cáo thiết kế và AI audit
 
@@ -171,4 +171,5 @@ Video thực thi TC khác với video demo end-to-end sử dụng skill ở mụ
 - [AI Critique](AI_Critique.md) · [PDF](AI_Critique.pdf).
 - [AI Audit Markdown](audit/AI_Audit_Report.md) · [Word](audit/AI_Audit_Report.docx) · [PDF](audit/AI_Audit_Report.pdf).
 - [Git commit log](Git_Commit_Log.txt) và [giới hạn lịch sử từng bước](Git_Workflow_Notes.md).
+
 
