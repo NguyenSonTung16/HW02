@@ -6009,7 +6009,8 @@ Theo S04 trang 3–4 (`S04_method.txt`), xác định Input/Output từ đặc t
 | --- | --- | --- |
 | FR-09 Mã giảm giá | Mã giảm giá do người dùng nhập tại Checkout. | Kết quả áp dụng hoặc từ chối mã; thông báo lỗi khi không đủ điều kiện; số tiền giảm (`discount_amount`) và tổng tiền sau giảm (`final_amount`). |
 
-Ngữ cảnh: tổng đơn do hệ thống tính từ giỏ hàng; JWT của người dùng; lịch sử số lượt đã dùng mã; thời điểm hiện tại; bản ghi mã gồm trạng thái hoạt động, loại, giá trị giảm, ngưỡng đơn hàng, hạn dùng và giới hạn lượt. Đây không phải các ô người dùng nhập trong chức năng áp dụng mã. Chuẩn bị giỏ hàng/sản phẩm để có tổng cần kiểm tra, không lấy tổng do client tự gửi làm giá trị chuẩn. Đặc tả chưa quy định nội dung thông báo lỗi cụ thể nên không tự đặt chuỗi thông báo mong đợi.
+Ngữ cảnh: tổng đơn do hệ thống tính từ giỏ hàng; JWT của người dùng; lịch sử số lượt đã dùng mã; thời điểm hiện tại; bản ghi mã gồm trạng thái hoạt động, loại, giá trị giảm, ngưỡng đơn hàng, hạn dùng và giới hạn lượt. Đây không phải các ô người dùng nhập trong chức năng áp dụng mã. Chuẩn bị giỏ hàng/sản phẩm để có tổng cần kiểm tra, không lấy tổng do client tự gửi làm giá trị chuẩn. Đặc tả chưa quy định nội dung thông báo lỗi cụ thể nên không tự đặt chuỗi thông báo mong đợi.
+
 
 
 ## AI-LOCAL-4eafa67b0de89aa4
@@ -6034,34 +6035,61 @@ Tách mã tồn tại và active (`is_active = 1`), mã không tồn tại, mã 
 
 Hai loại `percent` và `fixed` có công thức khác nhau nên tách EC15–EC16. Output EC17–EC19 kiểm tra số tiền giảm và tổng sau giảm theo công thức đặc tả khi đủ cả năm điều kiện; EC20–EC25 thể hiện kết quả từ chối theo từng nguyên nhân. Từ chối đúng điều kiện là Output mong đợi; đặc tả chưa quy định chuỗi thông báo cụ thể. Không tự đặt giới hạn độ dài mã. Đây là phân lớp thiết kế, chưa phải kết quả thực thi.
 
-| ID | Đầu vào/đầu ra | Lớp tương đương |
-| --- | --- | --- |
-| EC1 | Mã giảm giá | Mã tồn tại và đang hoạt động |
-| EC2 | Mã giảm giá | Mã không tồn tại |
-| EC3 | Mã giảm giá | Mã tồn tại nhưng không hoạt động |
-| EC4 | Thời điểm kiểm tra | Thời điểm hiện tại trước expired_at |
-| EC5 | Thời điểm kiểm tra | Thời điểm hiện tại bằng expired_at |
-| EC6 | Thời điểm kiểm tra | Thời điểm hiện tại sau expired_at |
-| EC7 | Tổng đơn trước giảm giá | Tổng đơn ≥ min_order_amount |
-| EC8 | Tổng đơn trước giảm giá | Tổng đơn < min_order_amount |
-| EC9 | Xác thực | Có JWT hợp lệ |
-| EC10 | Xác thực | Không có JWT |
-| EC11 | Xác thực | JWT không hợp lệ, chẳng hạn đã hết hạn |
-| EC12 | Số lượt đã dùng của người dùng | Số lượt đã dùng < max_uses_per_user |
-| EC13 | Số lượt đã dùng của người dùng | Số lượt đã dùng = max_uses_per_user |
-| EC14 | Số lượt đã dùng của người dùng | Số lượt đã dùng > max_uses_per_user |
-| EC15 | Loại mã | Mã loại percent |
-| EC16 | Loại mã | Mã loại fixed |
-| EC17 | Số tiền giảm | Với percent: discount_amount = total × discount_value / 100 |
-| EC18 | Số tiền giảm | Với fixed: discount_amount = discount_value |
-| EC19 | Tổng tiền sau giảm | final_amount = total − discount_amount |
-| EC20 | Thông báo kết quả | Không áp dụng mã không tồn tại |
-| EC21 | Thông báo kết quả | Không áp dụng mã không hoạt động |
-| EC22 | Thông báo kết quả | Không áp dụng mã đã đến hoặc qua hạn sử dụng |
-| EC23 | Thông báo kết quả | Không áp dụng mã khi tổng đơn dưới ngưỡng |
-| EC24 | Thông báo kết quả | Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ |
+| ID | Đầu vào/đầu ra | Lớp tương đương |
+
+| --- | --- | --- |
+
+| EC1 | Mã giảm giá | Mã tồn tại và đang hoạt động |
+
+| EC2 | Mã giảm giá | Mã không tồn tại |
+
+| EC3 | Mã giảm giá | Mã tồn tại nhưng không hoạt động |
+
+| EC4 | Thời điểm kiểm tra | Thời điểm hiện tại trước expired_at |
+
+| EC5 | Thời điểm kiểm tra | Thời điểm hiện tại bằng expired_at |
+
+| EC6 | Thời điểm kiểm tra | Thời điểm hiện tại sau expired_at |
+
+| EC7 | Tổng đơn trước giảm giá | Tổng đơn ≥ min_order_amount |
+
+| EC8 | Tổng đơn trước giảm giá | Tổng đơn < min_order_amount |
+
+| EC9 | Xác thực | Có JWT hợp lệ |
+
+| EC10 | Xác thực | Không có JWT |
+
+| EC11 | Xác thực | JWT không hợp lệ, chẳng hạn đã hết hạn |
+
+| EC12 | Số lượt đã dùng của người dùng | Số lượt đã dùng < max_uses_per_user |
+
+| EC13 | Số lượt đã dùng của người dùng | Số lượt đã dùng = max_uses_per_user |
+
+| EC14 | Số lượt đã dùng của người dùng | Số lượt đã dùng > max_uses_per_user |
+
+| EC15 | Loại mã | Mã loại percent |
+
+| EC16 | Loại mã | Mã loại fixed |
+
+| EC17 | Số tiền giảm | Với percent: discount_amount = total × discount_value / 100 |
+
+| EC18 | Số tiền giảm | Với fixed: discount_amount = discount_value |
+
+| EC19 | Tổng tiền sau giảm | final_amount = total − discount_amount |
+
+| EC20 | Thông báo kết quả | Không áp dụng mã không tồn tại |
+
+| EC21 | Thông báo kết quả | Không áp dụng mã không hoạt động |
+
+| EC22 | Thông báo kết quả | Không áp dụng mã đã đến hoặc qua hạn sử dụng |
+
+| EC23 | Thông báo kết quả | Không áp dụng mã khi tổng đơn dưới ngưỡng |
+
+| EC24 | Thông báo kết quả | Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ |
+
 | EC25 | Thông báo kết quả | Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt |
-
+
+
 
 
 ## AI-LOCAL-24299e7921a993cd
@@ -6078,60 +6106,114 @@ Dùng $domain-testing. Đọc SKILL.md và mẫu, specification.md, outputs/02_e
 
 ### Output của AI
 
-### 3.4 Domain Testing Bước 3 Chọn đại diện và xây dựng test case
-
-Chọn dữ liệu đại diện cho từng EC; giữ các điều kiện khác phù hợp khi kiểm tra một điều kiện không đạt. Các trạng thái ở bảng là điều kiện cần chuẩn bị độc lập cho từng test, chưa phải dữ liệu đã thiết lập hoặc kết quả đã chạy.
-
-Expected lấy từ `specification.md`, mục FR-09: chỉ áp dụng mã khi đủ cả năm điều kiện; tính số tiền giảm theo loại mã và tổng sau giảm theo công thức đã nêu. Đặc tả chưa quy định chuỗi thông báo lỗi cụ thể nên chỉ yêu cầu phản hồi phù hợp với nguyên nhân từ chối. Mỗi dòng mô tả hành động yêu cầu áp dụng mã tại Checkout; tổng đơn được chuẩn bị qua giỏ hàng và các trạng thái là ngữ cảnh trước yêu cầu, không phải trường nhập thêm.
-
-#### 3.4.1 Các ca kiểm thử bao phủ phân vùng
-
-| Phân vùng | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
-| --- | --- | --- | --- |
-| EC1 | Mã tồn tại và đang hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC2 | Mã không tồn tại | Mã giảm giá: "NO_SUCH_COUPON"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Xác nhận mã không tồn tại; JWT hợp lệ; chưa có mã khác được áp dụng. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC3 | Mã tồn tại nhưng không hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Bản ghi SAVE10 được chuẩn bị is_active = 0; JWT hợp lệ; đã dùng 0 lượt; còn hạn; các điều kiện khác thỏa. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC4 | Thời điểm hiện tại trước expired_at | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC5 | Thời điểm hiện tại bằng expired_at | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC6 | Thời điểm hiện tại sau expired_at | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra sau expired_at 1 giây. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC7 | Tổng đơn ≥ min_order_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC8 | Tổng đơn < min_order_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 200.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC9 | Có JWT hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC10 | Không có JWT | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu không có JWT. Không coi lịch sử lượt của một người dùng chưa xác thực là dữ liệu đầu vào độc lập. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC11 | JWT không hợp lệ, chẳng hạn đã hết hạn | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu với JWT đã hết hạn. Các dữ liệu giỏ hàng và mã còn lại hợp lệ. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC12 | Số lượt đã dùng < max_uses_per_user | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC13 | Số lượt đã dùng = max_uses_per_user | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC14 | Số lượt đã dùng > max_uses_per_user | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC15 | Mã loại percent | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC16 | Mã loại fixed | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 600.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 550.000 đ. |
-| EC17 | Với percent: discount_amount = total × discount_value / 100 | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC18 | Với fixed: discount_amount = discount_value | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 600.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 550.000 đ. |
-| EC19 | final_amount = total − discount_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| EC20 | Không áp dụng mã không tồn tại | Mã giảm giá: "NO_SUCH_COUPON"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Xác nhận mã không tồn tại; JWT hợp lệ; chưa có mã khác được áp dụng. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC21 | Không áp dụng mã không hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Bản ghi SAVE10 được chuẩn bị is_active = 0; JWT hợp lệ; đã dùng 0 lượt; còn hạn; các điều kiện khác thỏa. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC22 | Không áp dụng mã đã đến hoặc qua hạn sử dụng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC23 | Không áp dụng mã khi tổng đơn dưới ngưỡng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 200.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC24 | Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu không có JWT. Không coi lịch sử lượt của một người dùng chưa xác thực là dữ liệu đầu vào độc lập. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| EC25 | Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-
-#### 3.4.2 Tập ca kiểm thử rút gọn
-
-| Test case | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
-| --- | --- | --- | --- |
-| TC01 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC15: Mã loại percent; EC17: Với percent: discount_amount = total × discount_value / 100; EC19: final_amount = total − discount_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| TC02 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC16: Mã loại fixed; EC18: Với fixed: discount_amount = discount_value; EC19: final_amount = total − discount_amount | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 600.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 550.000 đ. |
-| TC03 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC16: Mã loại fixed; EC18: Với fixed: discount_amount = discount_value; EC19: final_amount = total − discount_amount | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 1/2 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 300.000 đ. |
-| TC04 | EC2: Mã không tồn tại; EC9: Có JWT hợp lệ; EC20: Không áp dụng mã không tồn tại | Mã giảm giá: "NO_SUCH_COUPON"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Xác nhận mã không tồn tại; JWT hợp lệ; chưa có mã khác được áp dụng. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC05 | EC3: Mã tồn tại nhưng không hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC21: Không áp dụng mã không hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Bản ghi SAVE10 được chuẩn bị is_active = 0; JWT hợp lệ; đã dùng 0 lượt; còn hạn; các điều kiện khác thỏa. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC06 | EC1: Mã tồn tại và đang hoạt động; EC5: Thời điểm hiện tại bằng expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC22: Không áp dụng mã đã đến hoặc qua hạn sử dụng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC07 | EC1: Mã tồn tại và đang hoạt động; EC6: Thời điểm hiện tại sau expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC22: Không áp dụng mã đã đến hoặc qua hạn sử dụng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra sau expired_at 1 giây. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC08 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC8: Tổng đơn < min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC23: Không áp dụng mã khi tổng đơn dưới ngưỡng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 200.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC09 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC10: Không có JWT; EC24: Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu không có JWT. Không coi lịch sử lượt của một người dùng chưa xác thực là dữ liệu đầu vào độc lập. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC10 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC11: JWT không hợp lệ, chẳng hạn đã hết hạn; EC24: Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu với JWT đã hết hạn. Các dữ liệu giỏ hàng và mã còn lại hợp lệ. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC11 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC13: Số lượt đã dùng = max_uses_per_user; EC25: Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC12 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC14: Số lượt đã dùng > max_uses_per_user; EC25: Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-
-25 dòng đại diện có 11 bộ dữ liệu, ngữ cảnh và kết quả khác nhau; gộp các dòng trùng thành 11 tình huống. Ví dụ, các dòng EC1, EC4, EC7, EC9, EC12, EC15, EC17 và EC19 dùng SAVE10, tổng 400.000 đ, JWT hợp lệ, chưa dùng lượt và còn hạn được gộp thành TC01, kiểm tra giảm 40.000 đ và còn 360.000 đ. Bổ sung TC03 dùng VIP100, đã dùng 1/2 lượt, để kiểm tra vẫn áp dụng được mã khi đã dùng một lượt nhưng chưa đạt giới hạn; tình huống này chưa có trong bảng đại diện. Vì vậy bộ cuối có 12 TC bao phủ EC1–EC25, gồm các tình huống đã gộp và một tình huống bổ sung. Đặc tả chưa nêu quy tắc làm tròn tiền, chuẩn hóa mã hoặc thời điểm tăng lượt dùng; không tự đặt expected cho các điểm này.
+### 3.4 Domain Testing Bước 3 Chọn đại diện và xây dựng test case
+
+
+
+Chọn dữ liệu đại diện cho từng EC; giữ các điều kiện khác phù hợp khi kiểm tra một điều kiện không đạt. Các trạng thái ở bảng là điều kiện cần chuẩn bị độc lập cho từng test, chưa phải dữ liệu đã thiết lập hoặc kết quả đã chạy.
+
+
+
+Expected lấy từ `specification.md`, mục FR-09: chỉ áp dụng mã khi đủ cả năm điều kiện; tính số tiền giảm theo loại mã và tổng sau giảm theo công thức đã nêu. Đặc tả chưa quy định chuỗi thông báo lỗi cụ thể nên chỉ yêu cầu phản hồi phù hợp với nguyên nhân từ chối. Mỗi dòng mô tả hành động yêu cầu áp dụng mã tại Checkout; tổng đơn được chuẩn bị qua giỏ hàng và các trạng thái là ngữ cảnh trước yêu cầu, không phải trường nhập thêm.
+
+
+
+#### 3.4.1 Các ca kiểm thử bao phủ phân vùng
+
+
+
+| Phân vùng | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
+
+| --- | --- | --- | --- |
+
+| EC1 | Mã tồn tại và đang hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC2 | Mã không tồn tại | Mã giảm giá: "NO_SUCH_COUPON"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Xác nhận mã không tồn tại; JWT hợp lệ; chưa có mã khác được áp dụng. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC3 | Mã tồn tại nhưng không hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Bản ghi SAVE10 được chuẩn bị is_active = 0; JWT hợp lệ; đã dùng 0 lượt; còn hạn; các điều kiện khác thỏa. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC4 | Thời điểm hiện tại trước expired_at | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC5 | Thời điểm hiện tại bằng expired_at | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC6 | Thời điểm hiện tại sau expired_at | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra sau expired_at 1 giây. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC7 | Tổng đơn ≥ min_order_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC8 | Tổng đơn < min_order_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 200.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC9 | Có JWT hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC10 | Không có JWT | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu không có JWT. Không coi lịch sử lượt của một người dùng chưa xác thực là dữ liệu đầu vào độc lập. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC11 | JWT không hợp lệ, chẳng hạn đã hết hạn | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu với JWT đã hết hạn. Các dữ liệu giỏ hàng và mã còn lại hợp lệ. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC12 | Số lượt đã dùng < max_uses_per_user | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC13 | Số lượt đã dùng = max_uses_per_user | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC14 | Số lượt đã dùng > max_uses_per_user | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC15 | Mã loại percent | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC16 | Mã loại fixed | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 600.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 550.000 đ. |
+
+| EC17 | Với percent: discount_amount = total × discount_value / 100 | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC18 | Với fixed: discount_amount = discount_value | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 600.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 550.000 đ. |
+
+| EC19 | final_amount = total − discount_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| EC20 | Không áp dụng mã không tồn tại | Mã giảm giá: "NO_SUCH_COUPON"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Xác nhận mã không tồn tại; JWT hợp lệ; chưa có mã khác được áp dụng. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC21 | Không áp dụng mã không hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Bản ghi SAVE10 được chuẩn bị is_active = 0; JWT hợp lệ; đã dùng 0 lượt; còn hạn; các điều kiện khác thỏa. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC22 | Không áp dụng mã đã đến hoặc qua hạn sử dụng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC23 | Không áp dụng mã khi tổng đơn dưới ngưỡng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 200.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC24 | Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu không có JWT. Không coi lịch sử lượt của một người dùng chưa xác thực là dữ liệu đầu vào độc lập. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| EC25 | Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+
+
+#### 3.4.2 Tập ca kiểm thử rút gọn
+
+
+
+| Test case | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
+
+| --- | --- | --- | --- |
+
+| TC01 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC15: Mã loại percent; EC17: Với percent: discount_amount = total × discount_value / 100; EC19: final_amount = total − discount_amount | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| TC02 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC16: Mã loại fixed; EC18: Với fixed: discount_amount = discount_value; EC19: final_amount = total − discount_amount | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 600.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 550.000 đ. |
+
+| TC03 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC16: Mã loại fixed; EC18: Với fixed: discount_amount = discount_value; EC19: final_amount = total − discount_amount | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 1/2 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 300.000 đ. |
+
+| TC04 | EC2: Mã không tồn tại; EC9: Có JWT hợp lệ; EC20: Không áp dụng mã không tồn tại | Mã giảm giá: "NO_SUCH_COUPON"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Xác nhận mã không tồn tại; JWT hợp lệ; chưa có mã khác được áp dụng. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC05 | EC3: Mã tồn tại nhưng không hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC21: Không áp dụng mã không hoạt động | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Bản ghi SAVE10 được chuẩn bị is_active = 0; JWT hợp lệ; đã dùng 0 lượt; còn hạn; các điều kiện khác thỏa. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC06 | EC1: Mã tồn tại và đang hoạt động; EC5: Thời điểm hiện tại bằng expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC22: Không áp dụng mã đã đến hoặc qua hạn sử dụng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC07 | EC1: Mã tồn tại và đang hoạt động; EC6: Thời điểm hiện tại sau expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC22: Không áp dụng mã đã đến hoặc qua hạn sử dụng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra sau expired_at 1 giây. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC08 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC8: Tổng đơn < min_order_amount; EC9: Có JWT hợp lệ; EC12: Số lượt đã dùng < max_uses_per_user; EC23: Không áp dụng mã khi tổng đơn dưới ngưỡng | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 200.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC09 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC10: Không có JWT; EC24: Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu không có JWT. Không coi lịch sử lượt của một người dùng chưa xác thực là dữ liệu đầu vào độc lập. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC10 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC11: JWT không hợp lệ, chẳng hạn đã hết hạn; EC24: Không áp dụng mã khi thiếu JWT hoặc JWT không hợp lệ | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động. còn hạn; gửi yêu cầu với JWT đã hết hạn. Các dữ liệu giỏ hàng và mã còn lại hợp lệ. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC11 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC13: Số lượt đã dùng = max_uses_per_user; EC25: Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC12 | EC1: Mã tồn tại và đang hoạt động; EC4: Thời điểm hiện tại trước expired_at; EC7: Tổng đơn ≥ min_order_amount; EC9: Có JWT hợp lệ; EC14: Số lượt đã dùng > max_uses_per_user; EC25: Không áp dụng mã khi đã dùng hết hoặc vượt giới hạn lượt | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+
+
+25 dòng đại diện có 11 bộ dữ liệu, ngữ cảnh và kết quả khác nhau; gộp các dòng trùng thành 11 tình huống. Ví dụ, các dòng EC1, EC4, EC7, EC9, EC12, EC15, EC17 và EC19 dùng SAVE10, tổng 400.000 đ, JWT hợp lệ, chưa dùng lượt và còn hạn được gộp thành TC01, kiểm tra giảm 40.000 đ và còn 360.000 đ. Bổ sung TC03 dùng VIP100, đã dùng 1/2 lượt, để kiểm tra vẫn áp dụng được mã khi đã dùng một lượt nhưng chưa đạt giới hạn; tình huống này chưa có trong bảng đại diện. Vì vậy bộ cuối có 12 TC bao phủ EC1–EC25, gồm các tình huống đã gộp và một tình huống bổ sung. Đặc tả chưa nêu quy tắc làm tròn tiền, chuẩn hóa mã hoặc thời điểm tăng lượt dùng; không tự đặt expected cho các điểm này.
+
 
 
 ## AI-LOCAL-98e9169fd9e69b09
@@ -6158,29 +6240,46 @@ Thời điểm đánh giá phải `< expired_at`: biên hạn mở, tại hạn 
 
 Mỗi dòng là một yêu cầu áp dụng mã tại Checkout, giữ các điều kiện còn lại hợp lệ. Trước mỗi ca, khôi phục giỏ hàng, trạng thái mã, JWT, lịch sử lượt và đồng hồ theo tiền điều kiện; quan sát phản hồi cùng số tiền giảm/tổng sau giảm. Các ca vượt giới hạn cần fixture lịch sử phù hợp (ví dụ lịch sử được tạo khi giới hạn trước đây cao hơn, sau đó đặt giới hạn hiện tại), không giả người dùng nhập số lượt hoặc tiếp tục dùng mã đã bị chặn. Cách chuẩn bị này là kế hoạch, chưa được thực hiện; đặc tả chưa nêu thời điểm tăng lượt. Không có cực trị UI, giới hạn độ dài mã hoặc biên trên tổng đơn được cung cấp để bổ sung. C1, C4 và loại mã là các miền phân loại đã được Domain Testing xử lý; không ép mỗi miền thành chín ca. Các giá trị số ở output được tính theo công thức đặc tả, không tự đặt thêm biên output.
 
-| Test case | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
-| --- | --- | --- | --- |
-| TC13 | VIP100: tổng đơn 299.999 đ, ngay dưới ngưỡng 300.000 đ. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 299.999 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 1/2 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC14 | VIP100: tổng đơn 300.000 đ, tại ngưỡng được chấp nhận. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 300.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 1/2 lượt. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 200.000 đ. |
-| TC15 | VIP100: tổng đơn 300.001 đ, ngay trên ngưỡng. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 300.001 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 1/2 lượt. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 200.001 đ. |
-| TC16 | BIGBUY: tổng đơn 499.999 đ, ngay dưới ngưỡng 500.000 đ. | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 499.999 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 0/1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC17 | BIGBUY: tổng đơn 500.000 đ, tại ngưỡng được chấp nhận. | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 500.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 0/1 lượt. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 450.000 đ. |
-| TC18 | BIGBUY: tổng đơn 500.001 đ, ngay trên ngưỡng. | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 500.001 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 0/1 lượt. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 450.001 đ. |
-| TC01 | SAVE10: đã dùng 0 lượt, ngay dưới giới hạn 1 lượt. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| TC11 | SAVE10: đã dùng 1 lượt, tại giới hạn nên bị từ chối. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC12 | SAVE10: đã dùng 2 lượt, vượt giới hạn 1 lượt. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC03 | VIP100: đã dùng 1 lượt, ngay dưới giới hạn 2 lượt. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 1/2 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 300.000 đ. |
-| TC19 | VIP100: đã dùng 2 lượt, tại giới hạn nên bị từ chối. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 2 lượt. giới hạn 2 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC20 | VIP100: đã dùng 3 lượt, vượt giới hạn 2 lượt. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 3 lượt. giới hạn hiện tại 2 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
-| TC21 | Thời điểm hiện tại bằng expired_at − 1 giây, ngay trước hạn. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; kiểm tra tại expired_at − 1 giây. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
-| TC06 | Thời điểm hiện tại bằng expired_at, tại hạn: không còn thỏa điều kiện trước hạn. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+| Test case | Điều kiện kiểm tra | Đầu vào | Đầu ra mong đợi |
+
+| --- | --- | --- | --- |
+
+| TC13 | VIP100: tổng đơn 299.999 đ, ngay dưới ngưỡng 300.000 đ. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 299.999 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 1/2 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC14 | VIP100: tổng đơn 300.000 đ, tại ngưỡng được chấp nhận. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 300.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 1/2 lượt. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 200.000 đ. |
+
+| TC15 | VIP100: tổng đơn 300.001 đ, ngay trên ngưỡng. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 300.001 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 1/2 lượt. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 200.001 đ. |
+
+| TC16 | BIGBUY: tổng đơn 499.999 đ, ngay dưới ngưỡng 500.000 đ. | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 499.999 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 0/1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC17 | BIGBUY: tổng đơn 500.000 đ, tại ngưỡng được chấp nhận. | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 500.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 0/1 lượt. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 450.000 đ. |
+
+| TC18 | BIGBUY: tổng đơn 500.001 đ, ngay trên ngưỡng. | Mã giảm giá: "BIGBUY"<br>Tổng đơn trước giảm: 500.001 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 0/1 lượt. | Áp dụng mã; giảm 50.000 đ; tổng sau giảm 450.001 đ. |
+
+| TC01 | SAVE10: đã dùng 0 lượt, ngay dưới giới hạn 1 lượt. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| TC11 | SAVE10: đã dùng 1 lượt, tại giới hạn nên bị từ chối. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; người dùng đã dùng 1 lượt. giới hạn 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC12 | SAVE10: đã dùng 2 lượt, vượt giới hạn 1 lượt. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 2 lượt. giới hạn hiện tại 1 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC03 | VIP100: đã dùng 1 lượt, ngay dưới giới hạn 2 lượt. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 1/2 lượt; thời điểm kiểm tra trước expired_at 1 ngày. | Áp dụng mã; giảm 100.000 đ; tổng sau giảm 300.000 đ. |
+
+| TC19 | VIP100: đã dùng 2 lượt, tại giới hạn nên bị từ chối. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; đã dùng 2 lượt. giới hạn 2 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC20 | VIP100: đã dùng 3 lượt, vượt giới hạn 2 lượt. | Mã giảm giá: "VIP100"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; còn hạn; chuẩn bị lịch sử đã dùng 3 lượt. giới hạn hiện tại 2 lượt. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
+| TC21 | Thời điểm hiện tại bằng expired_at − 1 giây, ngay trước hạn. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; kiểm tra tại expired_at − 1 giây. | Áp dụng mã; giảm 40.000 đ; tổng sau giảm 360.000 đ. |
+
+| TC06 | Thời điểm hiện tại bằng expired_at, tại hạn: không còn thỏa điều kiện trước hạn. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra đúng expired_at. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
+
 | TC07 | Thời điểm hiện tại bằng expired_at + 1 giây, ngay sau hạn. | Mã giảm giá: "SAVE10"<br>Tổng đơn trước giảm: 400.000 đ<br>Trạng thái ban đầu: Mã hoạt động; JWT hợp lệ; đã dùng 0 lượt; thời điểm kiểm tra sau expired_at 1 giây. | Không áp dụng giảm giá; phản hồi lỗi phù hợp với điều kiện không đạt. |
 
 Bao phủ thiết kế: tổng đơn dưới ngưỡng thuộc EC8 → EC23, tại/trên ngưỡng thuộc EC7 → EC18 và EC19; lượt dưới/bằng/vượt giới hạn thuộc EC12/EC13/EC14, hai trường hợp sau → EC25; thời gian trước/tại/sau hạn thuộc EC4/EC5/EC6, tại/sau → EC22. Các ca SAVE10 được chấp nhận kiểm tra EC17 và EC19; các ca fixed được chấp nhận kiểm tra EC18 và EC19. Đặc tả chưa quy định câu chữ thông báo lỗi nên expected chỉ nêu phản hồi phù hợp với điều kiện không đạt.
 
 Bảng BVA có đúng 15 dòng: 6 TC dùng chung Domain/BVA là TC01, TC03, TC06, TC07, TC11, TC12; 9 TC mới là TC13–TC21. Hợp với 12 TC Domain (TC01–TC12) được 21 TC thiết kế duy nhất của FR-09, không đếm lại các TC dùng chung. Không thay đổi ID hoặc tạo EC mới.
 
-Chưa chạy SUT trong demo; chưa có Actual Result, verdict Pass/Fail hay kết luận bug. Kết quả chạy lịch sử phải đọc README riêng của lần chạy tương ứng, không coi là kết quả thực thi của demo này.
+Chưa chạy SUT trong demo; chưa có Actual Result, verdict Pass/Fail hay kết luận bug. Kết quả chạy lịch sử phải đọc README riêng của lần chạy tương ứng, không coi là kết quả thực thi của demo này.
+
 
 
 ## AI-LOCAL-5b7b24b50f415557
@@ -6777,3 +6876,102 @@ YouTube Studio hiển thị trạng thái **Không công khai** cho video dài 7
 
 Đã ghi audit
 
+## AI-LOCAL-58035c6ff10c88b5
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+12:10:00 19/10/2026
+
+### Prompt của bạn
+
+C:\Users\tung1\OneDrive\Desktop\23120399_HW02_AI_DomainTesting_090
+đọc file AI audit để biết ngữ cảnh và chủ đề đang làm việc
+
+### Output của AI
+
+Sau khi đọc toàn bộ file `AI_Audit_Report.md` (cả tại thư mục nộp bài trên Desktop [23120399_HW02_AI_DomainTesting_090](file:///C:/Users/tung1/OneDrive/Desktop/23120399_HW02_AI_DomainTesting_090/AI_Audit_Report.md) và thư mục gốc [HW02/audit/](file:///D:/vscode/Software%20testing/HW02/audit/AI_Audit_Report.md)), dưới đây là tổng hợp ngữ cảnh và chủ đề dự án đang thực hiện:
+
+### 1. Thông tin sinh viên & Môn học
+- **Sinh viên thực hiện:** NGUYỄN SƠN TÙNG (MSSV: **23120399**).
+- **Môn học:** CS423 / CSC13003 – Kiểm chứng Phần mềm (Software Testing), Khoa Công nghệ Thông tin (FIT), Trường ĐH Khoa học Tự nhiên (HCMUS).
+- **Bài tập:** **HW02 — Domain Testing và Boundary Value Analysis (AI-augmented)**.
+- **Hệ thống mục tiêu (SUT):** `eShop` (hệ thống thương mại điện tử đa nền tảng gồm Web Storefront, Web Admin và ứng dụng di động React Native/Expo).
+- **Công cụ AI hỗ trợ:** Codex (dùng để hỗ trợ phân tích đặc tả, thiết kế test case theo 2 kỹ thuật, rà soát logic kiểm thử, viết kịch bản test tự động và ghi nhật ký audit minh bạch).
+
+---
+
+### 2. Chủ đề & Kỹ thuật kiểm thử trọng tâm
+HW02 yêu cầu áp dụng hai kỹ thuật kiểm thử hộp đen (Black-box Testing) chính:
+1. **Domain Testing (Phân hoạch tương đương & Kiểm thử miền):** Phân tích đặc tả yêu cầu, xác định rõ Đầu vào (Input), Đầu ra (Output) cùng ngữ cảnh hệ thống; phân hoạch thành các lớp tương đương hợp lệ (Valid Equivalence Classes - EC) và không hợp lệ (Invalid EC); chọn dữ liệu đại diện và tối ưu hóa bộ Test Cases (TC).
+2. **Boundary Value Analysis (BVA - Phân tích giá trị biên):** Xác định các biến có thứ tự và biên giá trị (Lower Boundary - LB, Upper Boundary - UB); chọn các giá trị tại biên ($LB, UB$) và sát hai phía ranh giới ($LB-1, LB+1, UB-1, UB+1$) với bước nhảy $\delta$ phù hợp (1đ, 1 giây, 1 lượt) để phát hiện lỗi sai lệch điều kiện so sánh.
+
+---
+
+### 3. Bốn tính năng (Features) được chọn từ 4 Pool
+- **Pool A: FR-02 — Đăng nhập & Khóa tài khoản (Authentication & Lockout):**
+  - *Domain Testing:* Phân tích email (hợp lệ, không tồn tại, sai định dạng HTML5), mật khẩu (đúng/sai), JWT token và trạng thái tài khoản.
+  - *BVA:* Kiểm tra biên ngưỡng 3 lần đăng nhập sai liên tiếp ($n = 0, 1, 2, 3$) và thời gian khóa tài khoản 30 giây ($t = 0, 1, 29, 30, 31$ giây).
+  - *Kết quả:* Thiết kế 14 TC, phát hiện **3 bugs** (BUG-FR02-001: bộ đếm sai tăng 2 lần mỗi request; BUG-FR02-002: hết 30 giây vẫn bị chặn 403; BUG-FR02-003: input email dùng type="text" không chặn HTML5 validation).
+- **Pool B: FR-09 — Mã giảm giá (Coupons):**
+  - *Domain Testing:* Kiểm tra 5 điều kiện tiên quyết (mã active, còn hạn $t < expired\_at$, tổng đơn $\ge min\_order\_amount$, có JWT hợp lệ, số lượt dùng $< max\_uses\_per\_user$) và 2 loại coupon (`percent` vs `fixed`).
+  - *BVA:* Kiểm tra biên tổng đơn tối thiểu ($\pm 1$ đ), hạn sử dụng ($\pm 1$ giây) và số lượt dùng ($\pm 1$ lượt).
+  - *Kết quả:* Thiết kế 21 TC, phát hiện **3 bugs** (BUG-FR09-001: coupon percent tính sai công thức thành số âm; BUG-FR09-002: request thiếu JWT vẫn áp dụng được coupon; BUG-FR09-003: mã fixed không kích hoạt đúng khi tổng đơn vừa bằng ngưỡng).
+- **Pool C: FR-15 — Quản lý sản phẩm (Product CRUD - Web Admin):**
+  - *Domain Testing:* Kiểm tra 4 thao tác CRUD (Thêm, Xem, Sửa, Xóa); kiểm tra tính toàn vẹn (thao tác trên một sản phẩm không làm ảnh hưởng các sản phẩm khác).
+  - *BVA:* Kiểm tra biên độ dài tên sản phẩm [1, 255] ký tự (rỗng 0 ký tự, 255 ký tự, 256 ký tự) và giá sản phẩm $> 0$ (thử giá $= 0$ đ, giá âm).
+  - *Kết quả:* Thiết kế 33 TC, phát hiện **3 bugs** (BUG-FR15-001: lỗi UI state sau khi Sửa khiến các sản phẩm khác bị đổi tên tạm thời; BUG-FR15-002: chấp nhận tên dài 256 ký tự; BUG-FR15-003: chấp nhận giá 0 đ).
+- **Pool D: FR-20 — Giỏ hàng Mobile (React Native / Expo):**
+  - *Domain Testing:* Kiểm tra thêm sản phẩm, cập nhật số lượng, xóa từng món, xóa toàn bộ giỏ, xem giỏ rỗng, tính tổng tiền.
+  - *BVA:* Kiểm tra biên số lượng sản phẩm ($quantity = 0, 1, stock$).
+  - *Kết quả:* Thiết kế 14 TC, phát hiện **5 bugs** (BUG-FR20-001 đến BUG-FR20-005: các lỗi cập nhật số lượng, đồng bộ giỏ hàng và hiển thị trên mobile).
+
+---
+
+### 4. Tổng kết số liệu kiểm thử & Báo cáo lỗi
+- **Tổng số Test Cases thiết kế:** **82 TC** (duy nhất, không đếm trùng giữa Domain và BVA).
+- **Số Test Cases đã chạy (Jest tự động / UI-API):** **29 TC** (7 Pass, 22 Fail, 53 Not Run do thiếu oracle hoặc giới hạn nhập liệu).
+- **Tổng số Bugs phát hiện và xác nhận:** **14 Bugs** (đã lập bug report chi tiết, đính kèm 31 ảnh chụp màn hình chứng cứ, và đã log GitHub Issues đầy đủ trên repo chung của nhóm: [vdt12a11/eshop-sut-testscript/issues](https://github.com/vdt12a11/eshop-sut-testscript/issues) ở nhánh `Tùng`).
+
+---
+
+### 5. Agent Skills & Minh bạch học thuật (AI Audit)
+- **4 Custom Agent Skills:**
+  1. `domain-testing`: Phân tích đặc tả, tách Input/Output, sinh 25 EC, rút gọn TC.
+  2. `boundary-value-analysis`: Xác định ranh giới và tạo các bộ điểm sát biên.
+  3. `test-execution-reporting`: Tổng kết kết quả chạy test và đối chiếu expected vs actual.
+  4. `ai-audit-report`: Quản lý quy trình AI Audit theo chuẩn mẫu AI-02 của FIT@HCMUS (Med Kharbach, PhD thích ứng), đảm bảo tính trung thực học thuật, lưu vết nguyên văn mọi tương tác (prompt, output, timestamp, snapshot).
+- **Video Demo (YouTube Unlisted):**
+  - 4 video demo chạy test cases cho 4 tính năng.
+  - 1 video demo toàn bộ quy trình sử dụng Agent Skill (FR-09) bằng CLI kết hợp OBS và lồng tiếng thuyết minh AI (7:17), đã đăng tải tại [https://youtu.be/pbWbPDQvH5c](https://youtu.be/pbWbPDQvH5c).
+
+---
+
+### 6. Tình trạng thư mục nộp bài (`23120399_HW02_AI_DomainTesting_090`)
+Thư mục trên Desktop đã được tinh gọn, chuẩn bị sẵn sàng để nén ZIP theo định dạng `<StudentID>_HW02_AI_DomainTesting_<SelfAssessedGrade>.zip`:
+- `Main_Report.md`, `Main_Report.docx`, `Main_Report.pdf`: Báo cáo chính toàn diện.
+- `AI_Audit_Report.md`, `AI_Audit_Report.docx`, `AI_Audit_Report.pdf`: Báo cáo AI Audit chuẩn mẫu AI-02.
+- `AI_Critique.md`, `AI_Critique.pdf`: Bản tự phê phán AI (200–300 từ).
+- `Git_Commit_Log.txt`: Lịch sử commit theo từng bước kiểm thử.
+- `README.md`: Bảng tự chấm điểm (**90/100**), Test Summary và các link video YouTube demo.
+- Thư mục con `bug-reports/`: 14 file báo cáo lỗi kèm 31 ảnh screenshots chứng cứ.
+- Thư mục con `skills/`: Mã nguồn 4 Agent Skills.
+
+Đã ghi audit
+
+## AI-LOCAL-361f180ab3e97b3e
+
+### Tên công cụ AI
+Codex
+
+### Ngày và giờ
+12:12:12 19/10/2026
+
+### Prompt của bạn
+
+sau đó push những file cần thiết theo yêu cầu đề lên link git [https://github.com/NguyenSonTung16/HW02](https://github.com/NguyenSonTung16/HW02), sau đó lấy các file gitlog mà đề yêu cầu và đưa vào folder nộp
+
+### Output của AI
+
+Đã đẩy báo cáo chính, README, AI Audit bản Markdown/Word/PDF, nhật ký prompt và liên kết demo mới lên nhánh `Tùng` của [repo cá nhân](https://github.com/NguyenSonTung16/HW02). README trỏ các video demo YouTube; không thêm tệp video lớn vào repo. Đã xuất `Git_Commit_Log.txt` từ lịch sử commit thật của nhánh và đưa bản mới nhất vào folder nộp `C:/Users/tung1/OneDrive/Desktop/23120399_HW02_AI_DomainTesting_090`. `Git_Workflow_Notes.md` ghi rõ lịch sử hiện tại thiếu commit riêng theo từng bước cho FR-02, FR-09 và FR-15; không tạo commit giả để bù.
