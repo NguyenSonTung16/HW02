@@ -134,12 +134,16 @@ Ghi chú FR-20 TC10–TC12: không lưu 0, 1.5 hoặc abc làm số lượng. Vi
 
 ## Video demo
 
-- **FR-02 — Đăng nhập và khóa tài khoản**: [Xem video](videos/FR-02-demo-paced.webm).
-- **FR-09 — Mã giảm giá**: [Xem video](videos/FR-09-demo.webm).
-- **FR-15 — Quản lý sản phẩm (Product management CRUD)**: [Xem video](videos/FR-15-demo.webm).
-- **FR-20 — Giỏ hàng Mobile**: [Xem video](videos/FR-20-demo.webm).
+- **FR-02 — Đăng nhập và khóa tài khoản**: [Xem video](https://youtu.be/AoFoUlWbVuA).
+- **FR-09 — Mã giảm giá**: [Xem video](https://youtu.be/GBzm2NFZ588).
+- **FR-09 — Demo skill Domain Testing và Boundary Value Analysis**: [Xem video có thuyết minh](https://youtu.be/pbWbPDQvH5c).
+- **FR-15 — Quản lý sản phẩm (Product management CRUD)**: [Xem video](https://youtu.be/TRgsIko1EvY).
+- **FR-20 — Giỏ hàng Mobile**: [Xem video](https://youtu.be/99fTlNuZtTg).
 
-Video thực thi TC khác với video demo end-to-end sử dụng skill ở mục 7 của đề. Liên kết YouTube: chưa đăng.
+Video thực thi TC khác với video demo end-to-end sử dụng skill ở mục 7 của đề. Bốn video thực thi TC và video demo skill FR-09 đã tải lên YouTube ở chế độ Không công khai; các liên kết ở trên.
+
+- **FR-09 — Demo áp dụng lại skill cho toàn bộ mục 3.1–3.6**: [Video có thuyết minh trên YouTube](https://youtu.be/pbWbPDQvH5c). 7 phút 17 giây; mở trực tiếp hai file `SKILL.md` trong VS Code, minh họa quy trình trên Codex CLI và tài liệu kết quả tương ứng; có chú thích và lời thuyết minh tiếng Việt. Mục 3.6 là rà soát kết quả; không chạy lại SUT.
+
 
 ## Tự đánh giá
 
@@ -167,3 +171,4 @@ Video thực thi TC khác với video demo end-to-end sử dụng skill ở mụ
 - [AI Critique](AI_Critique.md) · [PDF](AI_Critique.pdf).
 - [AI Audit Markdown](audit/AI_Audit_Report.md) · [Word](audit/AI_Audit_Report.docx) · [PDF](audit/AI_Audit_Report.pdf).
 - [Git commit log](Git_Commit_Log.txt) và [giới hạn lịch sử từng bước](Git_Workflow_Notes.md).
+

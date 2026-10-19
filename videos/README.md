@@ -8,7 +8,7 @@ Nhịp đã được người dùng duyệt: mục tiêu 4 giây, dừng 1,5 gi�
 
 FR-09 minh họa áp dụng mã tại checkout với tổng giỏ lấy từ sản phẩm thử; TC09 mở route checkout trực tiếp khi chưa đăng nhập để kiểm tra điều kiện JWT. FR-15 minh họa CRUD và dữ liệu biên trên giao diện admin; TC03 giữ cảnh ngay sau lưu và sau reload. Fixtures được chuẩn bị riêng, không sửa logic SUT.
 
-Thanh HW02 TEST HARNESS là phần minh họa của runner. Video này là thực thi TC, khác với video dùng skill thiết kế end-to-end. Chưa đăng YouTube. Lịch sử các take ở thư mục run/audit được giữ nguyên.
+Thanh HW02 TEST HARNESS là phần minh họa của runner. Video này là thực thi TC, khác với video dùng skill thiết kế end-to-end. Đã đăng YouTube ở chế độ Không công khai. Lịch sử các take ở thư mục run/audit được giữ nguyên.
 
 ## FR-20 — Giỏ hàng Mobile
 
@@ -16,4 +16,12 @@ Thanh HW02 TEST HARNESS là phần minh họa của runner. Video này là thự
 
 Ứng dụng React Native/Expo Go chạy trên Android Emulator 16. Video ghi viewer phản chiếu ảnh màn hình Android trực tiếp qua ADB, bên cạnh chú thích; không thay bằng frontend Web. Các bước chuẩn bị giỏ bằng UI được ghi riêng trước mục tiêu mỗi TC.
 
-Nhịp đã kiểm tra trong timeline: 4 giây đọc mục tiêu, dừng 1,5 giây sau nhập, 2 giây trước thao tác gửi, giữ kết quả ít nhất 3,5 giây. Thời gian thao tác/đọc cây UI Android có thể làm từng bước dài hơn khoảng dừng tối thiểu. Video chọn TC01/03/05/06/09/14 để minh họa cả 5 bug đã xác nhận và một ca điều hướng giữ giỏ đúng. TC10–TC12 được ghi riêng trong README do chưa chốt oracle/giới hạn nhập liệu. Chưa đăng YouTube.
+Nhịp đã kiểm tra trong timeline: 4 giây đọc mục tiêu, dừng 1,5 giây sau nhập, 2 giây trước thao tác gửi, giữ kết quả ít nhất 3,5 giây. Thời gian thao tác/đọc cây UI Android có thể làm từng bước dài hơn khoảng dừng tối thiểu. Video chọn TC01/03/05/06/09/14 để minh họa cả 5 bug đã xác nhận và một ca điều hướng giữ giỏ đúng. TC10–TC12 được ghi riêng trong README do chưa chốt oracle/giới hạn nhập liệu. Đã đăng YouTube ở chế độ Không công khai.
+
+## YouTube — Không công khai
+
+- [FR-02 — Đăng nhập, JWT và khóa tài khoản](https://youtu.be/AoFoUlWbVuA).
+- [FR-09 — Mã giảm giá và biên tổng đơn](https://youtu.be/GBzm2NFZ588).
+- [FR-15 — CRUD sản phẩm và biên tên/giá](https://youtu.be/TRgsIko1EvY).
+- [FR-20 — Giỏ hàng Mobile](https://youtu.be/99fTlNuZtTg).
+- [FR-09 — Demo skill Domain Testing và Boundary Value Analysis (có thuyết minh)](https://youtu.be/pbWbPDQvH5c).
