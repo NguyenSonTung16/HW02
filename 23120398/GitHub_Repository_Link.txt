@@ -1,0 +1,52 @@
+==============================================================================
+HỒ SƠ NỘP BÀI KIỂM THỬ PHẦN MỀM - HW#02 (DOMAIN TESTING & BOUNDARY VALUE ANALYSIS)
+Khoa Công nghệ Thông tin (FIT) – Trường Đại học Khoa học Tự nhiên (HCMUS)
+Môn học: CS423 / CSC13003 – Kiểm chứng Phần mềm (AI-augmented · 2026)
+==============================================================================
+
+THÔNG TIN HỌC VIÊN:
+- Họ tên: VÕ THÀNH MINH TUỆ
+- MSSV: 23120398
+- Lớp / Khoá: 23_3
+- Giảng viên: Lê Quang Vũ
+
+------------------------------------------------------------------------------
+🔗 LIÊN KẾT GITHUB REPOSITORY CHÍNH THỨC (BRANCH 23120398):
+https://github.com/NguyenSonTung16/HW02/tree/23120398
+
+🔗 COMMIT MỚI NHẤT TRÊN BRANCH:
+Commit Hash: b9a6628
+Tiêu đề: Submit HW02 report deliverables for student 23120398 (Vo Thanh Minh Tue)
+Link commit: https://github.com/NguyenSonTung16/HW02/commit/b9a6628
+
+------------------------------------------------------------------------------
+LỆNH CLONE TRỰC TIẾP NHÁNH NỘP BÀI QUA TERMINAL:
+git clone -b 23120398 https://github.com/NguyenSonTung16/HW02.git
+cd HW02
+
+------------------------------------------------------------------------------
+🔗 DANH SÁCH 15 GITHUB ISSUES ĐÃ TẠO TRÊN REPO NGUYENSONTUNG16/HW02:
+- Issue #25: https://github.com/NguyenSonTung16/HW02/issues/25 ([FR-03] Password Reset regex requires whitespace)
+- Issue #26: https://github.com/NguyenSonTung16/HW02/issues/26 ([FR-03] Server generates 4-digit OTP)
+- Issue #27: https://github.com/NguyenSonTung16/HW02/issues/27 ([FR-03] Backend reset-password API lacks password policy)
+- Issue #28: https://github.com/NguyenSonTung16/HW02/issues/28 ([FR-03] Missing Confirm New Password field)
+- Issue #29: https://github.com/NguyenSonTung16/HW02/issues/29 ([FR-03] Missing Step Indicator and Back to Login button)
+- Issue #30: https://github.com/NguyenSonTung16/HW02/issues/30 ([FR-08] Price tampering: 0 VND & negative totals accepted)
+- Issue #31: https://github.com/NguyenSonTung16/HW02/issues/31 ([FR-08] Total payment amount rendered as editable input)
+- Issue #32: https://github.com/NguyenSonTung16/HW02/issues/32 ([FR-08] Unauthenticated guest can access checkout)
+- Issue #33: https://github.com/NguyenSonTung16/HW02/issues/33 ([FR-08] Shopping cart not cleared after successful checkout)
+- Issue #34: https://github.com/NguyenSonTung16/HW02/issues/34 ([FR-16] Bulk import lacks atomic transaction rollback)
+- Issue #35: https://github.com/NguyenSonTung16/HW02/issues/35 ([FR-16] CSV parser split(',') breaks quoted fields with commas)
+- Issue #36: https://github.com/NguyenSonTung16/HW02/issues/36 ([FR-16] Missing price validation: price = 0 & negative accepted)
+- Issue #37: https://github.com/NguyenSonTung16/HW02/issues/37 ([FR-16] File upload input lacks accept=".csv" restriction)
+- Issue #38: https://github.com/NguyenSonTung16/HW02/issues/38 ([FR-20] Mobile login password input displays plaintext)
+- Issue #39: https://github.com/NguyenSonTung16/HW02/issues/39 ([FR-20] Login page header displays "Đăng Ký" instead of "Đăng Nhập")
+
+==============================================================================
+TỔNG KẾT KẾT QUẢ KIỂM THỬ:
+- Tổng số Test Cases đã chạy: 91
+- Số Test Cases Passed (đạt chuẩn đặc tả): 53 (58.2%)
+- Số Test Cases Failed (phát hiện lỗi thực tế): 38 (41.8%)
+- Số lỗi phần mềm độc lập phát hiện và báo cáo: 15 lỗi (8 Critical, 2 High, 2 Medium, 3 Low)
+- Toàn bộ 42 ảnh chụp màn hình bằng chứng lỗi nằm trong thư mục: ./bug-screenshots/
+==============================================================================

@@ -19,6 +19,7 @@ Toàn bộ báo cáo, tài liệu kỹ thuật, mã nguồn kiểm thử và b�
 - 📄 **[AI_Critique.md](./23120398/AI_Critique.md)** ([Bản PDF](./23120398/AI_Critique.pdf)): Báo cáo nhận xét phản biện AI (200–300 từ)
 - 📄 **[AI_Audit_Report.md](./23120398/AI_Audit_Report.md)** ([Bản PDF](./23120398/AI_Audit_Report.pdf)): Nhật ký kiểm toán AI chuẩn FIT@HCMUS 2026 v1.0
 - 📄 **[Appendix_A_AI_Logs.md](./23120398/Appendix_A_AI_Logs.md):** Toàn văn 100% Prompt & Output nguyên văn của AI
+- 🔗 **[GitHub_Repository_Link.txt](./23120398/GitHub_Repository_Link.txt):** Thông tin link GitHub repository branch 23120398 và 15 Issue
 - 📦 **[23120398_HW02_AI_DomainTesting_100.zip](./23120398/23120398_HW02_AI_DomainTesting_100.zip):** Gói nộp bài nén chuẩn Moodle
 - 🖼️ **[bug-screenshots/](./23120398/bug-screenshots/):** Toàn bộ 42 ảnh chụp màn hình bằng chứng lỗi Playwright
 - 🤖 **[skills/domain-testing/](./23120398/skills/domain-testing/):** Kỹ năng Agent Skill `domain-testing`

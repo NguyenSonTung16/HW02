@@ -81,6 +81,8 @@ All 15 confirmed bugs have been logged with complete reproduction steps, root ca
 ├── AI_Audit_Report.md             # Toàn văn Prompt & Output các phiên tương tác AI trong workspace
 ├── AI_Audit_Report.pdf            # Toàn văn Prompt & Output các phiên tương tác AI (PDF)
 ├── Git_Commit_Log.txt             # Nhật ký commit Git dạng văn bản theo Mục 12
+├── GitHub_Repository_Link.txt     # Link GitHub Repository branch 23120398 và danh sách Issue
+├── Appendix_A_AI_Logs.md          # Toàn văn Prompt & Output các phiên tương tác AI (bản riêng biệt)
 ├── bug-screenshots/               # Toàn bộ 42 ảnh chụp bằng chứng lỗi thực tế
 │   ├── FR-03-*.png
 │   ├── FR-08-*.png
