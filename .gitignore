@@ -1,4 +1,10 @@
-/audit/*
-!/audit/AI_Audit_Report.md
-!/audit/Appendix_A_Prompt_Log.md
-!/audit/generated_report_state.json
+# Dependencies and Runtime
+node_modules/
+package-lock.json
+playwright-report/
+test-results/
+sut/
+tests/
+playwright.config.ts
+*.sqlite
+package.json

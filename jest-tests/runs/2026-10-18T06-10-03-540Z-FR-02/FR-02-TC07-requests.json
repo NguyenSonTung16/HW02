@@ -1,8 +1,0 @@
-[
-  {
-    "time": 1792303881325,
-    "url": "http://localhost:3000/api/login",
-    "method": "POST",
-    "bearer": false
-  }
-]
